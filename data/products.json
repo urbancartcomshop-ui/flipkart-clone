@@ -4,13 +4,13 @@
     "name": "SAMSUNG 80cm TV",
     "price": 595,
     "originalPrice": 18990,
-    "image": "Flipkart/images/products/product-1-img-2.jpg",
+    "image": "/Flipkart/images/products/product-1-img-2.jpg",
     "images": [
-      "Flipkart/images/products/product-1-img-1.jpg",
-      "Flipkart/images/products/product-1-img-2.jpg",
-      "Flipkart/images/products/product-1-img-3.jpg",
-      "Flipkart/images/products/product-1-img-4.jpg",
-      "Flipkart/images/products/product-1-img-5.jpg"
+      "/Flipkart/images/products/product-1-img-1.jpg",
+      "/Flipkart/images/products/product-1-img-2.jpg",
+      "/Flipkart/images/products/product-1-img-3.jpg",
+      "/Flipkart/images/products/product-1-img-4.jpg",
+      "/Flipkart/images/products/product-1-img-5.jpg"
     ],
     "discount": 96,
     "rating": 4.6,
@@ -24,13 +24,13 @@
     "name": "boAt Soundbar",
     "price": 499,
     "originalPrice": 10999,
-    "image": "Flipkart/images/products/product-2-img-2.jpg",
+    "image": "/Flipkart/images/products/product-2-img-2.jpg",
     "images": [
-      "Flipkart/images/products/product-2-img-1.jpg",
-      "Flipkart/images/products/product-2-img-2.jpg",
-      "Flipkart/images/products/product-2-img-3.jpg",
-      "Flipkart/images/products/product-2-img-4.jpg",
-      "Flipkart/images/products/product-2-img-5.jpg"
+      "/Flipkart/images/products/product-2-img-1.jpg",
+      "/Flipkart/images/products/product-2-img-2.jpg",
+      "/Flipkart/images/products/product-2-img-3.jpg",
+      "/Flipkart/images/products/product-2-img-4.jpg",
+      "/Flipkart/images/products/product-2-img-5.jpg"
     ],
     "discount": 95,
     "rating": 4.4,
@@ -44,13 +44,13 @@
     "name": "Portable Bluetooth Speaker",
     "price": 467,
     "originalPrice": 14999,
-    "image": "Flipkart/images/products/product-3-img-2.jpg",
+    "image": "/Flipkart/images/products/product-3-img-2.jpg",
     "images": [
-      "Flipkart/images/products/product-3-img-1.jpg",
-      "Flipkart/images/products/product-3-img-2.jpg",
-      "Flipkart/images/products/product-3-img-3.jpg",
-      "Flipkart/images/products/product-3-img-4.jpg",
-      "Flipkart/images/products/product-3-img-5.jpg"
+      "/Flipkart/images/products/product-3-img-1.jpg",
+      "/Flipkart/images/products/product-3-img-2.jpg",
+      "/Flipkart/images/products/product-3-img-3.jpg",
+      "/Flipkart/images/products/product-3-img-4.jpg",
+      "/Flipkart/images/products/product-3-img-5.jpg"
     ],
     "discount": 96,
     "rating": 4.3,
@@ -64,13 +64,13 @@
     "name": "Wireless Headphones",
     "price": 599,
     "originalPrice": 36999,
-    "image": "Flipkart/images/products/product-4-img-2.jpg",
+    "image": "/Flipkart/images/products/product-4-img-2.jpg",
     "images": [
-      "Flipkart/images/products/product-4-img-1.jpg",
-      "Flipkart/images/products/product-4-img-2.jpg",
-      "Flipkart/images/products/product-4-img-3.jpg",
-      "Flipkart/images/products/product-4-img-4.jpg",
-      "Flipkart/images/products/product-4-img-5.jpg"
+      "/Flipkart/images/products/product-4-img-1.jpg",
+      "/Flipkart/images/products/product-4-img-2.jpg",
+      "/Flipkart/images/products/product-4-img-3.jpg",
+      "/Flipkart/images/products/product-4-img-4.jpg",
+      "/Flipkart/images/products/product-4-img-5.jpg"
     ],
     "discount": 98,
     "rating": 4.5,
@@ -84,13 +84,13 @@
     "name": "USB-C Fast Charger",
     "price": 567,
     "originalPrice": 26899,
-    "image": "Flipkart/images/products/product-5-img-2.jpg",
+    "image": "/Flipkart/images/products/product-5-img-2.jpg",
     "images": [
-      "Flipkart/images/products/product-5-img-1.jpg",
-      "Flipkart/images/products/product-5-img-2.jpg",
-      "Flipkart/images/products/product-5-img-3.jpg",
-      "Flipkart/images/products/product-5-img-4.jpg",
-      "Flipkart/images/products/product-5-img-5.jpg"
+      "/Flipkart/images/products/product-5-img-1.jpg",
+      "/Flipkart/images/products/product-5-img-2.jpg",
+      "/Flipkart/images/products/product-5-img-3.jpg",
+      "/Flipkart/images/products/product-5-img-4.jpg",
+      "/Flipkart/images/products/product-5-img-5.jpg"
     ],
     "discount": 97,
     "rating": 4.4,
@@ -104,13 +104,13 @@
     "name": "Gaming Mouse",
     "price": 499,
     "originalPrice": 10599,
-    "image": "Flipkart/images/products/product-6-img-2.jpg",
+    "image": "/Flipkart/images/products/product-6-img-2.jpg",
     "images": [
-      "Flipkart/images/products/product-6-img-1.jpg",
-      "Flipkart/images/products/product-6-img-2.jpg",
-      "Flipkart/images/products/product-6-img-3.jpg",
-      "Flipkart/images/products/product-6-img-4.jpg",
-      "Flipkart/images/products/product-6-img-5.jpg"
+      "/Flipkart/images/products/product-6-img-1.jpg",
+      "/Flipkart/images/products/product-6-img-2.jpg",
+      "/Flipkart/images/products/product-6-img-3.jpg",
+      "/Flipkart/images/products/product-6-img-4.jpg",
+      "/Flipkart/images/products/product-6-img-5.jpg"
     ],
     "discount": 95,
     "rating": 4.2,
@@ -124,13 +124,13 @@
     "name": "Mechanical Keyboard",
     "price": 419,
     "originalPrice": 24999,
-    "image": "Flipkart/images/products/product-7-img-2.jpg",
+    "image": "/Flipkart/images/products/product-7-img-2.jpg",
     "images": [
-      "Flipkart/images/products/product-7-img-1.jpg",
-      "Flipkart/images/products/product-7-img-2.jpg",
-      "Flipkart/images/products/product-7-img-3.jpg",
-      "Flipkart/images/products/product-7-img-4.jpg",
-      "Flipkart/images/products/product-7-img-5.jpg"
+      "/Flipkart/images/products/product-7-img-1.jpg",
+      "/Flipkart/images/products/product-7-img-2.jpg",
+      "/Flipkart/images/products/product-7-img-3.jpg",
+      "/Flipkart/images/products/product-7-img-4.jpg",
+      "/Flipkart/images/products/product-7-img-5.jpg"
     ],
     "discount": 98,
     "rating": 4.6,
@@ -144,13 +144,13 @@
     "name": "Webcam HD",
     "price": 597,
     "originalPrice": 6799,
-    "image": "Flipkart/images/products/product-8-img-2.jpg",
+    "image": "/Flipkart/images/products/product-8-img-2.jpg",
     "images": [
-      "Flipkart/images/products/product-8-img-1.jpg",
-      "Flipkart/images/products/product-8-img-2.jpg",
-      "Flipkart/images/products/product-8-img-3.jpg",
-      "Flipkart/images/products/product-8-img-4.jpg",
-      "Flipkart/images/products/product-8-img-5.jpg"
+      "/Flipkart/images/products/product-8-img-1.jpg",
+      "/Flipkart/images/products/product-8-img-2.jpg",
+      "/Flipkart/images/products/product-8-img-3.jpg",
+      "/Flipkart/images/products/product-8-img-4.jpg",
+      "/Flipkart/images/products/product-8-img-5.jpg"
     ],
     "discount": 91,
     "rating": 4.3,
@@ -164,13 +164,13 @@
     "name": "USB Hub Splitter",
     "price": 299,
     "originalPrice": 1999,
-    "image": "Flipkart/images/products/product-9-img-2.jpg",
+    "image": "/Flipkart/images/products/product-9-img-2.jpg",
     "images": [
-      "Flipkart/images/products/product-9-img-1.jpg",
-      "Flipkart/images/products/product-9-img-2.jpg",
-      "Flipkart/images/products/product-9-img-3.jpg",
-      "Flipkart/images/products/product-9-img-4.jpg",
-      "Flipkart/images/products/product-9-img-5.jpg"
+      "/Flipkart/images/products/product-9-img-1.jpg",
+      "/Flipkart/images/products/product-9-img-2.jpg",
+      "/Flipkart/images/products/product-9-img-3.jpg",
+      "/Flipkart/images/products/product-9-img-4.jpg",
+      "/Flipkart/images/products/product-9-img-5.jpg"
     ],
     "discount": 85,
     "rating": 4.1,
@@ -184,13 +184,13 @@
     "name": "Screen Protector Glass",
     "price": 535,
     "originalPrice": 7999,
-    "image": "Flipkart/images/products/product-10-img-2.jpg",
+    "image": "/Flipkart/images/products/product-10-img-2.jpg",
     "images": [
-      "Flipkart/images/products/product-10-img-1.jpg",
-      "Flipkart/images/products/product-10-img-2.jpg",
-      "Flipkart/images/products/product-10-img-3.jpg",
-      "Flipkart/images/products/product-10-img-4.jpg",
-      "Flipkart/images/products/product-10-img-5.jpg"
+      "/Flipkart/images/products/product-10-img-1.jpg",
+      "/Flipkart/images/products/product-10-img-2.jpg",
+      "/Flipkart/images/products/product-10-img-3.jpg",
+      "/Flipkart/images/products/product-10-img-4.jpg",
+      "/Flipkart/images/products/product-10-img-5.jpg"
     ],
     "discount": 93,
     "rating": 4.4,
@@ -204,13 +204,13 @@
     "name": "Phone Stand",
     "price": 399,
     "originalPrice": 5999,
-    "image": "Flipkart/images/products/product-11-img-2.jpg",
+    "image": "/Flipkart/images/products/product-11-img-2.jpg",
     "images": [
-      "Flipkart/images/products/product-11-img-1.jpg",
-      "Flipkart/images/products/product-11-img-2.jpg",
-      "Flipkart/images/products/product-11-img-3.jpg",
-      "Flipkart/images/products/product-11-img-4.jpg",
-      "Flipkart/images/products/product-11-img-5.jpg"
+      "/Flipkart/images/products/product-11-img-1.jpg",
+      "/Flipkart/images/products/product-11-img-2.jpg",
+      "/Flipkart/images/products/product-11-img-3.jpg",
+      "/Flipkart/images/products/product-11-img-4.jpg",
+      "/Flipkart/images/products/product-11-img-5.jpg"
     ],
     "discount": 93,
     "rating": 4.2,
@@ -224,13 +224,13 @@
     "name": "Cable Organizer",
     "price": 399,
     "originalPrice": 8999,
-    "image": "Flipkart/images/products/product-12-img-2.jpg",
+    "image": "/Flipkart/images/products/product-12-img-2.jpg",
     "images": [
-      "Flipkart/images/products/product-12-img-1.jpg",
-      "Flipkart/images/products/product-12-img-2.jpg",
-      "Flipkart/images/products/product-12-img-3.jpg",
-      "Flipkart/images/products/product-12-img-4.jpg",
-      "Flipkart/images/products/product-12-img-5.jpg"
+      "/Flipkart/images/products/product-12-img-1.jpg",
+      "/Flipkart/images/products/product-12-img-2.jpg",
+      "/Flipkart/images/products/product-12-img-3.jpg",
+      "/Flipkart/images/products/product-12-img-4.jpg",
+      "/Flipkart/images/products/product-12-img-5.jpg"
     ],
     "discount": 95,
     "rating": 4.3,
@@ -244,13 +244,13 @@
     "name": "Power Strip",
     "price": 419,
     "originalPrice": 2699,
-    "image": "Flipkart/images/products/product-13-img-2.jpg",
+    "image": "/Flipkart/images/products/product-13-img-2.jpg",
     "images": [
-      "Flipkart/images/products/product-13-img-1.jpg",
-      "Flipkart/images/products/product-13-img-2.jpg",
-      "Flipkart/images/products/product-13-img-3.jpg",
-      "Flipkart/images/products/product-13-img-4.jpg",
-      "Flipkart/images/products/product-13-img-5.jpg"
+      "/Flipkart/images/products/product-13-img-1.jpg",
+      "/Flipkart/images/products/product-13-img-2.jpg",
+      "/Flipkart/images/products/product-13-img-3.jpg",
+      "/Flipkart/images/products/product-13-img-4.jpg",
+      "/Flipkart/images/products/product-13-img-5.jpg"
     ],
     "discount": 84,
     "rating": 4.5,
@@ -264,13 +264,13 @@
     "name": "LED Desk Lamp",
     "price": 519,
     "originalPrice": 14999,
-    "image": "Flipkart/images/products/product-14-img-2.jpg",
+    "image": "/Flipkart/images/products/product-14-img-2.jpg",
     "images": [
-      "Flipkart/images/products/product-14-img-1.jpg",
-      "Flipkart/images/products/product-14-img-2.jpg",
-      "Flipkart/images/products/product-14-img-3.jpg",
-      "Flipkart/images/products/product-14-img-4.jpg",
-      "Flipkart/images/products/product-14-img-5.jpg"
+      "/Flipkart/images/products/product-14-img-1.jpg",
+      "/Flipkart/images/products/product-14-img-2.jpg",
+      "/Flipkart/images/products/product-14-img-3.jpg",
+      "/Flipkart/images/products/product-14-img-4.jpg",
+      "/Flipkart/images/products/product-14-img-5.jpg"
     ],
     "discount": 96,
     "rating": 4.4,
@@ -284,13 +284,13 @@
     "name": "Laptop Stand",
     "price": 299,
     "originalPrice": 4999,
-    "image": "Flipkart/images/products/product-15-img-2.jpg",
+    "image": "/Flipkart/images/products/product-15-img-2.jpg",
     "images": [
-      "Flipkart/images/products/product-15-img-1.jpg",
-      "Flipkart/images/products/product-15-img-2.jpg",
-      "Flipkart/images/products/product-15-img-3.jpg",
-      "Flipkart/images/products/product-15-img-4.jpg",
-      "Flipkart/images/products/product-15-img-5.jpg"
+      "/Flipkart/images/products/product-15-img-1.jpg",
+      "/Flipkart/images/products/product-15-img-2.jpg",
+      "/Flipkart/images/products/product-15-img-3.jpg",
+      "/Flipkart/images/products/product-15-img-4.jpg",
+      "/Flipkart/images/products/product-15-img-5.jpg"
     ],
     "discount": 94,
     "rating": 4.3,
@@ -304,13 +304,13 @@
     "name": "Monitor Light Bar",
     "price": 699,
     "originalPrice": 36999,
-    "image": "Flipkart/images/products/product-16-img-2.jpg",
+    "image": "/Flipkart/images/products/product-16-img-2.jpg",
     "images": [
-      "Flipkart/images/products/product-16-img-1.jpg",
-      "Flipkart/images/products/product-16-img-2.jpg",
-      "Flipkart/images/products/product-16-img-3.jpg",
-      "Flipkart/images/products/product-16-img-4.jpg",
-      "Flipkart/images/products/product-16-img-5.jpg"
+      "/Flipkart/images/products/product-16-img-1.jpg",
+      "/Flipkart/images/products/product-16-img-2.jpg",
+      "/Flipkart/images/products/product-16-img-3.jpg",
+      "/Flipkart/images/products/product-16-img-4.jpg",
+      "/Flipkart/images/products/product-16-img-5.jpg"
     ],
     "discount": 98,
     "rating": 4.6,
@@ -324,13 +324,13 @@
     "name": "Mouse Pad XL",
     "price": 567,
     "originalPrice": 5939,
-    "image": "Flipkart/images/products/product-17-img-2.jpg",
+    "image": "/Flipkart/images/products/product-17-img-2.jpg",
     "images": [
-      "Flipkart/images/products/product-17-img-1.jpg",
-      "Flipkart/images/products/product-17-img-2.jpg",
-      "Flipkart/images/products/product-17-img-3.jpg",
-      "Flipkart/images/products/product-17-img-4.jpg",
-      "Flipkart/images/products/product-17-img-5.jpg"
+      "/Flipkart/images/products/product-17-img-1.jpg",
+      "/Flipkart/images/products/product-17-img-2.jpg",
+      "/Flipkart/images/products/product-17-img-3.jpg",
+      "/Flipkart/images/products/product-17-img-4.jpg",
+      "/Flipkart/images/products/product-17-img-5.jpg"
     ],
     "discount": 90,
     "rating": 4.2,
@@ -344,13 +344,13 @@
     "name": "Docking Station",
     "price": 499,
     "originalPrice": 37899,
-    "image": "Flipkart/images/products/product-18-img-2.jpg",
+    "image": "/Flipkart/images/products/product-18-img-2.jpg",
     "images": [
-      "Flipkart/images/products/product-18-img-1.jpg",
-      "Flipkart/images/products/product-18-img-2.jpg",
-      "Flipkart/images/products/product-18-img-3.jpg",
-      "Flipkart/images/products/product-18-img-4.jpg",
-      "Flipkart/images/products/product-18-img-5.jpg"
+      "/Flipkart/images/products/product-18-img-1.jpg",
+      "/Flipkart/images/products/product-18-img-2.jpg",
+      "/Flipkart/images/products/product-18-img-3.jpg",
+      "/Flipkart/images/products/product-18-img-4.jpg",
+      "/Flipkart/images/products/product-18-img-5.jpg"
     ],
     "discount": 98,
     "rating": 4.5,
@@ -364,13 +364,13 @@
     "name": "Cooling Pad",
     "price": 325,
     "originalPrice": 4999,
-    "image": "Flipkart/images/products/product-19-img-2.jpg",
+    "image": "/Flipkart/images/products/product-19-img-2.jpg",
     "images": [
-      "Flipkart/images/products/product-19-img-1.jpg",
-      "Flipkart/images/products/product-19-img-2.jpg",
-      "Flipkart/images/products/product-19-img-3.jpg",
-      "Flipkart/images/products/product-19-img-4.jpg",
-      "Flipkart/images/products/product-19-img-5.jpg"
+      "/Flipkart/images/products/product-19-img-1.jpg",
+      "/Flipkart/images/products/product-19-img-2.jpg",
+      "/Flipkart/images/products/product-19-img-3.jpg",
+      "/Flipkart/images/products/product-19-img-4.jpg",
+      "/Flipkart/images/products/product-19-img-5.jpg"
     ],
     "discount": 93,
     "rating": 4.1,
@@ -384,13 +384,13 @@
     "name": "Phone Case",
     "price": 299,
     "originalPrice": 1499,
-    "image": "Flipkart/images/products/product-20-img-2.jpg",
+    "image": "/Flipkart/images/products/product-20-img-2.jpg",
     "images": [
-      "Flipkart/images/products/product-20-img-1.jpg",
-      "Flipkart/images/products/product-20-img-2.jpg",
-      "Flipkart/images/products/product-20-img-3.jpg",
-      "Flipkart/images/products/product-20-img-4.jpg",
-      "Flipkart/images/products/product-20-img-5.jpg"
+      "/Flipkart/images/products/product-20-img-1.jpg",
+      "/Flipkart/images/products/product-20-img-2.jpg",
+      "/Flipkart/images/products/product-20-img-3.jpg",
+      "/Flipkart/images/products/product-20-img-4.jpg",
+      "/Flipkart/images/products/product-20-img-5.jpg"
     ],
     "discount": 80,
     "rating": 4.2,
@@ -404,13 +404,13 @@
     "name": "Car Phone Mount",
     "price": 299,
     "originalPrice": 1799,
-    "image": "Flipkart/images/products/product-21-img-2.jpg",
+    "image": "/Flipkart/images/products/product-21-img-2.jpg",
     "images": [
-      "Flipkart/images/products/product-21-img-1.jpg",
-      "Flipkart/images/products/product-21-img-2.jpg",
-      "Flipkart/images/products/product-21-img-3.jpg",
-      "Flipkart/images/products/product-21-img-4.jpg",
-      "Flipkart/images/products/product-21-img-5.jpg"
+      "/Flipkart/images/products/product-21-img-1.jpg",
+      "/Flipkart/images/products/product-21-img-2.jpg",
+      "/Flipkart/images/products/product-21-img-3.jpg",
+      "/Flipkart/images/products/product-21-img-4.jpg",
+      "/Flipkart/images/products/product-21-img-5.jpg"
     ],
     "discount": 83,
     "rating": 4.3,
@@ -424,13 +424,13 @@
     "name": "Screen Cleaner Kit",
     "price": 472,
     "originalPrice": 17999,
-    "image": "Flipkart/images/products/product-22-img-2.jpg",
+    "image": "/Flipkart/images/products/product-22-img-2.jpg",
     "images": [
-      "Flipkart/images/products/product-22-img-1.jpg",
-      "Flipkart/images/products/product-22-img-2.jpg",
-      "Flipkart/images/products/product-22-img-3.jpg",
-      "Flipkart/images/products/product-22-img-4.jpg",
-      "Flipkart/images/products/product-22-img-5.jpg"
+      "/Flipkart/images/products/product-22-img-1.jpg",
+      "/Flipkart/images/products/product-22-img-2.jpg",
+      "/Flipkart/images/products/product-22-img-3.jpg",
+      "/Flipkart/images/products/product-22-img-4.jpg",
+      "/Flipkart/images/products/product-22-img-5.jpg"
     ],
     "discount": 97,
     "rating": 4.4,
@@ -444,13 +444,13 @@
     "name": "Selfie Ring Light",
     "price": 699,
     "originalPrice": 14999,
-    "image": "Flipkart/images/products/product-23-img-2.jpg",
+    "image": "/Flipkart/images/products/product-23-img-2.jpg",
     "images": [
-      "Flipkart/images/products/product-23-img-1.jpg",
-      "Flipkart/images/products/product-23-img-2.jpg",
-      "Flipkart/images/products/product-23-img-3.jpg",
-      "Flipkart/images/products/product-23-img-4.jpg",
-      "Flipkart/images/products/product-23-img-5.jpg"
+      "/Flipkart/images/products/product-23-img-1.jpg",
+      "/Flipkart/images/products/product-23-img-2.jpg",
+      "/Flipkart/images/products/product-23-img-3.jpg",
+      "/Flipkart/images/products/product-23-img-4.jpg",
+      "/Flipkart/images/products/product-23-img-5.jpg"
     ],
     "discount": 95,
     "rating": 4.5,
@@ -464,13 +464,13 @@
     "name": "Mini Projector",
     "price": 319,
     "originalPrice": 4999,
-    "image": "Flipkart/images/products/product-24-img-2.jpg",
+    "image": "/Flipkart/images/products/product-24-img-2.jpg",
     "images": [
-      "Flipkart/images/products/product-24-img-1.jpg",
-      "Flipkart/images/products/product-24-img-2.jpg",
-      "Flipkart/images/products/product-24-img-3.jpg",
-      "Flipkart/images/products/product-24-img-4.jpg",
-      "Flipkart/images/products/product-24-img-5.jpg"
+      "/Flipkart/images/products/product-24-img-1.jpg",
+      "/Flipkart/images/products/product-24-img-2.jpg",
+      "/Flipkart/images/products/product-24-img-3.jpg",
+      "/Flipkart/images/products/product-24-img-4.jpg",
+      "/Flipkart/images/products/product-24-img-5.jpg"
     ],
     "discount": 93,
     "rating": 4.2,
@@ -484,13 +484,13 @@
     "name": "Digital Pen",
     "price": 399,
     "originalPrice": 5999,
-    "image": "Flipkart/images/products/product-25-img-2.jpg",
+    "image": "/Flipkart/images/products/product-25-img-2.jpg",
     "images": [
-      "Flipkart/images/products/product-25-img-1.jpg",
-      "Flipkart/images/products/product-25-img-2.jpg",
-      "Flipkart/images/products/product-25-img-3.jpg",
-      "Flipkart/images/products/product-25-img-4.jpg",
-      "Flipkart/images/products/product-25-img-5.jpg"
+      "/Flipkart/images/products/product-25-img-1.jpg",
+      "/Flipkart/images/products/product-25-img-2.jpg",
+      "/Flipkart/images/products/product-25-img-3.jpg",
+      "/Flipkart/images/products/product-25-img-4.jpg",
+      "/Flipkart/images/products/product-25-img-5.jpg"
     ],
     "discount": 93,
     "rating": 4.4,
@@ -504,13 +504,13 @@
     "name": "Desk Humidifier",
     "price": 299,
     "originalPrice": 2999,
-    "image": "Flipkart/images/products/product-26-img-2.jpg",
+    "image": "/Flipkart/images/products/product-26-img-2.jpg",
     "images": [
-      "Flipkart/images/products/product-26-img-1.jpg",
-      "Flipkart/images/products/product-26-img-2.jpg",
-      "Flipkart/images/products/product-26-img-3.jpg",
-      "Flipkart/images/products/product-26-img-4.jpg",
-      "Flipkart/images/products/product-26-img-5.jpg"
+      "/Flipkart/images/products/product-26-img-1.jpg",
+      "/Flipkart/images/products/product-26-img-2.jpg",
+      "/Flipkart/images/products/product-26-img-3.jpg",
+      "/Flipkart/images/products/product-26-img-4.jpg",
+      "/Flipkart/images/products/product-26-img-5.jpg"
     ],
     "discount": 90,
     "rating": 4.1,
@@ -524,13 +524,13 @@
     "name": "Desk Organizer",
     "price": 349,
     "originalPrice": 1999,
-    "image": "Flipkart/images/products/product-27-img-2.jpg",
+    "image": "/Flipkart/images/products/product-27-img-2.jpg",
     "images": [
-      "Flipkart/images/products/product-27-img-1.jpg",
-      "Flipkart/images/products/product-27-img-2.jpg",
-      "Flipkart/images/products/product-27-img-3.jpg",
-      "Flipkart/images/products/product-27-img-4.jpg",
-      "Flipkart/images/products/product-27-img-5.jpg"
+      "/Flipkart/images/products/product-27-img-1.jpg",
+      "/Flipkart/images/products/product-27-img-2.jpg",
+      "/Flipkart/images/products/product-27-img-3.jpg",
+      "/Flipkart/images/products/product-27-img-4.jpg",
+      "/Flipkart/images/products/product-27-img-5.jpg"
     ],
     "discount": 82,
     "rating": 4.3,
@@ -544,13 +544,13 @@
     "name": "Anti-Blue Light Glasses",
     "price": 329,
     "originalPrice": 1599,
-    "image": "Flipkart/images/products/product-28-img-2.jpg",
+    "image": "/Flipkart/images/products/product-28-img-2.jpg",
     "images": [
-      "Flipkart/images/products/product-28-img-1.jpg",
-      "Flipkart/images/products/product-28-img-2.jpg",
-      "Flipkart/images/products/product-28-img-3.jpg",
-      "Flipkart/images/products/product-28-img-4.jpg",
-      "Flipkart/images/products/product-28-img-5.jpg"
+      "/Flipkart/images/products/product-28-img-1.jpg",
+      "/Flipkart/images/products/product-28-img-2.jpg",
+      "/Flipkart/images/products/product-28-img-3.jpg",
+      "/Flipkart/images/products/product-28-img-4.jpg",
+      "/Flipkart/images/products/product-28-img-5.jpg"
     ],
     "discount": 79,
     "rating": 4.2,
@@ -564,13 +564,13 @@
     "name": "Cable Ties Pack",
     "price": 549,
     "originalPrice": 14999,
-    "image": "Flipkart/images/products/product-29-img-2.jpg",
+    "image": "/Flipkart/images/products/product-29-img-2.jpg",
     "images": [
-      "Flipkart/images/products/product-29-img-1.jpg",
-      "Flipkart/images/products/product-29-img-2.jpg",
-      "Flipkart/images/products/product-29-img-3.jpg",
-      "Flipkart/images/products/product-29-img-4.jpg",
-      "Flipkart/images/products/product-29-img-5.jpg"
+      "/Flipkart/images/products/product-29-img-1.jpg",
+      "/Flipkart/images/products/product-29-img-2.jpg",
+      "/Flipkart/images/products/product-29-img-3.jpg",
+      "/Flipkart/images/products/product-29-img-4.jpg",
+      "/Flipkart/images/products/product-29-img-5.jpg"
     ],
     "discount": 96,
     "rating": 4.3,
@@ -584,13 +584,13 @@
     "name": "Battery Charger",
     "price": 349,
     "originalPrice": 14999,
-    "image": "Flipkart/images/products/product-30-img-2.jpg",
+    "image": "/Flipkart/images/products/product-30-img-2.jpg",
     "images": [
-      "Flipkart/images/products/product-30-img-1.jpg",
-      "Flipkart/images/products/product-30-img-2.jpg",
-      "Flipkart/images/products/product-30-img-3.jpg",
-      "Flipkart/images/products/product-30-img-4.jpg",
-      "Flipkart/images/products/product-30-img-5.jpg"
+      "/Flipkart/images/products/product-30-img-1.jpg",
+      "/Flipkart/images/products/product-30-img-2.jpg",
+      "/Flipkart/images/products/product-30-img-3.jpg",
+      "/Flipkart/images/products/product-30-img-4.jpg",
+      "/Flipkart/images/products/product-30-img-5.jpg"
     ],
     "discount": 97,
     "rating": 4.4,
@@ -604,13 +604,13 @@
     "name": "Card Reader",
     "price": 349,
     "originalPrice": 4999,
-    "image": "Flipkart/images/products/product-31-img-2.jpg",
+    "image": "/Flipkart/images/products/product-31-img-2.jpg",
     "images": [
-      "Flipkart/images/products/product-31-img-1.jpg",
-      "Flipkart/images/products/product-31-img-2.jpg",
-      "Flipkart/images/products/product-31-img-3.jpg",
-      "Flipkart/images/products/product-31-img-4.jpg",
-      "Flipkart/images/products/product-31-img-5.jpg"
+      "/Flipkart/images/products/product-31-img-1.jpg",
+      "/Flipkart/images/products/product-31-img-2.jpg",
+      "/Flipkart/images/products/product-31-img-3.jpg",
+      "/Flipkart/images/products/product-31-img-4.jpg",
+      "/Flipkart/images/products/product-31-img-5.jpg"
     ],
     "discount": 93,
     "rating": 4.2,
@@ -624,13 +624,13 @@
     "name": "Wireless Charger",
     "price": 399,
     "originalPrice": 10999,
-    "image": "Flipkart/images/products/product-32-img-2.jpg",
+    "image": "/Flipkart/images/products/product-32-img-2.jpg",
     "images": [
-      "Flipkart/images/products/product-32-img-1.jpg",
-      "Flipkart/images/products/product-32-img-2.jpg",
-      "Flipkart/images/products/product-32-img-3.jpg",
-      "Flipkart/images/products/product-32-img-4.jpg",
-      "Flipkart/images/products/product-32-img-5.jpg"
+      "/Flipkart/images/products/product-32-img-1.jpg",
+      "/Flipkart/images/products/product-32-img-2.jpg",
+      "/Flipkart/images/products/product-32-img-3.jpg",
+      "/Flipkart/images/products/product-32-img-4.jpg",
+      "/Flipkart/images/products/product-32-img-5.jpg"
     ],
     "discount": 96,
     "rating": 4.5,
