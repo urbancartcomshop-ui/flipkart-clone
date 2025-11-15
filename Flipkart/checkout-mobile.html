@@ -637,16 +637,17 @@
         }
 
         function updatePriceSummary() {
-            const totalPrice = cartData.reduce((sum, item) => sum + (item.originalPrice * item.quantity), 0);
+            // Use the price shown on homepage (already discounted)
             const finalPrice = cartData.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            const discount = totalPrice - finalPrice;
             const itemCount = cartData.reduce((sum, item) => sum + item.quantity, 0);
 
+            // Display the same price they see on homepage
             document.getElementById('itemCount').textContent = itemCount;
-            document.getElementById('totalPrice').textContent = '₹' + totalPrice.toLocaleString('en-IN');
-            document.getElementById('discount').textContent = '−₹' + discount.toLocaleString('en-IN');
+            document.getElementById('totalPrice').textContent = '₹' + finalPrice.toLocaleString('en-IN');
+            // No additional discount to show since price is already discounted
+            document.getElementById('discount').textContent = 'Applied';
             document.getElementById('finalTotal').textContent = '₹' + finalPrice.toLocaleString('en-IN');
-            document.getElementById('savings').textContent = discount.toLocaleString('en-IN');
+            document.getElementById('savings').textContent = '0';
         }
 
         // Step navigation
