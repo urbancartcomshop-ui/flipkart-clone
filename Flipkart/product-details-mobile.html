@@ -386,7 +386,6 @@
         <div style="height: 80px;"></div>
         
         <div class="action-buttons">
-            <button class="btn-cart" onclick="addToCart()">ADD TO CART</button>
             <button class="btn-buy" onclick="buyNow()">BUY NOW</button>
         </div>
     </div>
@@ -399,13 +398,16 @@
         // Load product details
         async function loadProductDetails() {
             try {
-                const response = await fetch('/api/products/' + productId);
-                const product = await response.json();
+                const response = await fetch('../data/products.json');
+                const allProducts = await response.json();
+                const product = allProducts.find(p => p.id === productId);
+                
+                if (!product) throw new Error('Product not found');
                 
                 // Update page
                 document.title = product.name + ' - Flipkart';
                 const mainImage = document.getElementById('productImage');
-                mainImage.src = product.img;
+                mainImage.src = product.image;
                 mainImage.alt = product.name;
                 document.getElementById('productName').textContent = product.name;
                 document.getElementById('productRating').textContent = product.rating;
@@ -413,7 +415,7 @@
                 document.getElementById('productPrice').textContent = `₹${product.price.toLocaleString()}`;
                 document.getElementById('productOriginalPrice').textContent = `₹${product.originalPrice.toLocaleString()}`;
                 document.getElementById('productDiscount').textContent = `${product.discount}% off`;
-                document.getElementById('deliveryInfo').textContent = product.freeDelivery ? 'Free delivery' : 'Delivery charges apply';
+                document.getElementById('deliveryInfo').textContent = 'Free delivery';
                 
                 // Image Gallery
                 const gallery = document.getElementById('imageGallery');
@@ -422,23 +424,21 @@
                         <img src="${imgUrl}" 
                              style="width: 60px; height: 60px; object-fit: cover; border: 2px solid #e0e0e0; border-radius: 4px; cursor: pointer;"
                              onclick="document.getElementById('productImage').src='${imgUrl}'"
-                             alt="${product.name}">
+                             alt="${product.name}" onerror="this.src='https://via.placeholder.com/60'">
                     `).join('');
                 }
                 
-                // Features
+                // Features - use description
                 const featuresList = document.getElementById('featuresList');
-                featuresList.innerHTML = product.features.map(feature => 
-                    `<div class="feature-item">${feature}</div>`
-                ).join('');
+                featuresList.innerHTML = `<div class="feature-item">${product.desc}</div>`;
                 
                 // Specifications
                 const specsList = document.getElementById('specificationsList');
                 const specs = [
-                    { label: 'Category', value: product.category.charAt(0).toUpperCase() + product.category.slice(1) },
-                    { label: 'Subcategory', value: product.subcategory },
-                    { label: 'In Stock', value: product.inStock ? 'Yes' : 'No' },
-                    { label: 'SKU', value: `FK-${product.id}` }
+                    { label: 'Category', value: product.category },
+                    { label: 'Price', value: '₹' + product.price.toLocaleString() },
+                    { label: 'Discount', value: product.discount + '% off' },
+                    { label: 'Rating', value: product.rating + ' ⭐' }
                 ];
                 specsList.innerHTML = specs.map(spec => `
                     <div class="spec-row">
@@ -460,16 +460,16 @@
         
         function buyNow() {
             // Save product to cart for checkout
-            const productId = parseInt(new URLSearchParams(window.location.search).get('id'));
-            fetch('/api/products/' + productId)
+            fetch('../data/products.json')
                 .then(res => res.json())
-                .then(product => {
+                .then(allProducts => {
+                    const product = allProducts.find(p => p.id === productId);
                     localStorage.setItem('cart', JSON.stringify([{
                         id: product.id,
                         name: product.name,
                         price: product.price,
                         originalPrice: product.originalPrice,
-                        img: product.img,
+                        image: product.image,
                         quantity: 1
                     }]));
                     window.location.href = 'checkout-mobile.html';

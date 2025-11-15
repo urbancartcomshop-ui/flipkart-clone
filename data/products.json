@@ -1,0 +1,642 @@
+[
+  {
+    "id": 1,
+    "name": "SAMSUNG 80cm TV",
+    "price": 595,
+    "originalPrice": 18990,
+    "image": "Flipkart/images/products/product-1-img-2.jpg",
+    "images": [
+      "Flipkart/images/products/product-1-img-1.jpg",
+      "Flipkart/images/products/product-1-img-2.jpg",
+      "Flipkart/images/products/product-1-img-3.jpg",
+      "Flipkart/images/products/product-1-img-4.jpg",
+      "Flipkart/images/products/product-1-img-5.jpg"
+    ],
+    "discount": 96,
+    "rating": 4.6,
+    "reviews": 7090,
+    "desc": "1.5 Ton 3 Star BEE Rating 2023. Energy efficient cooling with auto-restart, copper condenser, and sleep mode.",
+    "category": "Electronics",
+    "video": []
+  },
+  {
+    "id": 2,
+    "name": "boAt Soundbar",
+    "price": 499,
+    "originalPrice": 10999,
+    "image": "Flipkart/images/products/product-2-img-2.jpg",
+    "images": [
+      "Flipkart/images/products/product-2-img-1.jpg",
+      "Flipkart/images/products/product-2-img-2.jpg",
+      "Flipkart/images/products/product-2-img-3.jpg",
+      "Flipkart/images/products/product-2-img-4.jpg",
+      "Flipkart/images/products/product-2-img-5.jpg"
+    ],
+    "discount": 95,
+    "rating": 4.4,
+    "reviews": 5420,
+    "desc": "Premium soundbar with 40W output, Dolby Digital support, and wireless connectivity.",
+    "category": "Electronics",
+    "video": []
+  },
+  {
+    "id": 3,
+    "name": "Portable Bluetooth Speaker",
+    "price": 467,
+    "originalPrice": 14999,
+    "image": "Flipkart/images/products/product-3-img-2.jpg",
+    "images": [
+      "Flipkart/images/products/product-3-img-1.jpg",
+      "Flipkart/images/products/product-3-img-2.jpg",
+      "Flipkart/images/products/product-3-img-3.jpg",
+      "Flipkart/images/products/product-3-img-4.jpg",
+      "Flipkart/images/products/product-3-img-5.jpg"
+    ],
+    "discount": 96,
+    "rating": 4.3,
+    "reviews": 3210,
+    "desc": "Waterproof portable speaker with 12-hour battery life and 360-degree sound.",
+    "category": "Electronics",
+    "video": []
+  },
+  {
+    "id": 4,
+    "name": "Wireless Headphones",
+    "price": 599,
+    "originalPrice": 36999,
+    "image": "Flipkart/images/products/product-4-img-2.jpg",
+    "images": [
+      "Flipkart/images/products/product-4-img-1.jpg",
+      "Flipkart/images/products/product-4-img-2.jpg",
+      "Flipkart/images/products/product-4-img-3.jpg",
+      "Flipkart/images/products/product-4-img-4.jpg",
+      "Flipkart/images/products/product-4-img-5.jpg"
+    ],
+    "discount": 98,
+    "rating": 4.5,
+    "reviews": 8900,
+    "desc": "Noise-cancelling wireless headphones with 30-hour battery and premium sound quality.",
+    "category": "Electronics",
+    "video": []
+  },
+  {
+    "id": 5,
+    "name": "USB-C Fast Charger",
+    "price": 567,
+    "originalPrice": 26899,
+    "image": "Flipkart/images/products/product-5-img-2.jpg",
+    "images": [
+      "Flipkart/images/products/product-5-img-1.jpg",
+      "Flipkart/images/products/product-5-img-2.jpg",
+      "Flipkart/images/products/product-5-img-3.jpg",
+      "Flipkart/images/products/product-5-img-4.jpg",
+      "Flipkart/images/products/product-5-img-5.jpg"
+    ],
+    "discount": 97,
+    "rating": 4.4,
+    "reviews": 4560,
+    "desc": "65W USB-C fast charger compatible with all devices. Travel-friendly design with safety certifications.",
+    "category": "Electronics",
+    "video": []
+  },
+  {
+    "id": 6,
+    "name": "Gaming Mouse",
+    "price": 499,
+    "originalPrice": 10599,
+    "image": "Flipkart/images/products/product-6-img-2.jpg",
+    "images": [
+      "Flipkart/images/products/product-6-img-1.jpg",
+      "Flipkart/images/products/product-6-img-2.jpg",
+      "Flipkart/images/products/product-6-img-3.jpg",
+      "Flipkart/images/products/product-6-img-4.jpg",
+      "Flipkart/images/products/product-6-img-5.jpg"
+    ],
+    "discount": 95,
+    "rating": 4.2,
+    "reviews": 3890,
+    "desc": "RGB gaming mouse with 6400 DPI, programmable buttons, and ergonomic design.",
+    "category": "Electronics",
+    "video": []
+  },
+  {
+    "id": 7,
+    "name": "Mechanical Keyboard",
+    "price": 419,
+    "originalPrice": 24999,
+    "image": "Flipkart/images/products/product-7-img-2.jpg",
+    "images": [
+      "Flipkart/images/products/product-7-img-1.jpg",
+      "Flipkart/images/products/product-7-img-2.jpg",
+      "Flipkart/images/products/product-7-img-3.jpg",
+      "Flipkart/images/products/product-7-img-4.jpg",
+      "Flipkart/images/products/product-7-img-5.jpg"
+    ],
+    "discount": 98,
+    "rating": 4.6,
+    "reviews": 6780,
+    "desc": "Professional mechanical keyboard with RGB lighting and custom switches.",
+    "category": "Electronics",
+    "video": []
+  },
+  {
+    "id": 8,
+    "name": "Webcam HD",
+    "price": 597,
+    "originalPrice": 6799,
+    "image": "Flipkart/images/products/product-8-img-2.jpg",
+    "images": [
+      "Flipkart/images/products/product-8-img-1.jpg",
+      "Flipkart/images/products/product-8-img-2.jpg",
+      "Flipkart/images/products/product-8-img-3.jpg",
+      "Flipkart/images/products/product-8-img-4.jpg",
+      "Flipkart/images/products/product-8-img-5.jpg"
+    ],
+    "discount": 91,
+    "rating": 4.3,
+    "reviews": 2340,
+    "desc": "1080p HD webcam with auto-focus and built-in microphone for streaming.",
+    "category": "Electronics",
+    "video": []
+  },
+  {
+    "id": 9,
+    "name": "USB Hub Splitter",
+    "price": 299,
+    "originalPrice": 1999,
+    "image": "Flipkart/images/products/product-9-img-2.jpg",
+    "images": [
+      "Flipkart/images/products/product-9-img-1.jpg",
+      "Flipkart/images/products/product-9-img-2.jpg",
+      "Flipkart/images/products/product-9-img-3.jpg",
+      "Flipkart/images/products/product-9-img-4.jpg",
+      "Flipkart/images/products/product-9-img-5.jpg"
+    ],
+    "discount": 85,
+    "rating": 4.1,
+    "reviews": 1560,
+    "desc": "7-port USB 3.0 hub with individual switches and fast data transfer.",
+    "category": "Electronics",
+    "video": []
+  },
+  {
+    "id": 10,
+    "name": "Screen Protector Glass",
+    "price": 535,
+    "originalPrice": 7999,
+    "image": "Flipkart/images/products/product-10-img-2.jpg",
+    "images": [
+      "Flipkart/images/products/product-10-img-1.jpg",
+      "Flipkart/images/products/product-10-img-2.jpg",
+      "Flipkart/images/products/product-10-img-3.jpg",
+      "Flipkart/images/products/product-10-img-4.jpg",
+      "Flipkart/images/products/product-10-img-5.jpg"
+    ],
+    "discount": 93,
+    "rating": 4.4,
+    "reviews": 4210,
+    "desc": "Tempered glass screen protector with 9H hardness and anti-fingerprint coating.",
+    "category": "Electronics",
+    "video": []
+  },
+  {
+    "id": 11,
+    "name": "Phone Stand",
+    "price": 399,
+    "originalPrice": 5999,
+    "image": "Flipkart/images/products/product-11-img-2.jpg",
+    "images": [
+      "Flipkart/images/products/product-11-img-1.jpg",
+      "Flipkart/images/products/product-11-img-2.jpg",
+      "Flipkart/images/products/product-11-img-3.jpg",
+      "Flipkart/images/products/product-11-img-4.jpg",
+      "Flipkart/images/products/product-11-img-5.jpg"
+    ],
+    "discount": 93,
+    "rating": 4.2,
+    "reviews": 55,
+    "desc": "Adjustable phone stand compatible with all smartphones and tablets.",
+    "category": "Electronics",
+    "video": []
+  },
+  {
+    "id": 12,
+    "name": "Cable Organizer",
+    "price": 399,
+    "originalPrice": 8999,
+    "image": "Flipkart/images/products/product-12-img-2.jpg",
+    "images": [
+      "Flipkart/images/products/product-12-img-1.jpg",
+      "Flipkart/images/products/product-12-img-2.jpg",
+      "Flipkart/images/products/product-12-img-3.jpg",
+      "Flipkart/images/products/product-12-img-4.jpg",
+      "Flipkart/images/products/product-12-img-5.jpg"
+    ],
+    "discount": 95,
+    "rating": 4.3,
+    "reviews": 2100,
+    "desc": "Desk cable organizer with 5 slots to organize and manage cables efficiently.",
+    "category": "Electronics",
+    "video": []
+  },
+  {
+    "id": 13,
+    "name": "Power Strip",
+    "price": 419,
+    "originalPrice": 2699,
+    "image": "Flipkart/images/products/product-13-img-2.jpg",
+    "images": [
+      "Flipkart/images/products/product-13-img-1.jpg",
+      "Flipkart/images/products/product-13-img-2.jpg",
+      "Flipkart/images/products/product-13-img-3.jpg",
+      "Flipkart/images/products/product-13-img-4.jpg",
+      "Flipkart/images/products/product-13-img-5.jpg"
+    ],
+    "discount": 84,
+    "rating": 4.5,
+    "reviews": 5670,
+    "desc": "6-outlet power strip with surge protection and compact design.",
+    "category": "Electronics",
+    "video": []
+  },
+  {
+    "id": 14,
+    "name": "LED Desk Lamp",
+    "price": 519,
+    "originalPrice": 14999,
+    "image": "Flipkart/images/products/product-14-img-2.jpg",
+    "images": [
+      "Flipkart/images/products/product-14-img-1.jpg",
+      "Flipkart/images/products/product-14-img-2.jpg",
+      "Flipkart/images/products/product-14-img-3.jpg",
+      "Flipkart/images/products/product-14-img-4.jpg",
+      "Flipkart/images/products/product-14-img-5.jpg"
+    ],
+    "discount": 96,
+    "rating": 4.4,
+    "reviews": 3440,
+    "desc": "Dimmable LED desk lamp with USB charging port and touch control.",
+    "category": "Electronics",
+    "video": []
+  },
+  {
+    "id": 15,
+    "name": "Laptop Stand",
+    "price": 299,
+    "originalPrice": 4999,
+    "image": "Flipkart/images/products/product-15-img-2.jpg",
+    "images": [
+      "Flipkart/images/products/product-15-img-1.jpg",
+      "Flipkart/images/products/product-15-img-2.jpg",
+      "Flipkart/images/products/product-15-img-3.jpg",
+      "Flipkart/images/products/product-15-img-4.jpg",
+      "Flipkart/images/products/product-15-img-5.jpg"
+    ],
+    "discount": 94,
+    "rating": 4.3,
+    "reviews": 2890,
+    "desc": "Ergonomic aluminum laptop stand with adjustable height for better posture.",
+    "category": "Electronics",
+    "video": []
+  },
+  {
+    "id": 16,
+    "name": "Monitor Light Bar",
+    "price": 699,
+    "originalPrice": 36999,
+    "image": "Flipkart/images/products/product-16-img-2.jpg",
+    "images": [
+      "Flipkart/images/products/product-16-img-1.jpg",
+      "Flipkart/images/products/product-16-img-2.jpg",
+      "Flipkart/images/products/product-16-img-3.jpg",
+      "Flipkart/images/products/product-16-img-4.jpg",
+      "Flipkart/images/products/product-16-img-5.jpg"
+    ],
+    "discount": 98,
+    "rating": 4.6,
+    "reviews": 4560,
+    "desc": "Stylish monitor light bar that reduces eye strain with smart brightness.",
+    "category": "Electronics",
+    "video": []
+  },
+  {
+    "id": 17,
+    "name": "Mouse Pad XL",
+    "price": 567,
+    "originalPrice": 5939,
+    "image": "Flipkart/images/products/product-17-img-2.jpg",
+    "images": [
+      "Flipkart/images/products/product-17-img-1.jpg",
+      "Flipkart/images/products/product-17-img-2.jpg",
+      "Flipkart/images/products/product-17-img-3.jpg",
+      "Flipkart/images/products/product-17-img-4.jpg",
+      "Flipkart/images/products/product-17-img-5.jpg"
+    ],
+    "discount": 90,
+    "rating": 4.2,
+    "reviews": 1230,
+    "desc": "Large gaming mouse pad with smooth surface and anti-slip base.",
+    "category": "Electronics",
+    "video": []
+  },
+  {
+    "id": 18,
+    "name": "Docking Station",
+    "price": 499,
+    "originalPrice": 37899,
+    "image": "Flipkart/images/products/product-18-img-2.jpg",
+    "images": [
+      "Flipkart/images/products/product-18-img-1.jpg",
+      "Flipkart/images/products/product-18-img-2.jpg",
+      "Flipkart/images/products/product-18-img-3.jpg",
+      "Flipkart/images/products/product-18-img-4.jpg",
+      "Flipkart/images/products/product-18-img-5.jpg"
+    ],
+    "discount": 98,
+    "rating": 4.5,
+    "reviews": 3210,
+    "desc": "USB-C docking station with HDMI, Ethernet, and multiple ports.",
+    "category": "Electronics",
+    "video": []
+  },
+  {
+    "id": 19,
+    "name": "Cooling Pad",
+    "price": 325,
+    "originalPrice": 4999,
+    "image": "Flipkart/images/products/product-19-img-2.jpg",
+    "images": [
+      "Flipkart/images/products/product-19-img-1.jpg",
+      "Flipkart/images/products/product-19-img-2.jpg",
+      "Flipkart/images/products/product-19-img-3.jpg",
+      "Flipkart/images/products/product-19-img-4.jpg",
+      "Flipkart/images/products/product-19-img-5.jpg"
+    ],
+    "discount": 93,
+    "rating": 4.1,
+    "reviews": 1890,
+    "desc": "Laptop cooling pad with 5 fans to maintain optimal temperature during gaming.",
+    "category": "Electronics",
+    "video": []
+  },
+  {
+    "id": 20,
+    "name": "Phone Case",
+    "price": 299,
+    "originalPrice": 1499,
+    "image": "Flipkart/images/products/product-20-img-2.jpg",
+    "images": [
+      "Flipkart/images/products/product-20-img-1.jpg",
+      "Flipkart/images/products/product-20-img-2.jpg",
+      "Flipkart/images/products/product-20-img-3.jpg",
+      "Flipkart/images/products/product-20-img-4.jpg",
+      "Flipkart/images/products/product-20-img-5.jpg"
+    ],
+    "discount": 80,
+    "rating": 4.2,
+    "reviews": 2450,
+    "desc": "Durable phone case with shock absorption and premium design.",
+    "category": "Electronics",
+    "video": []
+  },
+  {
+    "id": 21,
+    "name": "Car Phone Mount",
+    "price": 299,
+    "originalPrice": 1799,
+    "image": "Flipkart/images/products/product-21-img-2.jpg",
+    "images": [
+      "Flipkart/images/products/product-21-img-1.jpg",
+      "Flipkart/images/products/product-21-img-2.jpg",
+      "Flipkart/images/products/product-21-img-3.jpg",
+      "Flipkart/images/products/product-21-img-4.jpg",
+      "Flipkart/images/products/product-21-img-5.jpg"
+    ],
+    "discount": 83,
+    "rating": 4.3,
+    "reviews": 1560,
+    "desc": "Dashboard and windscreen phone mount with 360-degree rotation.",
+    "category": "Electronics",
+    "video": []
+  },
+  {
+    "id": 22,
+    "name": "Screen Cleaner Kit",
+    "price": 472,
+    "originalPrice": 17999,
+    "image": "Flipkart/images/products/product-22-img-2.jpg",
+    "images": [
+      "Flipkart/images/products/product-22-img-1.jpg",
+      "Flipkart/images/products/product-22-img-2.jpg",
+      "Flipkart/images/products/product-22-img-3.jpg",
+      "Flipkart/images/products/product-22-img-4.jpg",
+      "Flipkart/images/products/product-22-img-5.jpg"
+    ],
+    "discount": 97,
+    "rating": 4.4,
+    "reviews": 890,
+    "desc": "Professional screen cleaner kit for phones, laptops, and monitors.",
+    "category": "Electronics",
+    "video": []
+  },
+  {
+    "id": 23,
+    "name": "Selfie Ring Light",
+    "price": 699,
+    "originalPrice": 14999,
+    "image": "Flipkart/images/products/product-23-img-2.jpg",
+    "images": [
+      "Flipkart/images/products/product-23-img-1.jpg",
+      "Flipkart/images/products/product-23-img-2.jpg",
+      "Flipkart/images/products/product-23-img-3.jpg",
+      "Flipkart/images/products/product-23-img-4.jpg",
+      "Flipkart/images/products/product-23-img-5.jpg"
+    ],
+    "discount": 95,
+    "rating": 4.5,
+    "reviews": 3670,
+    "desc": "LED ring light with adjustable brightness and color temperature for content creation.",
+    "category": "Electronics",
+    "video": []
+  },
+  {
+    "id": 24,
+    "name": "Mini Projector",
+    "price": 319,
+    "originalPrice": 4999,
+    "image": "Flipkart/images/products/product-24-img-2.jpg",
+    "images": [
+      "Flipkart/images/products/product-24-img-1.jpg",
+      "Flipkart/images/products/product-24-img-2.jpg",
+      "Flipkart/images/products/product-24-img-3.jpg",
+      "Flipkart/images/products/product-24-img-4.jpg",
+      "Flipkart/images/products/product-24-img-5.jpg"
+    ],
+    "discount": 93,
+    "rating": 4.2,
+    "reviews": 2130,
+    "desc": "Portable mini projector with HD resolution and wireless connectivity.",
+    "category": "Electronics",
+    "video": []
+  },
+  {
+    "id": 25,
+    "name": "Digital Pen",
+    "price": 399,
+    "originalPrice": 5999,
+    "image": "Flipkart/images/products/product-25-img-2.jpg",
+    "images": [
+      "Flipkart/images/products/product-25-img-1.jpg",
+      "Flipkart/images/products/product-25-img-2.jpg",
+      "Flipkart/images/products/product-25-img-3.jpg",
+      "Flipkart/images/products/product-25-img-4.jpg",
+      "Flipkart/images/products/product-25-img-5.jpg"
+    ],
+    "discount": 93,
+    "rating": 4.4,
+    "reviews": 2890,
+    "desc": "Stylus digital pen with pressure sensitivity for drawing and note-taking.",
+    "category": "Electronics",
+    "video": []
+  },
+  {
+    "id": 26,
+    "name": "Desk Humidifier",
+    "price": 299,
+    "originalPrice": 2999,
+    "image": "Flipkart/images/products/product-26-img-2.jpg",
+    "images": [
+      "Flipkart/images/products/product-26-img-1.jpg",
+      "Flipkart/images/products/product-26-img-2.jpg",
+      "Flipkart/images/products/product-26-img-3.jpg",
+      "Flipkart/images/products/product-26-img-4.jpg",
+      "Flipkart/images/products/product-26-img-5.jpg"
+    ],
+    "discount": 90,
+    "rating": 4.1,
+    "reviews": 1340,
+    "desc": "Quiet USB humidifier with LED light for dry air relief at workspace.",
+    "category": "Electronics",
+    "video": []
+  },
+  {
+    "id": 27,
+    "name": "Desk Organizer",
+    "price": 349,
+    "originalPrice": 1999,
+    "image": "Flipkart/images/products/product-27-img-2.jpg",
+    "images": [
+      "Flipkart/images/products/product-27-img-1.jpg",
+      "Flipkart/images/products/product-27-img-2.jpg",
+      "Flipkart/images/products/product-27-img-3.jpg",
+      "Flipkart/images/products/product-27-img-4.jpg",
+      "Flipkart/images/products/product-27-img-5.jpg"
+    ],
+    "discount": 82,
+    "rating": 4.3,
+    "reviews": 1780,
+    "desc": "Multi-compartment desk organizer made from premium materials.",
+    "category": "Electronics",
+    "video": []
+  },
+  {
+    "id": 28,
+    "name": "Anti-Blue Light Glasses",
+    "price": 329,
+    "originalPrice": 1599,
+    "image": "Flipkart/images/products/product-28-img-2.jpg",
+    "images": [
+      "Flipkart/images/products/product-28-img-1.jpg",
+      "Flipkart/images/products/product-28-img-2.jpg",
+      "Flipkart/images/products/product-28-img-3.jpg",
+      "Flipkart/images/products/product-28-img-4.jpg",
+      "Flipkart/images/products/product-28-img-5.jpg"
+    ],
+    "discount": 79,
+    "rating": 4.2,
+    "reviews": 2120,
+    "desc": "Anti-blue light glasses to reduce eye strain from screen exposure.",
+    "category": "Electronics",
+    "video": []
+  },
+  {
+    "id": 29,
+    "name": "Cable Ties Pack",
+    "price": 549,
+    "originalPrice": 14999,
+    "image": "Flipkart/images/products/product-29-img-2.jpg",
+    "images": [
+      "Flipkart/images/products/product-29-img-1.jpg",
+      "Flipkart/images/products/product-29-img-2.jpg",
+      "Flipkart/images/products/product-29-img-3.jpg",
+      "Flipkart/images/products/product-29-img-4.jpg",
+      "Flipkart/images/products/product-29-img-5.jpg"
+    ],
+    "discount": 96,
+    "rating": 4.3,
+    "reviews": 2450,
+    "desc": "Reusable cable ties pack with adjustable length and secure grip.",
+    "category": "Electronics",
+    "video": []
+  },
+  {
+    "id": 30,
+    "name": "Battery Charger",
+    "price": 349,
+    "originalPrice": 14999,
+    "image": "Flipkart/images/products/product-30-img-2.jpg",
+    "images": [
+      "Flipkart/images/products/product-30-img-1.jpg",
+      "Flipkart/images/products/product-30-img-2.jpg",
+      "Flipkart/images/products/product-30-img-3.jpg",
+      "Flipkart/images/products/product-30-img-4.jpg",
+      "Flipkart/images/products/product-30-img-5.jpg"
+    ],
+    "discount": 97,
+    "rating": 4.4,
+    "reviews": 3890,
+    "desc": "Smart battery charger compatible with AA, AAA, and 9V batteries.",
+    "category": "Electronics",
+    "video": []
+  },
+  {
+    "id": 31,
+    "name": "Card Reader",
+    "price": 349,
+    "originalPrice": 4999,
+    "image": "Flipkart/images/products/product-31-img-2.jpg",
+    "images": [
+      "Flipkart/images/products/product-31-img-1.jpg",
+      "Flipkart/images/products/product-31-img-2.jpg",
+      "Flipkart/images/products/product-31-img-3.jpg",
+      "Flipkart/images/products/product-31-img-4.jpg",
+      "Flipkart/images/products/product-31-img-5.jpg"
+    ],
+    "discount": 93,
+    "rating": 4.2,
+    "reviews": 1670,
+    "desc": "USB 3.0 card reader compatible with SD, microSD, CF cards.",
+    "category": "Electronics",
+    "video": []
+  },
+  {
+    "id": 32,
+    "name": "Wireless Charger",
+    "price": 399,
+    "originalPrice": 10999,
+    "image": "Flipkart/images/products/product-32-img-2.jpg",
+    "images": [
+      "Flipkart/images/products/product-32-img-1.jpg",
+      "Flipkart/images/products/product-32-img-2.jpg",
+      "Flipkart/images/products/product-32-img-3.jpg",
+      "Flipkart/images/products/product-32-img-4.jpg",
+      "Flipkart/images/products/product-32-img-5.jpg"
+    ],
+    "discount": 96,
+    "rating": 4.5,
+    "reviews": 4120,
+    "desc": "10W wireless charger with Qi certification for all compatible devices.",
+    "category": "Electronics",
+    "video": []
+  }
+]

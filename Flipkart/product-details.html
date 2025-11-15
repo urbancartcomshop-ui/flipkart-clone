@@ -4,1538 +4,832 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Details - Flipkart</title>
-    <link rel="preconnect" href="https://images.unsplash.com">
-    <link rel="stylesheet" href="../style.css">
     <style>
-        .product-detail-container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 20px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            animation: slideIn 0.6s ease-out;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        .product-images {
+        body {
+            font-family: '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', sans-serif;
+            background: #f1f3f6;
+            color: #212121;
+        }
+
+        .fk-header {
+            background: #2874f0;
+            padding: 10px 12px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
             display: flex;
-            flex-direction: column;
-            gap: 15px;
+            align-items: center;
+            gap: 12px;
         }
-        
-        .main-image {
-            width: 100%;
-            height: 500px;
+
+        .back-btn {
             background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: none;
+            font-size: 20px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        
-        .main-image img {
+
+        .fk-logo-box {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            text-decoration: none;
+            flex: 1;
+        }
+
+        .fk-logo-text {
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+            font-style: italic;
+        }
+
+        .fk-logo-plus {
+            color: #ffe500;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .header-icon-btn {
+            background: white;
+            border: none;
+            font-size: 18px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-image-section {
+            background: white;
+            padding: 12px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .product-image {
+            width: 100%;
+            aspect-ratio: 1;
+            background: #f0f0f0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 8px;
+            position: relative;
+            touch-action: pan-y;
+            user-select: none;
+        }
+
+        .product-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        
-        .thumbnail-images {
-            display: flex;
-            gap: 10px;
+
+        .image-counter {
+            text-align: center;
+            font-size: 12px;
+            color: #767676;
+            padding: 8px;
+            background: #f1f3f6;
+            border-radius: 4px;
+            margin-top: 8px;
         }
-        
-        .thumbnail {
-            width: 80px;
-            height: 80px;
-            border: 2px solid transparent;
+
+        .video-section {
+            background: white;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 4px;
+        }
+
+        .video-list {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+
+        .video-thumb {
+            min-width: 60px;
+            width: 60px;
+            height: 60px;
+            background: #f0f0f0;
             border-radius: 4px;
             cursor: pointer;
-            overflow: hidden;
-            transition: all 0.3s ease;
+            border: 2px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
         }
-        
-        .thumbnail img {
+
+        .video-thumb.active {
+            border-color: #2874f0;
+        }
+
+        .video-player {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 4px;
+            background: #000;
+            margin-bottom: 8px;
+        }
+
+        .video-player iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            border: none;
         }
-        
-        .thumbnail:hover, .thumbnail.active {
-            border-color: #2874f0;
-            box-shadow: 0 0 8px rgba(40, 116, 240, 0.5);
+
+        .product-header {
+            background: white;
+            padding: 12px;
+            margin-bottom: 8px;
         }
-        
-        .product-info {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        
-        .product-title {
-            font-size: 28px;
+
+        .product-header h1 {
+            font-size: 14px;
             font-weight: 600;
-            color: #212121;
+            margin-bottom: 8px;
+            line-height: 1.4;
         }
-        
-        .product-rating {
+
+        .rating-review {
             display: flex;
             align-items: center;
-            gap: 15px;
-            font-size: 16px;
-        }
-        
-        .rating-badge {
-            background: #31a049;
-            color: white;
-            padding: 4px 10px;
+            gap: 8px;
+            margin-bottom: 10px;
+            padding: 8px;
+            background: #f1f3f6;
             border-radius: 4px;
+        }
+
+        .rating-badge {
+            background: #388e3c;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
             font-weight: 600;
         }
-        
-        .pricing {
-            background: #f5f5f5;
-            padding: 20px;
-            border-radius: 8px;
+
+        .review-count {
+            font-size: 12px;
+            color: #767676;
         }
-        
-        .price-display {
-            display: flex;
-            align-items: center;
-            gap: 15px;
+
+        .price-section {
             margin-bottom: 10px;
         }
-        
-        .current-price {
-            font-size: 32px;
+
+        .price-display {
+            font-size: 22px;
             font-weight: 700;
             color: #212121;
+            display: inline;
         }
-        
+
         .original-price {
-            font-size: 20px;
-            color: #878787;
             text-decoration: line-through;
+            color: #767676;
+            font-size: 14px;
+            margin-left: 8px;
+            display: inline;
         }
-        
-        .discount-percentage {
-            background: #31a049;
+
+        .discount-badge {
+            background: #388e3c;
             color: white;
-            padding: 6px 12px;
-            border-radius: 4px;
+            padding: 4px 8px;
+            border-radius: 2px;
+            font-size: 12px;
             font-weight: 600;
-            font-size: 14px;
+            margin-left: 8px;
+            display: inline;
         }
-        
-        .delivery-info {
-            padding: 15px;
+
+        .you-save {
+            font-size: 12px;
+            color: #388e3c;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .offers-section {
             background: white;
-            border-left: 4px solid #2874f0;
+            padding: 12px;
+            margin-bottom: 8px;
+        }
+
+        .section-title {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #212121;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .offer-card {
+            background: #f1f3f6;
+            padding: 10px;
             border-radius: 4px;
-            font-size: 14px;
+            margin-bottom: 8px;
+            border-left: 3px solid #2874f0;
         }
-        
-        .delivery-info strong {
-            color: #31a049;
+
+        .offer-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #212121;
+            margin-bottom: 2px;
         }
-        
-        .specs {
+
+        .offer-detail {
+            font-size: 11px;
+            color: #767676;
+        }
+
+        .emi-options {
             background: white;
+            padding: 12px;
+            margin-bottom: 8px;
+        }
+
+        .emi-card {
+            background: #f1f3f6;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 8px;
             border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            overflow: hidden;
         }
-        
-        .specs-title {
-            padding: 15px;
-            background: #f5f5f5;
+
+        .emi-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .emi-bank {
+            font-size: 12px;
             font-weight: 600;
-            font-size: 16px;
-            border-bottom: 1px solid #e0e0e0;
+            color: #212121;
         }
-        
-        .specs-content {
-            padding: 15px;
+
+        .emi-amount {
+            font-size: 12px;
+            color: #388e3c;
+            font-weight: 600;
         }
-        
+
+        .emi-info {
+            font-size: 11px;
+            color: #767676;
+        }
+
+        .specs-section {
+            background: white;
+            padding: 12px;
+            margin-bottom: 8px;
+        }
+
         .spec-item {
             display: flex;
             justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid #f0f0f0;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 13px;
         }
-        
+
         .spec-label {
-            color: #878787;
-            font-weight: 500;
+            color: #767676;
+            font-weight: 600;
         }
-        
+
         .spec-value {
             color: #212121;
-            font-weight: 600;
             text-align: right;
-            max-width: 40%;
         }
-        
-        .spec-item:last-child {
-            border-bottom: none;
-        }
-        
-        .action-buttons {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .btn-add-to-cart {
-            flex: 1;
-            background: linear-gradient(90deg, #ff9f00 0%, #ff9800 100%);
-            color: white;
-            border: none;
-            padding: 16px;
-            font-size: 16px;
-            font-weight: 700;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-add-to-cart:hover {
-            box-shadow: 0 4px 16px rgba(255, 159, 0, 0.4);
-            transform: translateY(-2px);
-        }
-        
-        .btn-buy-now {
-            flex: 1;
-            background: linear-gradient(90deg, #2874f0 0%, #1f5ce8 100%);
-            color: white;
-            border: none;
-            padding: 16px;
-            font-size: 16px;
-            font-weight: 700;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-buy-now:hover {
-            box-shadow: 0 4px 16px rgba(40, 116, 240, 0.4);
-            transform: translateY(-2px);
-        }
-        
-        .btn-wishlist {
-            flex: 1;
-            background: white;
-            color: #2874f0;
-            border: 2px solid #2874f0;
-            padding: 14px;
-            font-size: 16px;
-            font-weight: 700;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-wishlist:hover {
-            background: #f5f5f5;
-        }
-        
-        .size-section {
-            background: white;
-            padding: 15px;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-        }
-        
-        .size-title {
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #212121;
-        }
-        
-        .size-options {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        
-        .size-btn {
-            padding: 10px 20px;
-            border: 2px solid #e0e0e0;
-            background: white;
-            cursor: pointer;
-            border-radius: 4px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-        
-        .size-btn:hover {
-            border-color: #2874f0;
-            background: #f5f5f5;
-        }
-        
-        .size-btn.selected {
-            border-color: #2874f0;
-            background: #2874f0;
-            color: white;
-        }
-        
+
         .reviews-section {
             background: white;
-            padding: 20px;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            margin-top: 20px;
+            padding: 12px;
+            margin-bottom: 8px;
         }
-        
-        .reviews-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: #212121;
-        }
-        
+
         .review-item {
-            padding: 15px 0;
-            border-bottom: 1px solid #f0f0f0;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
         }
-        
-        .review-item:last-child {
-            border-bottom: none;
-        }
-        
+
         .review-header {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 10px;
+            align-items: center;
+            margin-bottom: 4px;
         }
-        
+
         .reviewer-name {
+            font-size: 12px;
             font-weight: 600;
             color: #212121;
         }
-        
-        .review-date {
-            color: #878787;
-            font-size: 12px;
-        }
-        
+
         .review-rating {
-            color: #31a049;
+            background: #388e3c;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 2px;
+            font-size: 11px;
             font-weight: 600;
-            margin-bottom: 8px;
         }
-        
+
         .review-text {
-            color: #555;
-            font-size: 14px;
-            line-height: 1.6;
-        }
-        
-        .description {
-            background: white;
-            padding: 20px;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            line-height: 1.6;
-            color: #212121;
-        }
-        
-        .section-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: #212121;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #2874f0;
-        }
-        
-        .emi-section {
-            background: white;
-            padding: 20px;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            margin-top: 20px;
-        }
-        
-        .emi-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-        }
-        
-        .emi-card {
-            border: 1px solid #e0e0e0;
-            padding: 15px;
-            border-radius: 4px;
-            background: #f9f9f9;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .emi-card:hover {
-            background: #f0f5ff;
-            border-color: #2874f0;
-            box-shadow: 0 2px 8px rgba(40, 116, 240, 0.2);
-        }
-        
-        .emi-months {
-            font-weight: 700;
-            font-size: 18px;
-            color: #212121;
-            margin-bottom: 8px;
-        }
-        
-        .emi-amount {
-            font-size: 16px;
-            color: #31a049;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-        
-        .emi-interest {
-            font-size: 13px;
-            color: #878787;
-            margin-bottom: 5px;
-        }
-        
-        .emi-bank {
             font-size: 12px;
-            color: #2874f0;
-            background: #e8f2ff;
-            padding: 3px 8px;
-            border-radius: 3px;
-            display: inline-block;
+            color: #767676;
+            margin: 6px 0;
+            line-height: 1.4;
         }
-        
+
+        .verified-badge {
+            display: inline-block;
+            background: #e8f5e9;
+            color: #388e3c;
+            padding: 2px 6px;
+            border-radius: 2px;
+            font-size: 10px;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
         .payment-section {
             background: white;
-            padding: 20px;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            margin-top: 20px;
-        }
-        
-        .payment-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
-        }
-        
-        .payment-card {
-            border: 2px solid #e0e0e0;
-            padding: 15px;
-            border-radius: 4px;
-            background: white;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .payment-card:hover {
-            border-color: #2874f0;
-            background: #f0f5ff;
-            box-shadow: 0 2px 8px rgba(40, 116, 240, 0.15);
-        }
-        
-        .payment-method-name {
-            font-weight: 700;
-            font-size: 15px;
-            color: #212121;
+            padding: 12px;
             margin-bottom: 8px;
         }
-        
-        .payment-discount {
-            display: inline-block;
-            background: #31a049;
-            color: white;
-            padding: 2px 8px;
-            border-radius: 3px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-        
-        .payment-cashback {
-            font-size: 13px;
-            color: #2874f0;
-            margin-bottom: 5px;
-        }
-        
-        .payment-label {
-            font-size: 12px;
-            color: #878787;
-        }
-        
-        .offer-section {
-            background: linear-gradient(135deg, #fff3cd 0%, #fff8e1 100%);
-            padding: 20px;
-            border: 2px solid #ffc107;
-            border-radius: 8px;
-            margin-top: 20px;
-        }
-        
-        .exchange-offer-card {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            border-left: 4px solid #ffc107;
-        }
-        
-        .exchange-value {
-            font-size: 24px;
-            font-weight: 700;
-            color: #31a049;
-            margin-bottom: 10px;
-        }
-        
-        .exchange-description {
-            font-size: 14px;
-            color: #555;
-            margin-bottom: 8px;
-        }
-        
-        .exchange-eligible {
-            font-size: 13px;
-            color: #878787;
-            font-style: italic;
-        }
-        
-        .no-offer {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            color: #878787;
-            font-size: 14px;
-        }
-        
-        .warranty-section {
-            background: white;
-            padding: 20px;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            margin-top: 20px;
-        }
-        
-        .warranty-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-        
-        .warranty-item {
+
+        .payment-method {
             display: flex;
-            gap: 15px;
-            align-items: flex-start;
-            padding: 15px;
-            background: #f9f9f9;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
             border-radius: 4px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
         }
-        
-        .warranty-icon {
-            font-size: 30px;
-            min-width: 40px;
-            text-align: center;
+
+        .payment-method:active {
+            border-color: #2874f0;
+            background: #e3f2fd;
         }
-        
-        .warranty-details {
+
+        .payment-icon {
+            font-size: 20px;
+        }
+
+        .payment-info {
             flex: 1;
         }
-        
-        .warranty-label {
-            font-size: 12px;
-            color: #878787;
-            text-transform: uppercase;
+
+        .payment-name {
+            font-size: 13px;
             font-weight: 600;
-            margin-bottom: 5px;
-        }
-        
-        .warranty-value {
-            font-size: 16px;
-            font-weight: 700;
-            color: #212121;
-            margin-bottom: 3px;
-        }
-        
-        .warranty-desc {
-            font-size: 12px;
-            color: #555;
-        }
-        
-        @media (max-width: 768px) {
-            .emi-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .payment-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .warranty-info {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .description-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 15px;
             color: #212121;
         }
-        
-        .description-text {
-            color: #555;
+
+        .payment-desc {
+            font-size: 11px;
+            color: #767676;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 12px;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
             font-size: 14px;
-            line-height: 1.8;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
         }
-        
-        @media (max-width: 768px) {
-            .product-detail-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .main-image {
-                height: 350px;
-            }
-            
-            .product-title {
-                font-size: 24px;
-            }
-            
-            .current-price {
-                font-size: 24px;
-            }
+
+        .btn-cart {
+            background: #ff9800;
+            color: white;
+        }
+
+        .btn-cart:active {
+            background: #f57c00;
+        }
+
+        .btn-buy {
+            background: #2874f0;
+            color: white;
+        }
+
+        .btn-buy:active {
+            background: #1f5fc4;
+        }
+
+        .products-padding {
+            margin-bottom: 100px;
         }
     </style>
 </head>
 <body>
 
-<!-- TOP BAR -->
-<div class="top-bar">
-    <div class="top-bar-content">
-        <span>Become a Seller</span>
-        <span>More</span>
-    </div>
-</div>
-
-<!-- NAVBAR -->
-<header class="navbar">
-    <div class="navbar-container">
-        <a href="index.html" class="logo">
-            <span class="flipkart-text">Flipkart</span>
-            <span class="logo-plus">Plus</span>
-        </a>
-        <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Search for products, brands and more" autocomplete="off">
-            <button class="search-btn">🔍</button>
-        </div>
-        <div class="nav-right">
-            <a href="login.html" class="nav-link">👤 Login</a>
-            <a href="cart.html" class="nav-link">🛒 Cart</a>
-            <a href="#" class="nav-link">❓ Help</a>
-        </div>
+<header class="fk-header">
+    <button class="back-btn" onclick="goBack()">←</button>
+    <a href="/" class="fk-logo-box">
+        <span class="fk-logo-text">Flipkart</span>
+        <span class="fk-logo-plus">Plus</span>
+    </a>
+    <div class="header-icons">
+        <button class="header-icon-btn" onclick="goToCart()">🛒</button>
     </div>
 </header>
 
-<!-- BREADCRUMB -->
-<div style="max-width: 1280px; margin: 20px auto; padding: 0 20px; color: #878787; font-size: 14px;">
-    <a href="index.html" style="color: #2874f0; text-decoration: none;">Home</a> / 
-    <span id="breadcrumb-category">Electronics</span> / 
-    <span id="breadcrumb-product">Product</span>
-</div>
-
-<!-- PRODUCT DETAIL SECTION -->
-<div class="product-detail-container">
-    <!-- LEFT SIDE - IMAGES -->
-    <div class="product-images">
-        <div class="main-image">
-            <img id="mainImage" src="" alt="Product Image">
-        </div>
-        <div class="thumbnail-images">
-            <div class="thumbnail active" onclick="changeImage(this)">
-                <img id="thumb1" src="" alt="">
-            </div>
-            <div class="thumbnail" onclick="changeImage(this)">
-                <img id="thumb2" src="" alt="">
-            </div>
-            <div class="thumbnail" onclick="changeImage(this)">
-                <img id="thumb3" src="" alt="">
-            </div>
-        </div>
+<!-- PRODUCT IMAGE SECTION -->
+<div class="product-image-section">
+    <div class="product-image">
+        <img id="productImage" src="" alt="" onerror="this.onerror=null;this.src='https://via.placeholder.com/400?text=No+Image'">
     </div>
-
-    <!-- RIGHT SIDE - DETAILS -->
-    <div class="product-info">
-        <div>
-            <h1 class="product-title" id="productTitle">Product Title</h1>
-            <div class="product-rating">
-                <span class="rating-badge" id="productRating">4.5 ⭐</span>
-                <span id="reviewCount">(2,500 Reviews)</span>
-            </div>
-        </div>
-
-        <!-- PRICING SECTION -->
-        <div class="pricing">
-            <div class="price-display">
-                <span class="current-price" id="currentPrice">₹12,999</span>
-                <span class="original-price" id="originalPrice">₹16,499</span>
-                <span class="discount-percentage" id="discount">Save 20%</span>
-            </div>
-            <div class="delivery-info">
-                <strong>✓ Free Delivery</strong><br>
-                <span>Inclusive of all taxes</span>
-            </div>
-        </div>
-
-        <!-- SPECIFICATIONS -->
-        <div class="specs">
-            <div class="specs-title">Key Specifications</div>
-            <div class="specs-content" id="specsContainer">
-                <!-- Specs will be populated here -->
-            </div>
-        </div>
-
-        <!-- ACTION BUTTONS -->
-        <div class="action-buttons">
-            <button class="btn-buy-now" onclick="buyNow()">⚡ Buy Now</button>
+    <div class="image-counter">
+        <div style="display: flex; gap: 8px; justify-content: center; margin-top: 8px;">
+            <img class="thumb-img" style="width: 50px; height: 50px; border-radius: 4px; cursor: pointer; border: 2px solid #e0e0e0;" onclick="changeImage(this)" alt="" onerror="this.onerror=null;this.src='https://via.placeholder.com/50?text=No+Image'">
+            <img class="thumb-img" style="width: 50px; height: 50px; border-radius: 4px; cursor: pointer; border: 2px solid #e0e0e0;" onclick="changeImage(this)" alt="">
+            <img class="thumb-img" style="width: 50px; height: 50px; border-radius: 4px; cursor: pointer; border: 2px solid #e0e0e0;" onclick="changeImage(this)" alt="">
+            <img class="thumb-img" style="width: 50px; height: 50px; border-radius: 4px; cursor: pointer; border: 2px solid #e0e0e0;" onclick="changeImage(this)" alt="">
         </div>
     </div>
 </div>
 
-<!-- DESCRIPTION & REVIEWS SECTION -->
-<div style="max-width: 1280px; margin: 20px auto; padding: 0 20px;">
-    <div class="description">
-        <div class="description-title">About this Product</div>
-        <div class="description-text" id="productDescription">
-            Product description will appear here...
+<!-- VIDEO SECTION (Only for Product 9) -->
+<div id="videoSection" class="video-section" style="display: none;">
+    <div class="section-title">📹 Product Videos</div>
+    <div class="video-player" id="videoPlayer"></div>
+    <div class="video-list" id="videoList"></div>
+</div>
+
+<!-- PRODUCT HEADER -->
+<div class="product-header">
+    <h1 id="productName"></h1>
+    <div class="rating-review">
+        <span class="rating-badge" id="productRating">4.5 ⭐</span>
+        <span class="review-count" id="reviewCount">(2.5K reviews)</span>
+    </div>
+    
+    <div class="price-section">
+        <span class="price-display" id="productPrice">₹0</span>
+        <span class="original-price" id="originalPrice">₹0</span>
+        <span class="discount-badge" id="discountBadge">0% OFF</span>
+        <div class="you-save" id="youSave">You save ₹0</div>
+    </div>
+</div>
+
+<!-- OFFERS SECTION -->
+<div class="offers-section">
+    <div class="section-title">📢 Best Offers</div>
+    <div class="offer-card">
+        <div class="offer-title">Bank Offer</div>
+        <div class="offer-detail">10% instant discount on ICICI credit card</div>
+    </div>
+    <div class="offer-card">
+        <div class="offer-title">Bank Offer</div>
+        <div class="offer-detail">5% cashback on Axis Bank Debit Card</div>
+    </div>
+    <div class="offer-card">
+        <div class="offer-title">Coupon</div>
+        <div class="offer-detail">Use code FLIPKART10 for extra 10% off</div>
+    </div>
+    <div class="offer-card">
+        <div class="offer-title">Free Delivery</div>
+        <div class="offer-detail">Free delivery on all orders above ₹500</div>
+    </div>
+</div>
+
+<!-- EMI OPTIONS -->
+<div class="emi-options">
+    <div class="section-title">💳 EMI Available</div>
+    <div class="emi-card">
+        <div class="emi-header">
+            <span class="emi-bank">ICICI Bank</span>
+            <span class="emi-amount">₹2,167/month</span>
         </div>
+        <div class="emi-info">6 Months @ 0% interest</div>
+    </div>
+    <div class="emi-card">
+        <div class="emi-header">
+            <span class="emi-bank">HDFC Bank</span>
+            <span class="emi-amount">₹1,625/month</span>
+        </div>
+        <div class="emi-info">8 Months @ 0% interest</div>
+    </div>
+    <div class="emi-card">
+        <div class="emi-header">
+            <span class="emi-bank">Axis Bank</span>
+            <span class="emi-amount">₹1,300/month</span>
+        </div>
+        <div class="emi-info">10 Months @ 0% interest</div>
+    </div>
+</div>
+
+<!-- SPECIFICATIONS -->
+<div class="specs-section">
+    <div class="section-title">📋 Key Specifications</div>
+    <div class="spec-item">
+        <span class="spec-label">Warranty</span>
+        <span class="spec-value">1 Year Manufacturer Warranty</span>
+    </div>
+    <div class="spec-item">
+        <span class="spec-label">Seller</span>
+        <span class="spec-value">Flipkart</span>
+    </div>
+    <div class="spec-item">
+        <span class="spec-label">Return Policy</span>
+        <span class="spec-value">7 Days Replacement</span>
+    </div>
+    <div class="spec-item">
+        <span class="spec-label">Delivery</span>
+        <span class="spec-value">Free • 3-5 Business Days</span>
+    </div>
+    <div class="spec-item">
+        <span class="spec-label">Seller Rating</span>
+        <span class="spec-value">4.8/5 (98% positive)</span>
+    </div>
+</div>
+
+<!-- REVIEWS SECTION -->
+<div class="reviews-section">
+    <div class="section-title">⭐ Customer Reviews</div>
+    
+    <div class="review-item">
+        <div class="review-header">
+            <span class="reviewer-name">Rajesh Kumar</span>
+            <span class="review-rating">5</span>
+        </div>
+        <div class="review-text">Excellent product! Exactly as described. Fast delivery and great packaging.</div>
+        <span class="verified-badge">✓ Verified Purchase</span>
     </div>
 
-    <!-- REVIEWS SECTION -->
-    <div class="reviews-section">
-        <div class="reviews-title">⭐ Customer Reviews & Ratings</div>
-        <div id="reviewsContainer"></div>
+    <div class="review-item">
+        <div class="review-header">
+            <span class="reviewer-name">Priya Singh</span>
+            <span class="review-rating">4</span>
+        </div>
+        <div class="review-text">Very good quality. Battery life is impressive. Highly recommended!</div>
+        <span class="verified-badge">✓ Verified Purchase</span>
     </div>
 
-    <!-- EMI OPTIONS SECTION -->
-    <div class="emi-section">
-        <div class="section-title">💳 EMI Options</div>
-        <div class="emi-grid" id="emiContainer"></div>
+    <div class="review-item">
+        <div class="review-header">
+            <span class="reviewer-name">Amit Patel</span>
+            <span class="review-rating">5</span>
+        </div>
+        <div class="review-text">Best product in this price range. Came with all accessories.</div>
+        <span class="verified-badge">✓ Verified Purchase</span>
     </div>
 
-    <!-- PAYMENT OPTIONS SECTION -->
-    <div class="payment-section">
-        <div class="section-title">💰 Payment Options</div>
-        <div class="payment-grid" id="paymentContainer"></div>
+    <div class="review-item">
+        <div class="review-header">
+            <span class="reviewer-name">Neha Gupta</span>
+            <span class="review-rating">4</span>
+        </div>
+        <div class="review-text">Good value for money. Works smoothly. Customer service is responsive.</div>
+        <span class="verified-badge">✓ Verified Purchase</span>
     </div>
+</div>
 
-    <!-- EXCHANGE OFFER SECTION -->
-    <div class="offer-section" id="exchangeOfferSection">
-        <div class="section-title">🔄 Exchange Offer</div>
-        <div id="exchangeOfferContainer"></div>
-    </div>
-
-    <!-- WARRANTY & SELLER INFO SECTION -->
-    <div class="warranty-section">
-        <div class="warranty-info">
-            <div class="warranty-item">
-                <div class="warranty-icon">🛡️</div>
-                <div class="warranty-details">
-                    <div class="warranty-label">Warranty</div>
-                    <div class="warranty-value" id="warrantyType">1 Year</div>
-                    <div class="warranty-desc" id="warrantyDesc">Manufacturer warranty</div>
-                </div>
-            </div>
-            <div class="warranty-item">
-                <div class="warranty-icon">🏪</div>
-                <div class="warranty-details">
-                    <div class="warranty-label">Seller</div>
-                    <div class="warranty-value" id="sellerName">Flipko</div>
-                    <div class="warranty-desc">Official Flipko Store</div>
-                </div>
-            </div>
-            <div class="warranty-item">
-                <div class="warranty-icon">↩️</div>
-                <div class="warranty-details">
-                    <div class="warranty-label">Return Policy</div>
-                    <div class="warranty-value" id="returnPolicy">7 Days</div>
-                    <div class="warranty-desc">Easy returns</div>
-                </div>
-            </div>
-            <div class="warranty-item">
-                <div class="warranty-icon">🚚</div>
-                <div class="warranty-details">
-                    <div class="warranty-label">Shipping</div>
-                    <div class="warranty-value" id="shippingInfo">Free Shipping</div>
-                    <div class="warranty-desc">Fast delivery</div>
-                </div>
-            </div>
+<!-- PAYMENT METHODS -->
+<div class="payment-section">
+    <div class="section-title">💰 Payment Method</div>
+    
+    <div class="payment-method" onclick="selectPayment('upi')" style="border: 2px solid #2874f0; background: #f0f5ff;">
+        <span class="payment-icon">📱</span>
+        <div class="payment-info">
+            <div class="payment-name">UPI</div>
+            <div class="payment-desc">Google Pay • PhonePe • Paytm</div>
         </div>
     </div>
 </div>
 
-<!-- FOOTER -->
-<footer class="footer">
-    <div class="footer-content">
-        <div class="footer-section">
-            <h4>About</h4>
-            <ul>
-                <li><a href="#">Contact Us</a></li>
-                <li><a href="#">Careers</a></li>
-                <li><a href="#">Press</a></li>
-            </ul>
-        </div>
-        <div class="footer-section">
-            <h4>Help</h4>
-            <ul>
-                <li><a href="#">Payments</a></li>
-                <li><a href="#">Shipping</a></li>
-                <li><a href="#">Cancellation</a></li>
-            </ul>
-        </div>
-        <div class="footer-section">
-            <h4>Policy</h4>
-            <ul>
-                <li><a href="#">Return Policy</a></li>
-                <li><a href="#">Terms Of Use</a></li>
-                <li><a href="#">Security</a></li>
-            </ul>
-        </div>
-        <div class="footer-section">
-            <h4>Social</h4>
-            <ul>
-                <li><a href="#">Facebook</a></li>
-                <li><a href="#">Twitter</a></li>
-                <li><a href="#">YouTube</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        <p>© 2025 Flipko. All rights reserved.</p>
-    </div>
-</footer>
+<div class="products-padding"></div>
+
+<div class="action-buttons">
+    <button class="btn btn-buy" onclick="buyNow()">⚡ Buy Now</button>
+</div>
 
 <script>
-// Product Database - Flipkart Style with Detailed Information
-const products = {
-    1: {
-        id: 1,
-        name: "Samsung Galaxy M14 5G (Gray, 128GB) (6GB RAM)",
-        price: 12999,
-        originalPrice: 16499,
-        rating: 4.5,
-        reviews: 25847,
-        img: "https://images.unsplash.com/photo-1511707267537-b85faf00021e?w=500&h=500&fit=crop&q=80",
-        category: "Mobiles",
-        description: "Experience the power of 5G with Samsung Galaxy M14. This smartphone combines exceptional performance, impressive battery life, and an excellent camera system. The 6.5-inch IPS display delivers vibrant colors and deep blacks, while the 90Hz refresh rate ensures smooth scrolling. The MediaTek Dimensity 700 5G processor handles multitasking with ease. The 50MP triple camera system captures stunning photos even in low light. With a 5000mAh battery and 25W fast charging, you can stay productive all day long. The sleek design with premium finish makes it a stylish choice.",
-        specs: [
-            { label: "Screen Size", value: "6.5 inches" },
-            { label: "Resolution", value: "720 x 1600 pixels" },
-            { label: "Processor", value: "MediaTek Dimensity 700 5G" },
-            { label: "RAM", value: "6GB" },
-            { label: "Storage", value: "128GB expandable" },
-            { label: "Battery", value: "5000mAh" },
-            { label: "Rear Camera", value: "50MP + 2MP + 2MP" },
-            { label: "Front Camera", value: "13MP" },
-            { label: "Refresh Rate", value: "90Hz" },
-            { label: "Warranty", value: "1 Year" },
-            { label: "OS", value: "Android 13" },
-            { label: "5G", value: "Yes" }
-        ],
-        sizes: ["4GB/64GB", "6GB/128GB"],
-        customerReviews: [
-            { name: "Rajesh Kumar", rating: "5 ⭐", date: "2 days ago", text: "Excellent phone for the price! 5G is blazingly fast. Camera quality is amazing. Battery lasts almost 2 days with moderate use. Highly recommended!" },
-            { name: "Priya Singh", rating: "4 ⭐", date: "1 week ago", text: "Very good smartphone. Display is bright and clear. Performance is smooth for daily tasks. Only downside is it can get warm during gaming." },
-            { name: "Amit Patel", rating: "5 ⭐", date: "1 week ago", text: "Best value for money in this price range. Fast 5G connectivity. Great camera. Design looks premium. Very satisfied!" },
-            { name: "Neha Desai", rating: "5 ⭐", date: "2 weeks ago", text: "Love this phone! Everything works perfectly. 5G speed is incredible. Camera produces sharp photos. Build quality is solid." },
-            { name: "Vikram Sharma", rating: "4 ⭐", date: "3 weeks ago", text: "Good smartphone overall. Fast processor, good display. Would have liked faster charging, but otherwise perfect." }
-        ]
-    },
-    2: {
-        id: 2,
-        name: "Redmi Note 12 (Midnight Black, 128GB) (4GB RAM)",
-        price: 13499,
-        originalPrice: 17999,
-        rating: 4.6,
-        reviews: 18923,
-        img: "https://images.unsplash.com/photo-1511740357442-ee464c3f3c0d?w=500&h=500&fit=crop&q=80",
-        category: "Mobiles",
-        description: "Redmi Note 12 redefines the mid-range smartphone experience with its stunning AMOLED display and powerful processor. The 6.67-inch Super AMOLED display offers vibrant colors and deep blacks with a 120Hz refresh rate for buttery-smooth scrolling. The Snapdragon 680 processor ensures reliable performance for all your daily tasks. The 50MP main camera captures photos with exceptional detail, while the advanced night mode lets you take stunning low-light pictures. The 5000mAh battery combined with 33W fast charging means you spend less time charging and more time using your phone. The premium design with Gorilla Glass protection looks and feels premium.",
-        specs: [
-            { label: "Screen Size", value: "6.67 inches" },
-            { label: "Display Type", value: "Super AMOLED" },
-            { label: "Resolution", value: "1080 x 2400 pixels" },
-            { label: "Processor", value: "Snapdragon 680" },
-            { label: "RAM", value: "4GB" },
-            { label: "Storage", value: "128GB expandable" },
-            { label: "Battery", value: "5000mAh" },
-            { label: "Charging", value: "33W Fast Charging" },
-            { label: "Rear Camera", value: "50MP + 8MP + 2MP + 2MP" },
-            { label: "Front Camera", value: "16MP" },
-            { label: "Refresh Rate", value: "120Hz" },
-            { label: "OS", value: "MIUI 13" }
-        ],
-        sizes: ["4GB/128GB", "6GB/128GB"],
-        customerReviews: [
-            { name: "Sneha Verma", rating: "5 ⭐", date: "1 day ago", text: "Amazing AMOLED display! Colors are so vibrant. 120Hz scrolling is smooth. Camera is excellent. Battery life is great!" },
-            { name: "Rohan Kumar", rating: "5 ⭐", date: "3 days ago", text: "Fantastic phone! Build quality is premium. Display is one of the best I've seen. Performance is excellent. Highly satisfied!" },
-            { name: "Divya Patel", rating: "4 ⭐", date: "1 week ago", text: "Very good smartphone for the price. AMOLED display is beautiful. Camera takes great photos. Performance is smooth." },
-            { name: "Akshay Singh", rating: "5 ⭐", date: "2 weeks ago", text: "Perfect phone! Everything is excellent. Display quality is outstanding. Camera performance is impressive. Totally worth it!" },
-            { name: "Sophia Michael", rating: "4 ⭐", date: "3 weeks ago", text: "Great phone overall. Nice design, good performance. Camera is good but could be better in low light." }
-        ]
-    },
-    3: {
-        id: 3,
-        name: "Apple AirPods Pro (2nd Generation)",
-        price: 24900,
-        originalPrice: 29900,
-        rating: 4.8,
-        reviews: 45230,
-        img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&h=500&fit=crop&q=80",
-        category: "Audio",
-        description: "AirPods Pro deliver an incredibly immersive listening experience with industry-leading Active Noise Cancellation that reduces unwanted ambient sound. Transparency mode lets you hear the world around you. Personalized Spatial Audio with dynamic head tracking places sound all around you for an immersive listening experience. Adaptive Audio intelligently blends your audio environment to keep you aware and engaged. Conversation Awareness automatically reduces the volume of your audio and lowers media playback so you can hear and engage in conversations. The seamless integration with Apple devices means automatic setup, in-ear detection, and automatic switching between devices. USB-C charging provides fast charging. Up to 6 hours of battery life per charge, and up to 30 hours total with the charging case.",
-        specs: [
-            { label: "Noise Cancellation", value: "Active (Class-leading)" },
-            { label: "Battery (Per Charge)", value: "6 Hours" },
-            { label: "Total Battery Life", value: "30 Hours with case" },
-            { label: "Charging", value: "USB-C (Fast Charging)" },
-            { label: "Water Resistance", value: "IPX4" },
-            { label: "Transparency Mode", value: "Yes" },
-            { label: "Spatial Audio", value: "Yes with Dynamic Head Tracking" },
-            { label: "Adaptive Audio", value: "Yes" },
-            { label: "Conversation Awareness", value: "Yes" },
-            { label: "Automatic Switching", value: "Across Apple Devices" },
-            { label: "Mic", value: "Dual Microphone System" },
-            { label: "Warranty", value: "1 Year Limited" }
-        ],
-        sizes: ["Standard"],
-        customerReviews: [
-            { name: "Lisa Chen", rating: "5 ⭐", date: "1 day ago", text: "Best earbuds I've ever owned! ANC is incredible. Sound quality is pristine. Spatial Audio is mind-blowing. Worth every penny!" },
-            { name: "James Wilson", rating: "5 ⭐", date: "4 days ago", text: "Premium earbuds deserve premium features. Active noise cancellation is excellent. Battery lasts forever. Seamless integration with my Apple devices!" },
-            { name: "Olivia Brown", rating: "4 ⭐", date: "1 week ago", text: "Amazing earbuds! Very comfortable. Sound is excellent. Only took a while to get used to the controls." },
-            { name: "Daniel Garcia", rating: "5 ⭐", date: "2 weeks ago", text: "Incredible sound quality! ANC works like magic. Design is sleek. Highly recommended for Apple users!" },
-            { name: "Emma Davis", rating: "5 ⭐", date: "3 weeks ago", text: "Best purchase ever! These earbuds are fantastic. Clear audio, effective noise cancellation, great comfort." }
-        ]
-    },
-    4: {
-        id: 4,
-        name: "Apple Watch Series 9 (41mm, Midnight)",
-        price: 41999,
-        originalPrice: 49999,
-        rating: 4.7,
-        reviews: 32156,
-        img: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500&h=500&fit=crop&q=80",
-        category: "Wearables",
-        description: "Apple Watch Series 9 features an all-new display that's even more responsive and easier to see from any angle. The Retina LTPO OLED display is 40% brighter for reading notifications and fitness metrics in bright sunlight. The new S9 chip is powerful enough for demanding apps and activities. With advanced health features like ECG, blood oxygen, temperature sensing, and cycle tracking, you get comprehensive insights into your health. Fitness features include automatic workout detection for over 100 workout types. The always-on Retina display shows you important information at a glance. With up to 18 hours of battery life and water resistance up to 50m, it's perfect for your active lifestyle. The built-in microphone and speaker let you take calls and use Siri. Double tap gesture makes it easy to interact with your watch.",
-        specs: [
-            { label: "Display Size", value: "41mm LTPO OLED" },
-            { label: "Resolution", value: "394 x 430 pixels" },
-            { label: "Brightness", value: "40% brighter" },
-            { label: "Processor", value: "Apple S9" },
-            { label: "RAM", value: "32GB Storage" },
-            { label: "Battery Life", value: "18 hours" },
-            { label: "Water Resistance", value: "50 meters" },
-            { label: "ECG", value: "Yes" },
-            { label: "Blood Oxygen", value: "Yes" },
-            { label: "Temperature Sensing", value: "Yes" },
-            { label: "GPS", value: "Built-in" },
-            { label: "Warranty", value: "1 Year Limited" }
-        ],
-        sizes: ["41mm", "45mm"],
-        customerReviews: [
-            { name: "Dr. Rajesh", rating: "5 ⭐", date: "2 days ago", text: "Best smartwatch ever! Display is absolutely stunning. Health features are incredibly accurate. Battery lasts all day and more!" },
-            { name: "Sarah Johnson", rating: "5 ⭐", date: "1 week ago", text: "Amazing Apple Watch! The 40% brighter display is a game-changer. Health tracking is excellent. Double tap gesture is so convenient!" },
-            { name: "Michael Chen", rating: "5 ⭐", date: "2 weeks ago", text: "Worth every penny! Beautiful design, powerful performance. Health features are comprehensive. Integration with iPhone is seamless!" },
-            { name: "Emma Wilson", rating: "4 ⭐", date: "3 weeks ago", text: "Excellent smartwatch. Display is gorgeous. Fitness tracking is accurate. Would have liked faster charging." },
-            { name: "James Taylor", rating: "5 ⭐", date: "1 month ago", text: "Perfect smartwatch! All the features work flawlessly. Battery is reliable. Highly recommend!" }
-        ]
-    },
-    5: {
-        id: 5,
-        name: "Anker PowerLine III USB-C Cable (2m)",
-        price: 599,
-        originalPrice: 1499,
-        rating: 4.9,
-        reviews: 67890,
-        img: "https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=500&h=500&fit=crop&q=80",
-        category: "Accessories",
-        description: "Anker PowerLine III USB-C Cable is engineered for durability and performance. The robust nylon braiding protects against wear and tear from daily use. The carefully engineered connector design ensures a tight, secure fit that will last. With support for up to 100W (20V/5A) power delivery, it can charge almost any USB-C device, from smartphones to laptops. Ultra-High Speed supports data transmission rates of up to 480 Mbps, which is 4x faster than regular cables. The cable has been rigorously tested to withstand 10,000+ bends, ensuring durability for years of use. Available in multiple lengths and colors to suit your needs. MFi Certification ensures safety and compatibility. Lifetime warranty backs our confidence in the quality.",
-        specs: [
-            { label: "Power Output", value: "Up to 100W (20V/5A)" },
-            { label: "Length", value: "2 Meters (also available in 1m & 3m)" },
-            { label: "Connector Type", value: "USB-C to USB-C" },
-            { label: "Data Transfer", value: "480 Mbps (USB 3.1)" },
-            { label: "Material", value: "Nylon Braided" },
-            { label: "Durability Test", value: "10,000+ bend cycles" },
-            { label: "Warranty", value: "Lifetime" },
-            { label: "Compatibility", value: "All USB-C devices" },
-            { label: "Color Options", value: "Black, Silver, Red, Blue, Green" },
-            { label: "Certification", value: "MFi Certified" },
-            { label: "Temperature Rating", value: "-10°C to 60°C" },
-            { label: "Weight", value: "30g" }
-        ],
-        sizes: ["1 Meter", "2 Meter", "3 Meter"],
-        customerReviews: [
-            { name: "Tech Enthusiast", rating: "5 ⭐", date: "1 day ago", text: "Best USB-C cable I've ever owned! Super durable nylon braiding. Charges incredibly fast. Data transfer is super quick!" },
-            { name: "John Developer", rating: "5 ⭐", date: "3 days ago", text: "Excellent quality cable! Using it for 8 months with zero issues. Fast charging and data transfer. Highly recommended!" },
-            { name: "Priya Sharma", rating: "5 ⭐", date: "1 week ago", text: "High quality USB-C cable at a great price! Charges my phone, tablet, and laptop. Very durable. Great value!" },
-            { name: "Mike Chen", rating: "5 ⭐", date: "2 weeks ago", text: "Amazing cable! Strong build quality. Fast charging. Lifetime warranty gives peace of mind. Best purchase!" },
-            { name: "Lisa Anderson", rating: "5 ⭐", date: "3 weeks ago", text: "Perfect cable for my needs! Works with all my USB-C devices. Incredibly durable. Worth every rupee!" }
-        ]
-    },
-    6: {
-        id: 6,
-        name: "Spigen Tough Armor Case for iPhone 15 Pro Max",
-        price: 1299,
-        originalPrice: 2499,
-        rating: 4.7,
-        reviews: 23456,
-        img: "https://images.unsplash.com/photo-1510557880182-3d4d3f4650c2?w=500&h=500&fit=crop&q=80",
-        category: "Accessories",
-        description: "Spigen Tough Armor combines protective capability with a sleek design. The dual-layer design features a TPU inner layer that absorbs shock and a rigid plastic outer layer for structural support. Raised bezel protection guards the camera and screen from accidental drops. The air-pocket technology provides excellent drop protection while maintaining a slim profile. Precision cutouts allow for easy access to all ports and buttons. The textured back provides excellent grip to prevent accidental slips. The case is compatible with wireless charging, so you don't need to remove it when charging. MIL-STD-810G certified for military-grade drop protection. Color-matched buttons ensure a seamless look. The case has been tested to protect from drops up to 6.6 feet (2 meters).",
-        specs: [
-            { label: "Protection Level", value: "Military Grade (MIL-STD-810G)" },
-            { label: "Material", value: "TPU + Polycarbonate" },
-            { label: "Design", value: "Dual-Layer" },
-            { label: "Bezel Height", value: "Raised Edge (2.5mm)" },
-            { label: "Drop Protection", value: "Up to 6.6ft (2 meters)" },
-            { label: "Weight", value: "50g" },
-            { label: "Wireless Charging", value: "Compatible" },
-            { label: "Colors Available", value: "12+ Options" },
-            { label: "Warranty", value: "Lifetime Limited" },
-            { label: "Button Type", value: "Color-Matched" },
-            { label: "Camera Cutout", value: "Raised Protection" },
-            { label: "Texture", value: "Anti-Slip" }
-        ],
-        sizes: ["iPhone 15 Pro Max", "iPhone 15 Pro", "iPhone 15 Plus", "iPhone 15"],
-        customerReviews: [
-            { name: "Emma Stone", rating: "5 ⭐", date: "1 day ago", text: "Perfect case! Dropped my phone multiple times and it survived every fall. Looks premium too. Highly recommend!" },
-            { name: "Rajesh Nair", rating: "5 ⭐", date: "5 days ago", text: "Excellent protective case! Very slim and lightweight. Great grip. Works perfectly with wireless charging!" },
-            { name: "Sophie Martin", rating: "4 ⭐", date: "1 week ago", text: "Good quality case. Provides excellent protection. Looks nice. Only minor issue with button clicking." },
-            { name: "Vikram Singh", rating: "5 ⭐", date: "2 weeks ago", text: "Amazing case! Protection is top-notch. Doesn't add much bulk. Colors are vibrant. Very satisfied!" },
-            { name: "Jessica Brown", rating: "5 ⭐", date: "3 weeks ago", text: "Best phone case I've owned! Military-grade protection at this price is unbeatable. Great design!" }
-        ],
-        emiOptions: [
-            { months: 3, monthlyAmount: 433, interestRate: "0%", bank: "All Banks" },
-            { months: 6, monthlyAmount: 217, interestRate: "0%", bank: "All Banks" },
-            { months: 9, monthlyAmount: 148, interestRate: "1.5%", bank: "ICICI, HDFC" },
-            { months: 12, monthlyAmount: 112, interestRate: "1.5%", bank: "ICICI, HDFC, Axis" }
-        ],
-        paymentOptions: [
-            { method: "Credit Card", discount: "0%", maxCashback: "₹1,999" },
-            { method: "Debit Card", discount: "0%", maxCashback: "₹1,500" },
-            { method: "UPI", discount: "0%", maxCashback: "₹2,000" },
-            { method: "Net Banking", discount: "0%", maxCashback: "₹1,500" },
-            { method: "Wallet", discount: "5%", maxCashback: "₹1,000" },
-            { method: "Buy Now Pay Later", discount: "0%", maxCashback: "₹1,200" }
-        ],
-        exchangeOffer: {
-            enabled: true,
-            maxValue: "₹5,000",
-            description: "Get up to ₹5,000 off on exchange of your old phone",
-            eligibleDevices: "Any working smartphone"
-        },
-        warranty: { type: "1 Year Manufacturer Warranty", description: "Covers manufacturing defects" },
-        seller: "Flipko",
-        returnPolicy: "7 days return policy",
-        shippingInfo: "Free shipping | Delivery in 2-3 days"
-    },
-    2: {
-        id: 2,
-        name: "Redmi Note 12 (Midnight Black, 128GB) (4GB RAM)",
-        price: 13499,
-        originalPrice: 17999,
-        rating: 4.6,
-        reviews: 18923,
-        img: "https://images.unsplash.com/photo-1511740357442-ee464c3f3c0d?w=500&h=500&fit=crop&q=80",
-        category: "Mobiles",
-        description: "Redmi Note 12 redefines the mid-range smartphone experience with its stunning AMOLED display and powerful processor. The 6.67-inch Super AMOLED display offers vibrant colors and deep blacks with a 120Hz refresh rate for buttery-smooth scrolling. The Snapdragon 680 processor ensures reliable performance for all your daily tasks. The 50MP main camera captures photos with exceptional detail, while the advanced night mode lets you take stunning low-light pictures. The 5000mAh battery combined with 33W fast charging means you spend less time charging and more time using your phone. The premium design with Gorilla Glass protection looks and feels premium.",
-        specs: [
-            { label: "Screen Size", value: "6.67 inches" },
-            { label: "Display Type", value: "Super AMOLED" },
-            { label: "Resolution", value: "1080 x 2400 pixels" },
-            { label: "Processor", value: "Snapdragon 680" },
-            { label: "RAM", value: "4GB" },
-            { label: "Storage", value: "128GB expandable" },
-            { label: "Battery", value: "5000mAh" },
-            { label: "Charging", value: "33W Fast Charging" },
-            { label: "Rear Camera", value: "50MP + 8MP + 2MP + 2MP" },
-            { label: "Front Camera", value: "16MP" },
-            { label: "Refresh Rate", value: "120Hz" },
-            { label: "OS", value: "MIUI 13" }
-        ],
-        sizes: ["4GB/128GB", "6GB/128GB"],
-        customerReviews: [
-            { name: "Sneha Verma", rating: "5 ⭐", date: "1 day ago", text: "Amazing AMOLED display! Colors are so vibrant. 120Hz scrolling is smooth. Camera is excellent. Battery life is great!" },
-            { name: "Rohan Kumar", rating: "5 ⭐", date: "3 days ago", text: "Fantastic phone! Build quality is premium. Display is one of the best I've seen. Performance is excellent. Highly satisfied!" },
-            { name: "Divya Patel", rating: "4 ⭐", date: "1 week ago", text: "Very good smartphone for the price. AMOLED display is beautiful. Camera takes great photos. Performance is smooth." },
-            { name: "Akshay Singh", rating: "5 ⭐", date: "2 weeks ago", text: "Perfect phone! Everything is excellent. Display quality is outstanding. Camera performance is impressive. Totally worth it!" },
-            { name: "Sophia Michael", rating: "4 ⭐", date: "3 weeks ago", text: "Great phone overall. Nice design, good performance. Camera is good but could be better in low light." }
-        ],
-        emiOptions: [
-            { months: 3, monthlyAmount: 450, interestRate: "0%", bank: "All Banks" },
-            { months: 6, monthlyAmount: 225, interestRate: "0%", bank: "All Banks" },
-            { months: 9, monthlyAmount: 153, interestRate: "1.5%", bank: "ICICI, HDFC" },
-            { months: 12, monthlyAmount: 116, interestRate: "1.5%", bank: "ICICI, HDFC, Axis" }
-        ],
-        paymentOptions: [
-            { method: "Credit Card", discount: "0%", maxCashback: "₹2,000" },
-            { method: "Debit Card", discount: "0%", maxCashback: "₹1,500" },
-            { method: "UPI", discount: "0%", maxCashback: "₹2,200" },
-            { method: "Net Banking", discount: "0%", maxCashback: "₹1,500" },
-            { method: "Wallet", discount: "5%", maxCashback: "₹1,000" },
-            { method: "Buy Now Pay Later", discount: "0%", maxCashback: "₹1,300" }
-        ],
-        exchangeOffer: {
-            enabled: true,
-            maxValue: "₹5,500",
-            description: "Get up to ₹5,500 off on exchange of your old phone",
-            eligibleDevices: "Any working smartphone"
-        },
-        warranty: { type: "1 Year Manufacturer Warranty", description: "Covers manufacturing defects and hardware issues" },
-        seller: "Flipko",
-        returnPolicy: "7 days return policy",
-        shippingInfo: "Free shipping | Delivery in 2-3 days"
-    },
-    3: {
-        id: 3,
-        name: "Apple AirPods Pro (2nd Generation)",
-        price: 24900,
-        originalPrice: 29900,
-        rating: 4.8,
-        reviews: 45230,
-        img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&h=500&fit=crop&q=80",
-        category: "Audio",
-        description: "AirPods Pro deliver an incredibly immersive listening experience with industry-leading Active Noise Cancellation that reduces unwanted ambient sound. Transparency mode lets you hear the world around you. Personalized Spatial Audio with dynamic head tracking places sound all around you for an immersive listening experience. Adaptive Audio intelligently blends your audio environment to keep you aware and engaged. Conversation Awareness automatically reduces the volume of your audio and lowers media playback so you can hear and engage in conversations. The seamless integration with Apple devices means automatic setup, in-ear detection, and automatic switching between devices. USB-C charging provides fast charging. Up to 6 hours of battery life per charge, and up to 30 hours total with the charging case.",
-        specs: [
-            { label: "Noise Cancellation", value: "Active (Class-leading)" },
-            { label: "Battery (Per Charge)", value: "6 Hours" },
-            { label: "Total Battery Life", value: "30 Hours with case" },
-            { label: "Charging", value: "USB-C (Fast Charging)" },
-            { label: "Water Resistance", value: "IPX4" },
-            { label: "Transparency Mode", value: "Yes" },
-            { label: "Spatial Audio", value: "Yes with Dynamic Head Tracking" },
-            { label: "Adaptive Audio", value: "Yes" },
-            { label: "Conversation Awareness", value: "Yes" },
-            { label: "Automatic Switching", value: "Across Apple Devices" },
-            { label: "Mic", value: "Dual Microphone System" },
-            { label: "Warranty", value: "1 Year Limited" }
-        ],
-        sizes: ["Standard"],
-        customerReviews: [
-            { name: "Lisa Chen", rating: "5 ⭐", date: "1 day ago", text: "Best earbuds I've ever owned! ANC is incredible. Sound quality is pristine. Spatial Audio is mind-blowing. Worth every penny!" },
-            { name: "James Wilson", rating: "5 ⭐", date: "4 days ago", text: "Premium earbuds deserve premium features. Active noise cancellation is excellent. Battery lasts forever. Seamless integration with my Apple devices!" },
-            { name: "Olivia Brown", rating: "4 ⭐", date: "1 week ago", text: "Amazing earbuds! Very comfortable. Sound is excellent. Only took a while to get used to the controls." },
-            { name: "Daniel Garcia", rating: "5 ⭐", date: "2 weeks ago", text: "Incredible sound quality! ANC works like magic. Design is sleek. Highly recommended for Apple users!" },
-            { name: "Emma Davis", rating: "5 ⭐", date: "3 weeks ago", text: "Best purchase ever! These earbuds are fantastic. Clear audio, effective noise cancellation, great comfort." }
-        ],
-        emiOptions: [
-            { months: 3, monthlyAmount: 830, interestRate: "0%", bank: "All Banks" },
-            { months: 6, monthlyAmount: 415, interestRate: "0%", bank: "All Banks" },
-            { months: 9, monthlyAmount: 281, interestRate: "1.5%", bank: "ICICI, HDFC" },
-            { months: 12, monthlyAmount: 212, interestRate: "1.5%", bank: "ICICI, HDFC, Axis" }
-        ],
-        paymentOptions: [
-            { method: "Credit Card", discount: "0%", maxCashback: "₹2,500" },
-            { method: "Debit Card", discount: "0%", maxCashback: "₹2,000" },
-            { method: "UPI", discount: "0%", maxCashback: "₹2,500" },
-            { method: "Net Banking", discount: "0%", maxCashback: "₹2,000" },
-            { method: "Wallet", discount: "5%", maxCashback: "₹1,500" },
-            { method: "Buy Now Pay Later", discount: "0%", maxCashback: "₹1,800" }
-        ],
-        exchangeOffer: {
-            enabled: false,
-            maxValue: "N/A",
-            description: "No exchange offer available",
-            eligibleDevices: "N/A"
-        },
-        warranty: { type: "1 Year Limited Warranty", description: "Covers manufacturing defects and hardware replacement" },
-        seller: "Flipko",
-        returnPolicy: "10 days return policy",
-        shippingInfo: "Free shipping | Delivery in 1-2 days"
-    },
-    4: {
-        id: 4,
-        name: "Apple Watch Series 9 (41mm, Midnight)",
-        price: 41999,
-        originalPrice: 49999,
-        rating: 4.7,
-        reviews: 32156,
-        img: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500&h=500&fit=crop&q=80",
-        category: "Wearables",
-        description: "Apple Watch Series 9 features an all-new display that's even more responsive and easier to see from any angle. The Retina LTPO OLED display is 40% brighter for reading notifications and fitness metrics in bright sunlight. The new S9 chip is powerful enough for demanding apps and activities. With advanced health features like ECG, blood oxygen, temperature sensing, and cycle tracking, you get comprehensive insights into your health. Fitness features include automatic workout detection for over 100 workout types. The always-on Retina display shows you important information at a glance. With up to 18 hours of battery life and water resistance up to 50m, it's perfect for your active lifestyle. The built-in microphone and speaker let you take calls and use Siri. Double tap gesture makes it easy to interact with your watch.",
-        specs: [
-            { label: "Display Size", value: "41mm LTPO OLED" },
-            { label: "Resolution", value: "394 x 430 pixels" },
-            { label: "Brightness", value: "40% brighter" },
-            { label: "Processor", value: "Apple S9" },
-            { label: "RAM", value: "32GB Storage" },
-            { label: "Battery Life", value: "18 hours" },
-            { label: "Water Resistance", value: "50 meters" },
-            { label: "ECG", value: "Yes" },
-            { label: "Blood Oxygen", value: "Yes" },
-            { label: "Temperature Sensing", value: "Yes" },
-            { label: "GPS", value: "Built-in" },
-            { label: "Warranty", value: "1 Year Limited" }
-        ],
-        sizes: ["41mm", "45mm"],
-        customerReviews: [
-            { name: "Dr. Rajesh", rating: "5 ⭐", date: "2 days ago", text: "Best smartwatch ever! Display is absolutely stunning. Health features are incredibly accurate. Battery lasts all day and more!" },
-            { name: "Sarah Johnson", rating: "5 ⭐", date: "1 week ago", text: "Amazing Apple Watch! The 40% brighter display is a game-changer. Health tracking is excellent. Double tap gesture is so convenient!" },
-            { name: "Michael Chen", rating: "5 ⭐", date: "2 weeks ago", text: "Worth every penny! Beautiful design, powerful performance. Health features are comprehensive. Integration with iPhone is seamless!" },
-            { name: "Emma Wilson", rating: "4 ⭐", date: "3 weeks ago", text: "Excellent smartwatch. Display is gorgeous. Fitness tracking is accurate. Would have liked faster charging." },
-            { name: "James Taylor", rating: "5 ⭐", date: "1 month ago", text: "Perfect smartwatch! All the features work flawlessly. Battery is reliable. Highly recommend!" }
-        ],
-        emiOptions: [
-            { months: 3, monthlyAmount: 1400, interestRate: "0%", bank: "All Banks" },
-            { months: 6, monthlyAmount: 700, interestRate: "0%", bank: "All Banks" },
-            { months: 9, monthlyAmount: 475, interestRate: "1.5%", bank: "ICICI, HDFC" },
-            { months: 12, monthlyAmount: 360, interestRate: "1.5%", bank: "ICICI, HDFC, Axis" }
-        ],
-        paymentOptions: [
-            { method: "Credit Card", discount: "0%", maxCashback: "₹4,000" },
-            { method: "Debit Card", discount: "0%", maxCashback: "₹3,000" },
-            { method: "UPI", discount: "0%", maxCashback: "₹4,000" },
-            { method: "Net Banking", discount: "0%", maxCashback: "₹3,000" },
-            { method: "Wallet", discount: "5%", maxCashback: "₹2,000" },
-            { method: "Buy Now Pay Later", discount: "0%", maxCashback: "₹2,500" }
-        ],
-        exchangeOffer: {
-            enabled: false,
-            maxValue: "N/A",
-            description: "No exchange offer available",
-            eligibleDevices: "N/A"
-        },
-        warranty: { type: "1 Year Limited Warranty", description: "Covers hardware defects and manufacturing issues" },
-        seller: "Flipko",
-        returnPolicy: "7 days return policy",
-        shippingInfo: "Free shipping | Delivery in 1-2 days"
-    },
-    5: {
-        id: 5,
-        name: "Anker PowerLine III USB-C Cable (2m)",
-        price: 599,
-        originalPrice: 1499,
-        rating: 4.9,
-        reviews: 67890,
-        img: "https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=500&h=500&fit=crop&q=80",
-        category: "Accessories",
-        description: "Anker PowerLine III USB-C Cable is engineered for durability and performance. The robust nylon braiding protects against wear and tear from daily use. The carefully engineered connector design ensures a tight, secure fit that will last. With support for up to 100W (20V/5A) power delivery, it can charge almost any USB-C device, from smartphones to laptops. Ultra-High Speed supports data transmission rates of up to 480 Mbps, which is 4x faster than regular cables. The cable has been rigorously tested to withstand 10,000+ bends, ensuring durability for years of use. Available in multiple lengths and colors to suit your needs. MFi Certification ensures safety and compatibility. Lifetime warranty backs our confidence in the quality.",
-        specs: [
-            { label: "Power Output", value: "Up to 100W (20V/5A)" },
-            { label: "Length", value: "2 Meters (also available in 1m & 3m)" },
-            { label: "Connector Type", value: "USB-C to USB-C" },
-            { label: "Data Transfer", value: "480 Mbps (USB 3.1)" },
-            { label: "Material", value: "Nylon Braided" },
-            { label: "Durability Test", value: "10,000+ bend cycles" },
-            { label: "Warranty", value: "Lifetime" },
-            { label: "Compatibility", value: "All USB-C devices" },
-            { label: "Color Options", value: "Black, Silver, Red, Blue, Green" },
-            { label: "Certification", value: "MFi Certified" },
-            { label: "Temperature Rating", value: "-10°C to 60°C" },
-            { label: "Weight", value: "30g" }
-        ],
-        sizes: ["1 Meter", "2 Meter", "3 Meter"],
-        customerReviews: [
-            { name: "Tech Enthusiast", rating: "5 ⭐", date: "1 day ago", text: "Best USB-C cable I've ever owned! Super durable nylon braiding. Charges incredibly fast. Data transfer is super quick!" },
-            { name: "John Developer", rating: "5 ⭐", date: "3 days ago", text: "Excellent quality cable! Using it for 8 months with zero issues. Fast charging and data transfer. Highly recommended!" },
-            { name: "Priya Sharma", rating: "5 ⭐", date: "1 week ago", text: "High quality USB-C cable at a great price! Charges my phone, tablet, and laptop. Very durable. Great value!" },
-            { name: "Mike Chen", rating: "5 ⭐", date: "2 weeks ago", text: "Amazing cable! Strong build quality. Fast charging. Lifetime warranty gives peace of mind. Best purchase!" },
-            { name: "Lisa Anderson", rating: "5 ⭐", date: "3 weeks ago", text: "Perfect cable for my needs! Works with all my USB-C devices. Incredibly durable. Worth every rupee!" }
-        ],
-        emiOptions: [
-            { months: 3, monthlyAmount: 200, interestRate: "0%", bank: "All Banks" },
-            { months: 6, monthlyAmount: 100, interestRate: "0%", bank: "All Banks" },
-            { months: 9, monthlyAmount: 70, interestRate: "0%", bank: "ICICI, HDFC" },
-            { months: 12, monthlyAmount: 53, interestRate: "0%", bank: "ICICI, HDFC, Axis" }
-        ],
-        paymentOptions: [
-            { method: "Credit Card", discount: "0%", maxCashback: "₹100" },
-            { method: "Debit Card", discount: "0%", maxCashback: "₹75" },
-            { method: "UPI", discount: "0%", maxCashback: "₹150" },
-            { method: "Net Banking", discount: "0%", maxCashback: "₹75" },
-            { method: "Wallet", discount: "10%", maxCashback: "₹50" },
-            { method: "Buy Now Pay Later", discount: "0%", maxCashback: "₹50" }
-        ],
-        exchangeOffer: {
-            enabled: false,
-            maxValue: "N/A",
-            description: "No exchange offer available for accessories",
-            eligibleDevices: "N/A"
-        },
-        warranty: { type: "Lifetime Warranty", description: "Lifetime warranty on manufacturing defects" },
-        seller: "Flipko",
-        returnPolicy: "30 days return policy",
-        shippingInfo: "Free shipping | Delivery in 1-2 days"
-    },
-    6: {
-        id: 6,
-        name: "Spigen Tough Armor Case for iPhone 15 Pro Max",
-        price: 1299,
-        originalPrice: 2499,
-        rating: 4.7,
-        reviews: 23456,
-        img: "https://images.unsplash.com/photo-1510557880182-3d4d3f4650c2?w=500&h=500&fit=crop&q=80",
-        category: "Accessories",
-        description: "Spigen Tough Armor combines protective capability with a sleek design. The dual-layer design features a TPU inner layer that absorbs shock and a rigid plastic outer layer for structural support. Raised bezel protection guards the camera and screen from accidental drops. The air-pocket technology provides excellent drop protection while maintaining a slim profile. Precision cutouts allow for easy access to all ports and buttons. The textured back provides excellent grip to prevent accidental slips. The case is compatible with wireless charging, so you don't need to remove it when charging. MIL-STD-810G certified for military-grade drop protection. Color-matched buttons ensure a seamless look. The case has been tested to protect from drops up to 6.6 feet (2 meters).",
-        specs: [
-            { label: "Protection Level", value: "Military Grade (MIL-STD-810G)" },
-            { label: "Material", value: "TPU + Polycarbonate" },
-            { label: "Design", value: "Dual-Layer" },
-            { label: "Bezel Height", value: "Raised Edge (2.5mm)" },
-            { label: "Drop Protection", value: "Up to 6.6ft (2 meters)" },
-            { label: "Weight", value: "50g" },
-            { label: "Wireless Charging", value: "Compatible" },
-            { label: "Colors Available", value: "12+ Options" },
-            { label: "Warranty", value: "Lifetime Limited" },
-            { label: "Button Type", value: "Color-Matched" },
-            { label: "Camera Cutout", value: "Raised Protection" },
-            { label: "Texture", value: "Anti-Slip" }
-        ],
-        sizes: ["iPhone 15 Pro Max", "iPhone 15 Pro", "iPhone 15 Plus", "iPhone 15"],
-        customerReviews: [
-            { name: "Emma Stone", rating: "5 ⭐", date: "1 day ago", text: "Perfect case! Dropped my phone multiple times and it survived every fall. Looks premium too. Highly recommend!" },
-            { name: "Rajesh Nair", rating: "5 ⭐", date: "5 days ago", text: "Excellent protective case! Very slim and lightweight. Great grip. Works perfectly with wireless charging!" },
-            { name: "Sophie Martin", rating: "4 ⭐", date: "1 week ago", text: "Good quality case. Provides excellent protection. Looks nice. Only minor issue with button clicking." },
-            { name: "Vikram Singh", rating: "5 ⭐", date: "2 weeks ago", text: "Amazing case! Protection is top-notch. Doesn't add much bulk. Colors are vibrant. Very satisfied!" },
-            { name: "Jessica Brown", rating: "5 ⭐", date: "3 weeks ago", text: "Best phone case I've owned! Military-grade protection at this price is unbeatable. Great design!" }
-        ],
-        emiOptions: [
-            { months: 3, monthlyAmount: 433, interestRate: "0%", bank: "All Banks" },
-            { months: 6, monthlyAmount: 217, interestRate: "0%", bank: "All Banks" },
-            { months: 9, monthlyAmount: 150, interestRate: "0%", bank: "ICICI, HDFC" },
-            { months: 12, monthlyAmount: 110, interestRate: "0%", bank: "ICICI, HDFC, Axis" }
-        ],
-        paymentOptions: [
-            { method: "Credit Card", discount: "0%", maxCashback: "₹150" },
-            { method: "Debit Card", discount: "0%", maxCashback: "₹100" },
-            { method: "UPI", discount: "0%", maxCashback: "₹200" },
-            { method: "Net Banking", discount: "0%", maxCashback: "₹100" },
-            { method: "Wallet", discount: "10%", maxCashback: "₹80" },
-            { method: "Buy Now Pay Later", discount: "0%", maxCashback: "₹80" }
-        ],
-        exchangeOffer: {
-            enabled: false,
-            maxValue: "N/A",
-            description: "No exchange offer available for accessories",
-            eligibleDevices: "N/A"
-        },
-        warranty: { type: "Lifetime Limited Warranty", description: "Covers manufacturing defects and material issues" },
-        seller: "Flipko",
-        returnPolicy: "30 days return policy",
-        shippingInfo: "Free shipping | Delivery in 1-2 days"
-    }
-};
+let currentProduct = null;
+let selectedPaymentMethod = 'upi';
+let currentImageIndex = 0;
+let touchStartX = 0;
+let touchEndX = 0;
 
-// Get product ID from URL
-function getProductIdFromURL() {
-    const params = new URLSearchParams(window.location.search);
-    return parseInt(params.get('id')) || 1;
+// Dynamic dataset will be loaded from data/products-sourced.json
+let products = [];
+
+function loadProductsDataset() {
+    return fetch('../data/products.json')
+        .then(r => r.json())
+        .then(data => {
+            products = data.map(p => ({
+                id: p.id,
+                name: p.name,
+                price: p.price,
+                originalPrice: p.originalPrice,
+                image: (p.images && p.images[0]) || 'https://via.placeholder.com/400',
+                images: p.images || [],
+                discount: p.discount,
+                rating: p.rating,
+                reviews: p.reviews,
+                desc: p.desc,
+                category: p.category || 'Electronics'
+            }));
+            loadProduct();
+        })
+        .catch(err => console.error('Failed to load product dataset', err));
 }
 
-// Load product details
-function loadProductDetails() {
-    const productId = getProductIdFromURL();
-    const product = products[productId];
+function changeImage(imgElement) {
+    const mainImage = document.getElementById('productImage');
+    mainImage.src = imgElement.src;
+    currentImageIndex = Array.from(document.querySelectorAll('.thumb-img')).indexOf(imgElement);
+    document.querySelectorAll('.thumb-img').forEach(img => img.style.border = '2px solid #e0e0e0');
+    imgElement.style.border = '3px solid #2874f0';
+}
+
+function handleSwipe() {
+    const diff = touchStartX - touchEndX;
+    const threshold = 50;
     
-    if (!product) {
-        document.body.innerHTML = '<h1>Product not found</h1>';
+    if (Math.abs(diff) > threshold) {
+        const thumbs = document.querySelectorAll('.thumb-img');
+        if (diff > 0) {
+            // Swiped left - go to next image
+            currentImageIndex = (currentImageIndex + 1) % thumbs.length;
+        } else {
+            // Swiped right - go to previous image
+            currentImageIndex = (currentImageIndex - 1 + thumbs.length) % thumbs.length;
+        }
+        changeImage(thumbs[currentImageIndex]);
+    }
+}
+
+function setupSwipeListeners() {
+    const productImage = document.querySelector('.product-image');
+    
+    productImage.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, false);
+    
+    productImage.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, false);
+}
+
+function loadVideos() {
+    if (currentProduct && currentProduct.videos && currentProduct.videos.length > 0) {
+        document.getElementById('videoSection').style.display = 'block';
+        const videoPlayer = document.getElementById('videoPlayer');
+        const videoList = document.getElementById('videoList');
+        
+        // Load first video
+        videoPlayer.innerHTML = `<iframe src="${currentProduct.videos[0]}?autoplay=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+        
+        // Create video thumbnails
+        videoList.innerHTML = currentProduct.videos.map((video, index) => `
+            <div class="video-thumb ${index === 0 ? 'active' : ''}" onclick="playVideo(${index})" title="Video ${index + 1}">
+                🎬
+            </div>
+        `).join('');
+    } else {
+        document.getElementById('videoSection').style.display = 'none';
+    }
+}
+
+function playVideo(index) {
+    const videoPlayer = document.getElementById('videoPlayer');
+    videoPlayer.innerHTML = `<iframe src="${currentProduct.videos[index]}?autoplay=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+    
+    document.querySelectorAll('.video-thumb').forEach((thumb, i) => {
+        thumb.classList.toggle('active', i === index);
+    });
+}
+
+function loadProduct() {
+    const productId = parseInt(sessionStorage.getItem('selectedProductId')) || products[0]?.id || 0;
+    currentProduct = products.find(p => p.id === productId);
+
+    if (currentProduct) {
+        const originalPrice = currentProduct.originalPrice;
+        const savings = originalPrice - currentProduct.price;
+
+        document.getElementById('productName').textContent = currentProduct.name;
+        document.getElementById('productImage').src = currentProduct.image;
+        document.getElementById('productPrice').textContent = '₹' + currentProduct.price.toLocaleString();
+        document.getElementById('originalPrice').textContent = '₹' + originalPrice.toLocaleString();
+        document.getElementById('discountBadge').textContent = currentProduct.discount + '% OFF';
+        document.getElementById('productRating').textContent = currentProduct.rating + ' ⭐';
+        document.getElementById('youSave').textContent = 'You save ₹' + savings.toLocaleString();
+        document.getElementById('reviewCount').textContent = '(' + currentProduct.reviews.toLocaleString() + ' reviews)';
+
+        // Load product images
+        const thumbImages = document.querySelectorAll('.thumb-img');
+        if (currentProduct.images && currentProduct.images.length) {
+            thumbImages.forEach((img, index) => {
+                if (currentProduct.images[index]) {
+                    img.src = currentProduct.images[index];
+                }
+            });
+        }
+
+        // Load videos if available
+        loadVideos();
+        currentImageIndex = 0;
+
+        // Setup swipe listeners
+        setupSwipeListeners();
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadProductsDataset();
+});
+
+function selectPayment(method) {
+    selectedPaymentMethod = method;
+    document.querySelectorAll('.payment-method').forEach(m => m.style.borderColor = '#e0e0e0');
+    event.target.closest('.payment-method').style.borderColor = '#2874f0';
+}
+
+function buyNow() {
+    if (!selectedPaymentMethod) {
+        alert('Please select a payment method');
         return;
     }
+    let cart = JSON.parse(localStorage.getItem('flipkart_cart')) || [];
+    const existingItem = cart.find(item => item.id === currentProduct.id);
     
-    // Set images
-    document.getElementById('mainImage').src = product.img;
-    document.getElementById('thumb1').src = product.img;
-    document.getElementById('thumb2').src = product.img;
-    document.getElementById('thumb3').src = product.img;
-    
-    // Set basic info
-    document.getElementById('productTitle').textContent = product.name;
-    document.getElementById('productRating').textContent = product.rating + ' ⭐';
-    document.getElementById('reviewCount').textContent = '(' + product.reviews.toLocaleString() + ' Reviews)';
-    
-    // Set pricing
-    document.getElementById('currentPrice').textContent = '₹' + product.price.toLocaleString();
-    document.getElementById('originalPrice').textContent = '₹' + product.originalPrice.toLocaleString();
-    const discount = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
-    document.getElementById('discount').textContent = 'Save ' + discount + '%';
-    
-    // Set breadcrumb
-    document.getElementById('breadcrumb-category').textContent = product.category;
-    document.getElementById('breadcrumb-product').textContent = product.name;
-    
-    // Set specifications
-    const specsHTML = product.specs.map(spec => `
-        <div class="spec-item">
-            <span class="spec-label">${spec.label}</span>
-            <span class="spec-value">${spec.value}</span>
-        </div>
-    `).join('');
-    document.getElementById('specsContainer').innerHTML = specsHTML;
-    
-    // Set size options if available
-    if (product.sizes && product.sizes.length > 0 && product.sizes[0] !== 'Standard') {
-        const sizeSection = document.getElementById('sizeSection');
-        if (sizeSection) {
-            sizeSection.style.display = 'block';
-            const sizeHTML = product.sizes.map((size, idx) => `
-                <button class="size-btn ${idx === 0 ? 'selected' : ''}" onclick="selectSize(this, '${size}')">${size}</button>
-            `).join('');
-            document.getElementById('sizeOptions').innerHTML = sizeHTML;
-        }
+    if (existingItem) {
+        existingItem.qty += 1;
+    } else {
+        cart.push({ ...currentProduct, qty: 1 });
     }
     
-    // Set description
-    document.getElementById('productDescription').textContent = product.description;
-    
-    // Set customer reviews
-    if (product.customerReviews) {
-        const reviewsHTML = product.customerReviews.map(review => `
-            <div class="review-item">
-                <div class="review-header">
-                    <span class="reviewer-name">${review.name}</span>
-                    <span class="review-date">${review.date}</span>
-                </div>
-                <div class="review-rating">${review.rating}</div>
-                <div class="review-text">${review.text}</div>
-            </div>
-        `).join('');
-        
-        const reviewsContainer = document.getElementById('reviewsContainer');
-        if (reviewsContainer) {
-            reviewsContainer.innerHTML = reviewsHTML;
-        }
-    }
-    
-    // Set EMI Options
-    if (product.emiOptions) {
-        const emiHTML = product.emiOptions.map(emi => `
-            <div class="emi-card">
-                <div class="emi-months">${emi.months} Months</div>
-                <div class="emi-amount">₹${emi.monthlyAmount} / month</div>
-                <div class="emi-interest">Interest Rate: ${emi.interestRate}</div>
-                <div class="emi-bank">${emi.bank}</div>
-            </div>
-        `).join('');
-        const emiContainer = document.getElementById('emiContainer');
-        if (emiContainer) {
-            emiContainer.innerHTML = emiHTML;
-        }
-    }
-    
-    // Set Payment Options
-    if (product.paymentOptions) {
-        const paymentHTML = product.paymentOptions.map(payment => `
-            <div class="payment-card">
-                <div class="payment-method-name">${payment.method}</div>
-                ${payment.discount !== '0%' ? `<div class="payment-discount">${payment.discount} OFF</div>` : ''}
-                <div class="payment-cashback">Cashback: ${payment.maxCashback}</div>
-                <div class="payment-label">Max rewards</div>
-            </div>
-        `).join('');
-        const paymentContainer = document.getElementById('paymentContainer');
-        if (paymentContainer) {
-            paymentContainer.innerHTML = paymentHTML;
-        }
-    }
-    
-    // Set Exchange Offer
-    if (product.exchangeOffer) {
-        const exchangeOfferSection = document.getElementById('exchangeOfferSection');
-        const exchangeOfferContainer = document.getElementById('exchangeOfferContainer');
-        
-        if (product.exchangeOffer.enabled) {
-            exchangeOfferContainer.innerHTML = `
-                <div class="exchange-offer-card">
-                    <div class="exchange-value">${product.exchangeOffer.maxValue}</div>
-                    <div class="exchange-description">${product.exchangeOffer.description}</div>
-                    <div class="exchange-eligible">Eligible: ${product.exchangeOffer.eligibleDevices}</div>
-                </div>
-            `;
-            exchangeOfferSection.style.display = 'block';
-        } else {
-            exchangeOfferContainer.innerHTML = `
-                <div class="no-offer">
-                    No exchange offer available for this product
-                </div>
-            `;
-            exchangeOfferSection.style.display = 'block';
-        }
-    }
-    
-    // Set Warranty & Seller Info
-    if (product.warranty) {
-        document.getElementById('warrantyType').textContent = product.warranty.type;
-        document.getElementById('warrantyDesc').textContent = product.warranty.description;
-    }
-    
-    if (product.seller) {
-        document.getElementById('sellerName').textContent = product.seller;
-    }
-    
-    if (product.returnPolicy) {
-        document.getElementById('returnPolicy').textContent = product.returnPolicy.split(' ')[0] + ' Days';
-    }
-    
-    if (product.shippingInfo) {
-        document.getElementById('shippingInfo').textContent = product.shippingInfo.split(' ')[0];
-    }
+    localStorage.setItem('flipkart_cart', JSON.stringify(cart));
+    window.location.href = '/cart.html';
 }
 
-// Change main image
-function changeImage(element) {
-    document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
-    element.classList.add('active');
-    document.getElementById('mainImage').src = element.querySelector('img').src;
+function goBack() {
+    window.history.back();
 }
 
-// Select size
-function selectSize(element, size) {
-    document.querySelectorAll('.size-btn').forEach(btn => btn.classList.remove('selected'));
-    element.classList.add('selected');
-    sessionStorage.setItem('selectedSize', size);
+function goToCart() {
+    window.location.href = '/cart.html';
 }
 
-// Add to cart
-function addProductToCart() {
-    const productId = getProductIdFromURL();
-    const product = products[productId];
-    const selectedSize = sessionStorage.getItem('selectedSize') || (product.sizes ? product.sizes[0] : 'One Size');
-
-    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    cart.push({
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        image: product.img,
-        size: selectedSize,
-        quantity: 1
-    });
-    localStorage.setItem('cart', JSON.stringify(cart));
-
-    alert('✓ ' + product.name + ' added to cart!');
-}
-
-// Buy now
-function buyNow() {
-    const productId = getProductIdFromURL();
-    const product = products[productId];
-    const selectedSize = sessionStorage.getItem('selectedSize') || (product.sizes ? product.sizes[0] : 'One Size');
-
-    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    cart.push({
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        image: product.img,
-        size: selectedSize,
-        quantity: 1
-    });
-    localStorage.setItem('cart', JSON.stringify(cart));
-
-    alert('✓ Proceeding to checkout...');
-    window.location.href = '../Flipkart/checkout.html';
-}
-
-// Load on page load
-window.addEventListener('DOMContentLoaded', loadProductDetails);
+document.addEventListener('DOMContentLoaded', loadProduct);
 </script>
 
 </body>

@@ -653,13 +653,14 @@ let currentSlide = 0;
 // Load products
 async function loadProducts() {
     try {
-        const res = await fetch('/api/products');
+        const res = await fetch('/data/products.json');
         allProducts = await res.json();
         
-        renderProducts(allProducts.filter(p => p.category === 'mobiles').slice(0, 10), 'mobielsGrid');
-        renderProducts(allProducts.filter(p => p.category === 'electronics').slice(0, 10), 'electronicsGrid');
-        renderProducts(allProducts.filter(p => p.category === 'fashion').slice(0, 10), 'fashionGrid');
-        renderProducts(allProducts.filter(p => p.category === 'home').slice(0, 10), 'homeGrid');
+        // Group all products by category for display
+        renderProducts(allProducts.filter(p => (p.category === 'Electronics' || p.category === 'mobiles')).slice(0, 10), 'electronicsGrid');
+        renderProducts(allProducts.slice(10, 20), 'homeGrid');
+        renderProducts(allProducts.slice(20, 30), 'fashionGrid');
+        renderProducts(allProducts.slice(0, 10), 'mobielsGrid');
     } catch (e) {
         console.error('Error loading products:', e);
     }
@@ -670,7 +671,7 @@ function renderProducts(products, gridId) {
     grid.innerHTML = products.map(p => `
         <a href="product-details-mobile.html?id=${p.id}" class="product-card">
             <div class="product-image">
-                <img src="${p.img}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/150'">
+                <img src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/150'">
                 <div class="wishlist-icon">♡</div>
             </div>
             <div class="product-info">
@@ -678,7 +679,7 @@ function renderProducts(products, gridId) {
                 <div class="product-rating">⭐ ${p.rating} (${p.reviews.toLocaleString()})</div>
                 <div><span class="product-price">₹${p.price.toLocaleString()}</span></div>
                 <div><span class="product-original">₹${p.originalPrice.toLocaleString()}</span><span class="product-discount">${p.discount}% off</span></div>
-                <div class="product-delivery">${p.freeDelivery ? 'Free delivery' : ''}</div>
+                <div class="product-delivery">Free delivery</div>
             </div>
         </a>
     `).join('');
