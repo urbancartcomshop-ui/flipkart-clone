@@ -1,0 +1,19 @@
+{
+  "family": "__TASK_FAMILY__",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "cpu": "512",
+  "memory": "1024",
+  "executionRoleArn": "__EXECUTION_ROLE_ARN__",
+  "containerDefinitions": [
+    {
+      "name": "flipkart-app",
+      "image": "__IMAGE_PLACEHOLDER__",
+      "portMappings": [ { "containerPort": 8080, "protocol": "tcp" } ],
+      "essential": true,
+      "environment": [ { "name": "HOST_REGION", "value": "af-south-1" } ]
+    }
+  ]
+}

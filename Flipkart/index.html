@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flipkart – Online Shopping Site</title>
+    <!-- Performance: Preconnect to image CDN -->
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="dns-prefetch" href="https://images.unsplash.com">
+    <!-- Load CSS immediately for faster rendering -->
+    <link rel="stylesheet" href="/style.css">
+    <!-- Optional static config to set API_BASE when hosted as a static site -->
+    <script src="/static.config.js" defer></script>
+    <!-- Inline critical CSS for instant paint -->
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f5; }
+        .navbar { background: #2874f0; padding: 12px 0; position: sticky; top: 0; z-index: 100; }
+        .navbar-container { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; padding: 0 20px; gap: 20px; }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; padding: 20px; max-width: 1280px; margin: 0 auto; }
+        .product-card { background: white; border-radius: 4px; overflow: hidden; }
+        .product-image { width: 100%; aspect-ratio: 1 / 1; background: #f0f0f0; overflow: hidden; }
+        .product-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+    <div class="top-bar-content">
+        <span>Become a Seller</span>
+        <span>More</span>
+    </div>
+</div>
+
+<!-- NAVBAR -->
+<header class="navbar">
+    <div class="navbar-container">
+        <a href="index.html" class="logo">
+            <span class="flipkart-text">Flipkart</span>
+            <span class="logo-plus">Plus</span>
+        </a>
+
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search for products, brands and more" autocomplete="off">
+            <button class="search-btn">🔍</button>
+        </div>
+
+        <div class="nav-right">
+            <a href="login.html" class="nav-link">👤 Login</a>
+            <a href="cart.html" class="nav-link">🛒 Cart</a>
+            <a href="#" class="nav-link">❓ Help</a>
+        </div>
+    </div>
+</header>
+
+<!-- CATEGORY BAR -->
+<section class="category-bar">
+    <a href="#" class="category-item">
+        <div class="category-icon">🏠</div>
+        <div>Home</div>
+    </a>
+    <a href="#" class="category-item">
+        <div class="category-icon">📱</div>
+        <div>Electronics</div>
+    </a>
+    <a href="#" class="category-item">
+        <div class="category-icon">👕</div>
+        <div>Fashion</div>
+    </a>
+    <a href="#" class="category-item">
+        <div class="category-icon">🎮</div>
+        <div>Mobiles</div>
+    </a>
+    <a href="#" class="category-item">
+        <div class="category-icon">💍</div>
+        <div>Beauty</div>
+    </a>
+    <a href="#" class="category-item">
+        <div class="category-icon">🏠</div>
+        <div>Home & Furniture</div>
+    </a>
+    <a href="#" class="category-item">
+        <div class="category-icon">📚</div>
+        <div>Books</div>
+    </a>
+    <a href="#" class="category-item">
+        <div class="category-icon">⚽</div>
+        <div>Sports</div>
+    </a>
+</section>
+
+<!-- BANNER SLIDER -->
+<div class="banner-slider">
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slide" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"><span class="slide-text">Flat 50% OFF</span></div>
+            <div class="slide" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"><span class="slide-text">New Arrivals</span></div>
+            <div class="slide" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"><span class="slide-text">Tech Deals</span></div>
+            <div class="slide" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);"><span class="slide-text">Exclusive</span></div>
+            <div class="slide" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);"><span class="slide-text">Best Sellers</span></div>
+        </div>
+        <button class="slider-btn prev" onclick="changeSlide(-1)">❮</button>
+        <button class="slider-btn next" onclick="changeSlide(1)">❯</button>
+    </div>
+    <div class="slider-dots" id="sliderDots"></div>
+</div>
+
+<!-- BEST SELLERS SECTION -->
+<section class="section-title">
+    <h2>Best Sellers</h2>
+    <a href="#" class="view-all">View All →</a>
+</section>
+
+<div class="products-grid">
+
+    <a href="product-details.html?id=1" class="product-card product-link">
+        <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1511707267537-b85faf00021e?w=180&h=180&fit=crop&q=75" alt="Redmi Note 12" loading="eager" decoding="async">
+            <span class="badge">Save 20%</span>
+            <span class="best-seller">Best Seller</span>
+        </div>
+        <h3>Redmi Note 12</h3>
+        <div class="rating-section">
+            <span class="rating">⭐ 4.5</span>
+            <span class="reviews">(2.5K)</span>
+        </div>
+        <div class="price-section">
+            <span class="price">₹12,999</span>
+            <span class="original-price">₹16,499</span>
+        </div>
+        <p class="offer">Free Delivery</p>
+    </a>
+
+    <a href="product-details.html?id=2" class="product-card product-link">
+        <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1511740357442-ee464c3f3c0d?w=180&h=180&fit=crop&q=75" alt="Samsung M14" loading="eager" decoding="async">
+            <span class="badge">Save 15%</span>
+            <span class="best-seller">Best Seller</span>
+        </div>
+        <h3>Samsung M14</h3>
+        <div class="rating-section">
+            <span class="rating">⭐ 4.7</span>
+            <span class="reviews">(1.8K)</span>
+        </div>
+        <div class="price-section">
+            <span class="price">₹14,499</span>
+            <span class="original-price">₹17,999</span>
+        </div>
+        <p class="offer">Free Delivery</p>
+    </a>
+
+    <a href="product-details.html?id=3" class="product-card product-link">
+        <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=180&h=180&fit=crop&q=75" alt="Wireless Earbuds" loading="eager" decoding="async">
+            <span class="badge">Save 25%</span>
+            <span class="best-seller">Best Seller</span>
+        </div>
+        <h3>Wireless Earbuds Pro</h3>
+        <div class="rating-section">
+            <span class="rating">⭐ 4.3</span>
+            <span class="reviews">(1.2K)</span>
+        </div>
+        <div class="price-section">
+            <span class="price">₹4,999</span>
+            <span class="original-price">₹6,999</span>
+        </div>
+        <p class="offer">Free Delivery</p>
+    </a>
+
+    <a href="product-details.html?id=4" class="product-card product-link">
+        <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=180&h=180&fit=crop&q=75" alt="Smart Watch" loading="eager" decoding="async">
+            <span class="badge">Save 30%</span>
+            <span class="best-seller">Best Seller</span>
+        </div>
+        <h3>Smart Watch Series 5</h3>
+        <div class="rating-section">
+            <span class="rating">⭐ 4.6</span>
+            <span class="reviews">(3.1K)</span>
+        </div>
+        <div class="price-section">
+            <span class="price">₹8,999</span>
+            <span class="original-price">₹12,999</span>
+        </div>
+        <p class="offer">Free Delivery</p>
+    </a>
+
+    <a href="product-details.html?id=5" class="product-card product-link">
+        <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=180&h=180&fit=crop&q=75" alt="USB Cable" loading="eager" decoding="async">
+            <span class="badge">Save 40%</span>
+            <span class="best-seller">Best Seller</span>
+        </div>
+        <h3>Premium USB-C Cable</h3>
+        <div class="rating-section">
+            <span class="rating">⭐ 4.8</span>
+            <span class="reviews">(5.2K)</span>
+        </div>
+        <div class="price-section">
+            <span class="price">₹599</span>
+            <span class="original-price">₹999</span>
+        </div>
+        <p class="offer">Free Delivery</p>
+    </a>
+
+    <a href="product-details.html?id=6" class="product-card product-link">
+        <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1510557880182-3d4d3f4650c2?w=180&h=180&fit=crop&q=75" alt="Phone Case" loading="eager" decoding="async">
+            <span class="badge">Save 35%</span>
+            <span class="best-seller">Best Seller</span>
+        </div>
+        <h3>Protective Phone Case</h3>
+        <div class="rating-section">
+            <span class="rating">⭐ 4.4</span>
+            <span class="reviews">(4.0K)</span>
+        </div>
+        <div class="price-section">
+            <span class="price">₹899</span>
+            <span class="original-price">₹1,399</span>
+        </div>
+        <p class="offer">Free Delivery</p>
+    </a>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>About Us</h4>
+            <ul>
+                <li><a href="#">About Flipkart</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Press</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Help</h4>
+            <ul>
+                <li><a href="#">Payments</a></li>
+                <li><a href="#">Shipping</a></li>
+                <li><a href="#">Cancellation</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Policy</h4>
+            <ul>
+                <li><a href="#">Return Policy</a></li>
+                <li><a href="#">Terms Of Use</a></li>
+                <li><a href="#">Security</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Social</h4>
+            <ul>
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">YouTube</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2025 Flipkart. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="image-loader.js" defer></script>
+<script src="/script.js" defer></script>
+</body>
+</html>

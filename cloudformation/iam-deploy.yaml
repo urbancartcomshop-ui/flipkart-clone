@@ -1,0 +1,78 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >-
+  Create an IAM user and policy for GitHub Actions to deploy the Flipkart app to
+  ECS/ECR in af-south-1. This template creates an IAM user, an inline policy
+  with limited permissions, and an access key. The AccessKey's secret is
+  returned as a CloudFormation output (copy it immediately).
+
+Parameters:
+  GitHubActor:
+    Type: String
+    Description: GitHub principal (for tagging) - e.g. your-github-org-or-user
+
+Resources:
+  FlipkartDeployPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      ManagedPolicyName: flipkart-deploy-policy
+      Description: Permissions to push images to ECR and update ECS services
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action:
+              - ecr:CreateRepository
+              - ecr:DescribeRepositories
+              - ecr:GetAuthorizationToken
+              - ecr:BatchCheckLayerAvailability
+              - ecr:InitiateLayerUpload
+              - ecr:UploadLayerPart
+              - ecr:CompleteLayerUpload
+              - ecr:PutImage
+            Resource: '*'
+          - Effect: Allow
+            Action:
+              - ecs:RegisterTaskDefinition
+              - ecs:UpdateService
+              - ecs:DescribeServices
+              - ecs:ListTaskDefinitions
+            Resource: '*'
+          - Effect: Allow
+            Action:
+              - iam:PassRole
+            Resource: '*'
+          - Effect: Allow
+            Action:
+              - logs:CreateLogGroup
+              - logs:CreateLogStream
+              - logs:PutLogEvents
+            Resource: '*'
+
+  FlipkartDeployUser:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: !Sub flipkart-deploy-${GitHubActor}
+      ManagedPolicyArns:
+        - !Ref FlipkartDeployPolicy
+
+  FlipkartDeployAccessKey:
+    Type: AWS::IAM::AccessKey
+    Properties:
+      UserName: !Ref FlipkartDeployUser
+
+Outputs:
+  AccessKeyId:
+    Description: Access Key Id for GitHub Actions
+    Value: !Ref FlipkartDeployAccessKey
+    Export:
+      Name: FlipkartDeployAccessKeyId
+
+  SecretAccessKey:
+    Description: Secret Access Key for GitHub Actions (copy this value now)
+    Value: !GetAtt [FlipkartDeployAccessKey, SecretAccessKey]
+    Export:
+      Name: FlipkartDeploySecretAccessKey
+
+  DeployUserName:
+    Description: IAM username created for deployment
+    Value: !Ref FlipkartDeployUser
