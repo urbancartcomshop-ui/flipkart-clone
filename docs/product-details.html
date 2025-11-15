@@ -669,7 +669,7 @@ let touchEndX = 0;
 let products = [];
 
 function loadProductsDataset() {
-    return fetch('./products.json')
+    return fetch('products.json')
         .then(r => r.json())
         .then(data => {
             products = data.map(p => ({
@@ -758,8 +758,7 @@ function playVideo(index) {
 }
 
 function loadProduct() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const productId = parseInt(urlParams.get('id')) || products[0]?.id || 0;
+    const productId = parseInt(sessionStorage.getItem('selectedProductId')) || products[0]?.id || 0;
     currentProduct = products.find(p => p.id === productId);
 
     if (currentProduct) {

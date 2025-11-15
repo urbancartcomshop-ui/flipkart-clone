@@ -304,9 +304,6 @@
     </footer>
 
     <script>
-        let productId = null;
-        let currentProduct = null;
-
         function getProductId() {
             const params = new URLSearchParams(window.location.search);
             return parseInt(params.get('id')) || 1;
