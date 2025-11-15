@@ -1,0 +1,21 @@
+{
+  "buildCommand": "npm install",
+  "devCommand": "node server.js",
+  "outputDirectory": ".",
+  "public": "Flipkart",
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "functions": {
+    "server.js": {
+      "memory": 1024,
+      "maxDuration": 60
+    }
+  },
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/server.js"
+    }
+  ]
+}
