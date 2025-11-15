@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Flipkart</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="navbar">
+    <div class="logo">
+        <span class="flipkart-text">Flipkart</span>
+        <span class="logo-plus">+</span>
+    </div>
+    <nav class="menu">
+        <a href="index.html">Home</a>
+        <a href="cart.html">🛒 Cart</a>
+        <button id="darkToggle" class="dark-btn">🌙</button>
+    </nav>
+</header>
+
+<h2 class="cart-title">Checkout</h2>
+
+<div id="checkoutItems" class="cart-items"></div>
+
+<div class="checkout-form-container">
+    <form id="checkoutForm">
+        <h3>Customer details</h3>
+        <input id="custName" type="text" placeholder="Full name" required><br>
+        <input id="custEmail" type="email" placeholder="Email" required><br>
+        <textarea id="custAddress" placeholder="Address (optional)"></textarea><br>
+        <button type="submit" class="btn">Place Order</button>
+    </form>
+</div>
+
+<footer>
+    © 2025 Flipkart.
+</footer>
+
+<script src="/static.config.js"></script>
+<script src="/script.js"></script>
+</body>
+</html>
