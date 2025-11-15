@@ -1,8 +1,12 @@
 {
   "version": 2,
   "public": "public",
-  "buildCommand": "echo 'Deploying Flipkart Clone'",
-  "env": {
-    "FORCE_BUILD": "1"
-  }
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/:path*",
+      "destination": "/index-mobile.html"
+    }
+  ]
 }
