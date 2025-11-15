@@ -107,7 +107,7 @@ Resources:
   AppInstance:
     Type: AWS::EC2::Instance
     Properties:
-      ImageId: ami-0c55b159cbfafe1f0  # Amazon Linux 2
+      ImageId: ami-0e8a1cbbf3a0dd180  # Amazon Linux 2 (Updated for 2025)
       InstanceType: !Ref InstanceType
       KeyName: !Ref KeyPairName
       SubnetId: !Ref PublicSubnet
