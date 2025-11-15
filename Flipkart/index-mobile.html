@@ -653,7 +653,7 @@ let currentSlide = 0;
 // Load products
 async function loadProducts() {
     try {
-        const res = await fetch('../data/products.json');
+        const res = await fetch('data/products.json');
         allProducts = await res.json();
         
         // Group all products by category for display

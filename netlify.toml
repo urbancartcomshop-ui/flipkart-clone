@@ -1,6 +1,6 @@
 [build]
   publish = "Flipkart"
-  command = "echo 'Static site - no build needed'"
+  command = "echo 'Static site - no build needed' && cp -r ../data Flipkart/ 2>/dev/null || true"
 
 [[redirects]]
   from = "/api/*"
