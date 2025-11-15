@@ -742,8 +742,7 @@ function renderProducts() {
 }
 
 function goToProductDetails(productId) {
-    sessionStorage.setItem('selectedProductId', productId);
-    window.location.href = '/product-details.html';
+    window.location.href = './product-details.html?id=' + productId;
 }
 
 document.addEventListener('DOMContentLoaded', () => {

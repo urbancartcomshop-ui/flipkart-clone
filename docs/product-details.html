@@ -758,7 +758,8 @@ function playVideo(index) {
 }
 
 function loadProduct() {
-    const productId = parseInt(sessionStorage.getItem('selectedProductId')) || products[0]?.id || 0;
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = parseInt(urlParams.get('id')) || products[0]?.id || 0;
     currentProduct = products.find(p => p.id === productId);
 
     if (currentProduct) {

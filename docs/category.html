@@ -254,7 +254,7 @@ function sortBy(type) {
 
 function goToProduct(id) {
     sessionStorage.setItem('selectedProductId', id);
-    window.location.href = '/product-details.html';
+    window.location.href = './product-details.html?id=' + productId;
 }
 
 function goHome() {
