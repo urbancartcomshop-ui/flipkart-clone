@@ -1,0 +1,51 @@
+# Flipkart Clone - robots.txt
+# Allow search engines to crawl all public pages
+
+User-agent: *
+Allow: /
+Allow: /vercel-homepage.html
+Allow: /product.html
+Allow: /products.json
+Allow: /images/
+Allow: /cart.html
+Allow: /checkout.html
+Allow: /category.html
+
+# Disallow admin and private areas
+Disallow: /admin
+Disallow: /private
+Disallow: /api/admin
+Disallow: /*.json$
+
+# Allow specific JSON files
+Allow: /products.json
+Allow: /data/products.json
+
+# Crawl delay
+Crawl-delay: 1
+
+# Request rate
+Request-rate: 1/1s
+
+# Sitemap
+Sitemap: https://flipkart-clone.vercel.app/sitemap.xml
+
+# Google specific
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Bing specific
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Block bad bots
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
