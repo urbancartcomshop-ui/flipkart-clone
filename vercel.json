@@ -1,14 +1,10 @@
 {
   "version": 2,
+  "name": "flipkart-clone-app",
   "buildCommand": "npm install",
   "env": {
     "REGION": "Africa (South Africa)",
     "NODE_ENV": "production"
   },
-  "regions": ["jnb1"],
-  "functions": {
-    "index.js": {
-      "maxDuration": 60
-    }
-  }
+  "regions": ["jnb1"]
 }
