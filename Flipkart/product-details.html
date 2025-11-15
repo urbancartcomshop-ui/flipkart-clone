@@ -669,7 +669,7 @@ let touchEndX = 0;
 let products = [];
 
 function loadProductsDataset() {
-    return fetch('data/products.json')
+    return fetch('products.json')
         .then(r => r.json())
         .then(data => {
             products = data.map(p => ({
