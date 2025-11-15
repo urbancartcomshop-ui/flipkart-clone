@@ -596,8 +596,12 @@ let products = [];
 
 function loadProductsDataset() {
     return fetch('products.json')
-        .then(r => r.json())
+        .then(r => {
+            if (!r.ok) throw new Error(`HTTP error! status: ${r.status}`);
+            return r.json();
+        })
         .then(data => {
+            console.log('Loaded products:', data.length);
             products = data.map(p => ({
                 id: p.id,
                 name: p.name,
@@ -611,12 +615,14 @@ function loadProductsDataset() {
                 desc: p.desc || '',
                 category: p.category || 'Electronics'
             }));
-            initProductSlider();
-            renderProducts();
+            console.log('Mapped products:', products.length);
+            return products;
         })
         .catch(err => {
-            console.error('Failed to load products', err);
-            console.log('Tried to load: products.json');
+            console.error('Failed to load products:', err);
+            // Fallback to empty array so page doesn't break
+            products = [];
+            return [];
         });
 }
 
@@ -741,7 +747,14 @@ function goToProductDetails(productId) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    loadProductsDataset();
+    loadProductsDataset().then(() => {
+        initProductSlider();
+        updateCartCount();
+    }).catch(err => {
+        console.error('Error loading products:', err);
+        // Fallback - at least initialize UI
+        updateCartCount();
+    });
 });
 
 function showAllProducts(e) {
@@ -769,9 +782,7 @@ function updateCartCount() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    initProductSlider();
-    renderProducts();
-    updateCartCount();
+    loadProductsDataset();
 });
 </script>
 
