@@ -313,7 +313,7 @@
             productId = getProductId();
             
             try {
-                const response = await fetch('products.json');
+                const response = await fetch('./products.json');
                 const products = await response.json();
                 const product = products.find(p => p.id === productId);
 
@@ -880,7 +880,7 @@
             productId = getProductId();
             
             try {
-                const response = await fetch('products.json');
+                const response = await fetch('./products.json');
                 const products = await response.json();
                 const product = products.find(p => p.id === productId);
 

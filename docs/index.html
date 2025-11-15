@@ -595,7 +595,7 @@ const slides = document.querySelectorAll('.slide').length;
 let products = [];
 
 function loadProductsDataset() {
-    return fetch('products.json')
+    return fetch('./products.json')
         .then(r => {
             if (!r.ok) throw new Error(`HTTP error! status: ${r.status}`);
             return r.json();
