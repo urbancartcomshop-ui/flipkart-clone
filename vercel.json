@@ -1,4 +1,8 @@
 {
   "version": 2,
-  "public": "public"
+  "public": "public",
+  "buildCommand": "echo 'Deploying Flipkart Clone'",
+  "env": {
+    "FORCE_BUILD": "1"
+  }
 }
