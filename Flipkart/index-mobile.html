@@ -669,7 +669,7 @@ async function loadProducts() {
 function renderProducts(products, gridId) {
     const grid = document.getElementById(gridId);
     grid.innerHTML = products.map(p => `
-        <a href="product-details-new.html?id=${p.id}" class="product-card">
+        <a href="product-details-final.html?id=${p.id}" class="product-card">
             <div class="product-image">
                 <img src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/150'">
                 <div class="wishlist-icon">♡</div>
