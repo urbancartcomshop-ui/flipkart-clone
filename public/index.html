@@ -595,7 +595,7 @@ const slides = document.querySelectorAll('.slide').length;
 let products = [];
 
 function loadProductsDataset() {
-    return fetch('data/products-sourced.json')
+    return fetch('products.json')
         .then(r => r.json())
         .then(data => {
             products = data.map(p => ({
@@ -603,19 +603,20 @@ function loadProductsDataset() {
                 name: p.name,
                 price: p.price,
                 originalPrice: p.originalPrice,
-                image: (p.images && p.images[0]) || 'https://via.placeholder.com/300',
+                image: p.image || (p.images && p.images[0]) || 'https://via.placeholder.com/300',
                 images: p.images || [],
-                discount: p.discountPercent,
-                rating: p.rating,
-                reviews: p.ratingsCount,
-                desc: p.desc,
-                category: p.category || 'Misc'
+                discount: p.discount || 0,
+                rating: p.rating || 0,
+                reviews: p.reviews || 0,
+                desc: p.desc || '',
+                category: p.category || 'Electronics'
             }));
             initProductSlider();
             renderProducts();
         })
         .catch(err => {
-            console.error('Failed to load dataset', err);
+            console.error('Failed to load products', err);
+            console.log('Tried to load: products.json');
         });
 }
 
