@@ -1,34 +1,14 @@
 {
   "version": 2,
-  "public": true,
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=3600"
-        },
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "SAMEORIGIN"
-        }
-      ]
-    }
-  ],
-  "functions": {
-    "api/index.js": {
-      "runtime": "nodejs18.x"
-    }
+  "buildCommand": "npm install",
+  "env": {
+    "REGION": "Africa (South Africa)",
+    "NODE_ENV": "production"
   },
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/api"
+  "regions": ["jnb1"],
+  "functions": {
+    "index.js": {
+      "maxDuration": 60
     }
-  ]
+  }
 }

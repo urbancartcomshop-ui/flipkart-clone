@@ -4,13 +4,10 @@
   "description": "Express server to serve Flipkart static site and products API",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js",
-    "docker-start": "node server.js",
-    "deploy-server": "node server-deploy.js",
-    "deploy": "node deploy-vercel.js",
-    "deploy:prod": "vercel --prod --yes",
-    "build": "echo 'Static site - no build needed'"
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "server": "node index.js",
+    "deploy": "node index.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
