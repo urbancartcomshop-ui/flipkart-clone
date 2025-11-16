@@ -3,6 +3,7 @@
  * ✅ HOSTED FROM: Africa (South Africa - Johannesburg)
  * ✅ OPTIMIZED FOR: India
  * Features: Complete e-commerce platform with products, cart, checkout
+ * Updated: Nov 16, 2025 - Fixed homepage with no add to cart button
  */
 
 const express = require('express');
