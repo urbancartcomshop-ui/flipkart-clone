@@ -149,6 +149,12 @@
         document.getElementById('subtotal').textContent = `₹${total.toLocaleString()}`;
         document.getElementById('totalAmount').textContent = `₹${total.toLocaleString()}`;
 
+        // Check if cart is not empty
+        if (cart.length === 0 || total === 0) {
+            alert('Your cart is empty! Please add items first.');
+            window.location.href = '/';
+        }
+
         // Check if address is provided
         const address = JSON.parse(localStorage.getItem('deliveryAddress') || 'null');
         if (!address) {
@@ -194,12 +200,16 @@
 
             // INSTANTLY redirect to UPI app
             console.log('[PAYMENT] Opening UPI app:', appName, upiUrl);
+            
+            // Try to open UPI app
             window.location.href = upiUrl;
-
-            // After 3 seconds, show QR code option
+            
+            // Show QR code and instructions immediately (will be visible if user comes back)
             setTimeout(() => {
-                showQRCode();
-            }, 3000);
+                if (document.visibilityState === 'visible') {
+                    showQRCode();
+                }
+            }, 2000);
         }
 
         // Show QR code as fallback
