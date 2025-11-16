@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - Flipkart</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f1f3f6; }
+        .header { background: #2874f0; color: white; padding: 15px 20px; }
+        .container { max-width: 600px; margin: 30px auto; padding: 20px; }
+        .payment-box { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .payment-method { margin: 20px 0; padding: 15px; border: 2px solid #e0e0e0; border-radius: 4px; cursor: pointer; }
+        .payment-method.active { border-color: #2874f0; background: #f0f7ff; }
+        .payment-method h3 { color: #212121; margin-bottom: 5px; }
+        .payment-method p { color: #666; font-size: 14px; }
+        .upi-input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px; font-size: 16px; }
+        .pay-button { width: 100%; padding: 15px; background: #ff9f00; color: white; border: none; border-radius: 4px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 20px; }
+        .pay-button:hover { background: #e68a00; }
+        .qr-section { text-align: center; margin: 20px 0; padding: 20px; background: #f9f9f9; border-radius: 8px; }
+        #qrCode { margin: 20px auto; }
+        .upi-link { display: inline-block; padding: 12px 24px; background: #00C853; color: white; text-decoration: none; border-radius: 4px; margin: 10px 0; }
+        .verification { margin-top: 20px; padding: 15px; background: #fff3cd; border-left: 4px solid #ff9f00; }
+        .success-message { padding: 20px; background: #d4edda; border-left: 4px solid #28a745; border-radius: 4px; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h2>🛒 Flipkart - Payment</h2>
+    </div>
+
+    <div class="container">
+        <div class="payment-box">
+            <h2>Select Payment Method</h2>
+            
+            <!-- UPI Payment (Only Option) -->
+            <div class="payment-method active">
+                <h3>📱 UPI Payment</h3>
+                <p>Pay using Google Pay, PhonePe, Paytm, BHIM or any UPI app</p>
+            </div>
+
+            <div id="upiSection" style="display: block;">
+                <h3 style="margin-top: 30px; color: #212121;">Order Summary</h3>
+                <div style="padding: 15px; background: #f9f9f9; border-radius: 4px; margin: 10px 0;">
+                    <div style="display: flex; justify-content: space-between; margin: 10px 0;">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">₹0</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 10px 0;">
+                        <span>Shipping:</span>
+                        <span style="color: #00C853;">FREE</span>
+                    </div>
+                    <hr style="margin: 10px 0;">
+                    <div style="display: flex; justify-content: space-between; margin: 10px 0; font-size: 18px; font-weight: bold;">
+                        <span>Total Amount:</span>
+                        <span id="totalAmount">₹0</span>
+                    </div>
+                </div>
+
+                <button class="pay-button" onclick="initiateUPIPayment()">
+                    💳 Pay with UPI
+                </button>
+
+                <div id="upiPaymentSection" style="display: none;">
+                    <div class="qr-section">
+                        <h3>Scan QR Code to Pay</h3>
+                        <div id="qrCode"></div>
+                        <p style="margin: 10px 0; color: #666;">OR</p>
+                        <a id="upiLink" href="#" class="upi-link" target="_blank">
+                            Open UPI App
+                        </a>
+                        <p style="margin-top: 15px; color: #666; font-size: 14px;">
+                            UPI ID: <strong id="upiId">Loading...</strong>
+                        </p>
+                    </div>
+
+                    <div class="verification">
+                        <h4>After Payment:</h4>
+                        <ol style="margin-left: 20px; margin-top: 10px;">
+                            <li>Complete payment in your UPI app</li>
+                            <li>Take a screenshot of the payment confirmation</li>
+                            <li>Click "I have paid" below</li>
+                            <li>We'll verify and confirm your order within 5-10 minutes</li>
+                        </ol>
+                        <input type="text" class="upi-input" id="transactionId" placeholder="Enter UPI Transaction ID (optional)">
+                        <button class="pay-button" onclick="confirmPayment()" style="background: #00C853;">
+                            ✅ I have paid
+                        </button>
+                    </div>
+                </div>
+
+                <div id="successMessage" style="display: none;" class="success-message">
+                    <h3>✅ Payment Received!</h3>
+                    <p>Thank you for your payment. We are verifying your transaction.</p>
+                    <p>Order ID: <strong id="orderId"></strong></p>
+                    <p>You will receive a confirmation email shortly.</p>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+    <script>
+        let currentPaymentData = null;
+
+        // Get cart total from localStorage
+        const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        document.getElementById('subtotal').textContent = `₹${total.toLocaleString()}`;
+        document.getElementById('totalAmount').textContent = `₹${total.toLocaleString()}`;
+
+        // UPI is the only payment method
+        function selectPayment(method) {
+            // Only UPI available
+            document.getElementById('upiSection').style.display = 'block';
+        }
+
+        async function initiateUPIPayment() {
+            const orderId = `ORD-${Date.now()}`;
+            const amount = total;
+
+            if (amount <= 0) {
+                alert('Cart is empty! Please add items to cart first.');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/upi/create-payment', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        amount: amount,
+                        orderId: orderId,
+                        customerName: 'Customer',
+                        customerEmail: 'customer@email.com'
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    currentPaymentData = data.payment;
+                    
+                    // Show UPI payment section
+                    document.getElementById('upiPaymentSection').style.display = 'block';
+                    document.getElementById('orderId').textContent = data.payment.orderId;
+                    
+                    // Generate QR Code
+                    const qrContainer = document.getElementById('qrCode');
+                    qrContainer.innerHTML = '';
+                    QRCode.toCanvas(qrContainer, data.payment.upiUrl, { width: 256 }, function (error) {
+                        if (error) console.error(error);
+                    });
+                    
+                    // Set UPI link
+                    document.getElementById('upiLink').href = data.payment.upiUrl;
+                    document.getElementById('upiId').textContent = data.payment.upiId;
+                    
+                    console.log('Payment initiated:', data);
+                } else {
+                    alert('Failed to initiate payment: ' + data.error);
+                }
+            } catch (error) {
+                console.error('Payment error:', error);
+                alert('Error initiating payment. Please try again.');
+            }
+        }
+
+        async function confirmPayment() {
+            const transactionId = document.getElementById('transactionId').value;
+            
+            if (!currentPaymentData) {
+                alert('Please initiate payment first');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/upi/verify-payment', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        paymentId: currentPaymentData.paymentId,
+                        transactionId: transactionId
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    document.getElementById('upiPaymentSection').style.display = 'none';
+                    document.getElementById('successMessage').style.display = 'block';
+                    
+                    // Clear cart
+                    localStorage.removeItem('cart');
+                    
+                    console.log('Payment verified:', data);
+                } else {
+                    alert('Verification failed: ' + data.error);
+                }
+            } catch (error) {
+                console.error('Verification error:', error);
+                alert('Error verifying payment. Please try again.');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -466,6 +466,119 @@ app.post('/api/confirm-payment', async (req, res) => {
   }
 });
 
+// ============================================
+// UPI PAYMENT SYSTEM (India)
+// ============================================
+
+// Get UPI payment link
+app.post('/api/upi/create-payment', (req, res) => {
+  try {
+    const { amount, orderId, customerName, customerEmail } = req.body;
+    
+    if (!amount || amount <= 0) {
+      return res.status(400).json({ error: 'Invalid amount' });
+    }
+
+    // Your UPI ID - Credit Card Bill Payment
+    const upiId = process.env.UPI_ID || 'cc.9199915057220975@axisbank';
+    const merchantName = process.env.MERCHANT_NAME || 'Axis Bank Credit Card';
+    
+    // Generate UPI payment URL
+    const upiUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(merchantName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(`Order ${orderId || Date.now()}`)}`;
+    
+    // Payment record
+    const payment = {
+      paymentId: `PAY-${Date.now()}`,
+      orderId: orderId || `ORD-${Date.now()}`,
+      amount: amount,
+      currency: 'INR',
+      upiId: upiId,
+      upiUrl: upiUrl,
+      customerName: customerName,
+      customerEmail: customerEmail,
+      status: 'pending',
+      createdAt: new Date().toISOString(),
+      expiresAt: new Date(Date.now() + 15 * 60 * 1000).toISOString() // 15 min expiry
+    };
+
+    res.status(200).json({
+      success: true,
+      payment: payment,
+      instructions: {
+        step1: 'Click the UPI link or scan QR code',
+        step2: 'Complete payment in your UPI app',
+        step3: 'Return here and click "I have paid"',
+        step4: 'Upload payment screenshot for verification'
+      }
+    });
+  } catch (error) {
+    console.error('UPI Payment Error:', error);
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+});
+
+// Verify UPI payment (manual verification)
+app.post('/api/upi/verify-payment', (req, res) => {
+  try {
+    const { paymentId, transactionId, screenshot } = req.body;
+    
+    if (!paymentId) {
+      return res.status(400).json({ error: 'Payment ID required' });
+    }
+
+    // In real app: Admin verifies screenshot and updates status
+    // For now: Accept all payments as "pending verification"
+    
+    const verification = {
+      paymentId: paymentId,
+      transactionId: transactionId || 'Pending',
+      status: 'pending_verification',
+      message: 'Payment received! We will verify and confirm your order within 5-10 minutes.',
+      verifiedAt: new Date().toISOString()
+    };
+
+    console.log('📱 UPI Payment Verification:', verification);
+
+    res.status(200).json({
+      success: true,
+      verification: verification
+    });
+  } catch (error) {
+    console.error('UPI Verification Error:', error);
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+});
+
+// Get UPI QR code data
+app.get('/api/upi/qr-code', (req, res) => {
+  const { amount, orderId } = req.query;
+  
+  if (!amount) {
+    return res.status(400).json({ error: 'Amount required' });
+  }
+
+  const upiId = process.env.UPI_ID || 'cc.9199915057220975@axisbank';
+  const merchantName = process.env.MERCHANT_NAME || 'Axis Bank Credit Card';
+  
+  const upiUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(merchantName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(`Order ${orderId || Date.now()}`)}`;
+  
+  res.json({
+    success: true,
+    upiUrl: upiUrl,
+    qrCodeData: upiUrl,
+    upiId: upiId,
+    merchantName: merchantName,
+    amount: parseFloat(amount),
+    currency: 'INR'
+  });
+});
+
 // Get publishable key for Stripe.js frontend
 app.get('/api/stripe-key', (req, res) => {
   res.json({
