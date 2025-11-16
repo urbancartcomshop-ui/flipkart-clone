@@ -12,6 +12,9 @@
         .payment-box { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
         .payment-method { margin: 20px 0; padding: 15px; border: 2px solid #e0e0e0; border-radius: 4px; cursor: pointer; }
         .payment-method.active { border-color: #2874f0; background: #f0f7ff; }
+        .upi-app-option { padding: 20px; border: 2px solid #e0e0e0; border-radius: 8px; cursor: pointer; transition: all 0.3s; }
+        .upi-app-option:hover { border-color: #2874f0; background: #f0f7ff; transform: scale(1.05); }
+        .upi-app-option.selected { border-color: #00C853; background: #e8f5e9; }
         .payment-method h3 { color: #212121; margin-bottom: 5px; }
         .payment-method p { color: #666; font-size: 14px; }
         .upi-input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px; font-size: 16px; }
@@ -31,12 +34,39 @@
 
     <div class="container">
         <div class="payment-box">
-            <h2>Select Payment Method</h2>
+            <h2>Select UPI App</h2>
+            <p style="color: #666; margin-bottom: 20px;">Choose your preferred UPI app to complete the payment</p>
             
-            <!-- UPI Payment (Only Option) -->
-            <div class="payment-method active">
-                <h3>📱 UPI Payment</h3>
-                <p>Pay using Google Pay, PhonePe, Paytm, BHIM or any UPI app</p>
+            <!-- UPI App Selection -->
+            <div class="upi-apps" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin: 20px 0;">
+                <div class="upi-app-option" onclick="selectUPIApp('Google Pay')" data-app="gpay">
+                    <div style="font-size: 40px; text-align: center;">📱</div>
+                    <div style="text-align: center; font-weight: 500; color: #212121;">Google Pay</div>
+                </div>
+                <div class="upi-app-option" onclick="selectUPIApp('PhonePe')" data-app="phonepe">
+                    <div style="font-size: 40px; text-align: center;">💜</div>
+                    <div style="text-align: center; font-weight: 500; color: #212121;">PhonePe</div>
+                </div>
+                <div class="upi-app-option" onclick="selectUPIApp('Paytm')" data-app="paytm">
+                    <div style="font-size: 40px; text-align: center;">💙</div>
+                    <div style="text-align: center; font-weight: 500; color: #212121;">Paytm</div>
+                </div>
+                <div class="upi-app-option" onclick="selectUPIApp('Amazon Pay')" data-app="amazonpay">
+                    <div style="font-size: 40px; text-align: center;">🟠</div>
+                    <div style="text-align: center; font-weight: 500; color: #212121;">Amazon Pay</div>
+                </div>
+                <div class="upi-app-option" onclick="selectUPIApp('BHIM')" data-app="bhim">
+                    <div style="font-size: 40px; text-align: center;">🇮🇳</div>
+                    <div style="text-align: center; font-weight: 500; color: #212121;">BHIM UPI</div>
+                </div>
+                <div class="upi-app-option" onclick="selectUPIApp('Other UPI')" data-app="other">
+                    <div style="font-size: 40px; text-align: center;">📲</div>
+                    <div style="text-align: center; font-weight: 500; color: #212121;">Other UPI</div>
+                </div>
+            </div>
+
+            <div id="selectedApp" style="display: none; text-align: center; padding: 15px; background: #e8f5e9; border-radius: 8px; margin: 20px 0;">
+                <strong style="color: #2e7d32;">Selected: <span id="appName"></span></strong>
             </div>
 
             <div id="upiSection" style="display: block;">
@@ -104,12 +134,33 @@
     <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
     <script>
         let currentPaymentData = null;
+        let selectedUPIApp = null;
 
         // Get cart total from localStorage
         const cart = JSON.parse(localStorage.getItem('cart') || '[]');
         const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
         document.getElementById('subtotal').textContent = `₹${total.toLocaleString()}`;
         document.getElementById('totalAmount').textContent = `₹${total.toLocaleString()}`;
+
+        // Check if address is provided
+        const address = JSON.parse(localStorage.getItem('deliveryAddress') || 'null');
+        if (!address) {
+            alert('Please provide delivery address first!');
+            window.location.href = '/address.html';
+        }
+
+        // Select UPI app
+        function selectUPIApp(appName) {
+            selectedUPIApp = appName;
+            
+            // Update UI
+            document.querySelectorAll('.upi-app-option').forEach(el => el.classList.remove('selected'));
+            event.target.closest('.upi-app-option').classList.add('selected');
+            
+            // Show selected app
+            document.getElementById('selectedApp').style.display = 'block';
+            document.getElementById('appName').textContent = appName;
+        }
 
         // UPI is the only payment method
         function selectPayment(method) {
@@ -118,6 +169,11 @@
         }
 
         async function initiateUPIPayment() {
+            if (!selectedUPIApp) {
+                alert('Please select a UPI app first!');
+                return;
+            }
+
             const orderId = `ORD-${Date.now()}`;
             const amount = total;
 
@@ -133,8 +189,9 @@
                     body: JSON.stringify({
                         amount: amount,
                         orderId: orderId,
-                        customerName: 'Customer',
-                        customerEmail: 'customer@email.com'
+                        customerName: address.fullName,
+                        customerEmail: 'customer@email.com',
+                        upiApp: selectedUPIApp
                     })
                 });
 

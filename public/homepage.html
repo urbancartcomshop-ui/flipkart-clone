@@ -385,7 +385,10 @@
                             ${product.original_price ? `<span class="original-price">₹${product.original_price}</span>` : ''}
                             ${product.discount ? `<span class="discount">${product.discount}% OFF</span>` : ''}
                         </div>
-                        <button class="add-to-cart" onclick="addToCart(event, ${product.id})">Add to Cart</button>
+                        <div style="display: flex; gap: 10px;">
+                            <button class="add-to-cart" onclick="addToCart(event, ${product.id})" style="flex: 1;">🛒 Add to Cart</button>
+                            <button class="add-to-cart" onclick="buyNow(event, ${product.id})" style="flex: 1; background: #ff9f00;">⚡ Buy Now</button>
+                        </div>
                     </div>
                 </div>
             `).join('');
@@ -410,11 +413,53 @@
         // Add to cart
         function addToCart(event, productId) {
             event.stopPropagation();
-            alert('Product added to cart!');
-            // Store in localStorage for demo
-            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-            cart.push(productId);
+            
+            const product = allProducts.find(p => p.id === productId);
+            if (!product) return;
+            
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    quantity: 1
+                });
+            }
+            
             localStorage.setItem('cart', JSON.stringify(cart));
+            alert('✅ Product added to cart!');
+        }
+
+        // Buy Now - Add to cart and go to address
+        function buyNow(event, productId) {
+            event.stopPropagation();
+            
+            const product = allProducts.find(p => p.id === productId);
+            if (!product) return;
+            
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    quantity: 1
+                });
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            window.location.href = '/address.html';
         }
 
         // Search functionality

@@ -726,7 +726,29 @@
         }
 
         function openPaymentModal() {
-            document.getElementById('paymentModal').classList.add('show');
+            // Add current product to cart and go to address page
+            const product = {
+                id: currentProduct.id,
+                name: currentProduct.name,
+                price: currentProduct.price,
+                image: currentProduct.image,
+                quantity: 1
+            };
+            
+            // Add to cart
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const existingItem = cart.find(item => item.id === product.id);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push(product);
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            
+            // Redirect to address page
+            window.location.href = '/address.html';
         }
 
         function closePaymentModal() {
