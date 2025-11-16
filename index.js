@@ -1,29 +1,133 @@
 /**
- * Flipkart Clone - Express Server
- * ✅ HOSTED FROM: Africa (South Africa - Johannesburg)
- * ✅ OPTIMIZED FOR: India
+ * Flipkart Clone - Secured Express Server with Load Balancing
+ * ✅ SECURITY: Advanced protection, identity anonymization
+ * ✅ PERFORMANCE: Clustered load balancing, rate limiting
  * Features: Complete e-commerce platform with products, cart, checkout
- * Updated: Nov 16, 2025 - Fixed homepage with no add to cart button
+ * Updated: Nov 16, 2025 - Added security hardening and load balancing
  */
 
+const cluster = require('cluster');
+const os = require('os');
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const cors = require('cors');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const compression = require('compression');
 require('dotenv').config();
+
+// Load balancing with cluster - use all CPU cores
+if (cluster.isMaster) {
+  const numCPUs = os.cpus().length;
+  console.log(`🚀 Master process ${process.pid} starting...`);
+  console.log(`🔄 Spawning ${numCPUs} worker processes for load balancing...`);
+  
+  // Fork workers for each CPU core
+  for (let i = 0; i < numCPUs; i++) {
+    cluster.fork();
+  }
+
+  cluster.on('exit', (worker, code, signal) => {
+    console.log(`⚠️ Worker ${worker.process.pid} died. Spawning new worker...`);
+    cluster.fork(); // Auto-restart crashed workers
+  });
+
+  return; // Master process doesn't run the server
+}
+
+// Worker process runs the actual server
+console.log(`✅ Worker ${process.pid} started`);
 
 // Initialize Stripe with environment variable
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY || 'sk_test_placeholder');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const REGION = 'Africa (South Africa - Johannesburg)';
-const TARGET_MARKET = 'India';
+
+// Enable trust proxy for rate limiting behind Cloudflare
+app.set('trust proxy', 1);
 
 // ============================================
-// MIDDLEWARE
+// SECURITY MIDDLEWARE - IDENTITY PROTECTION
 // ============================================
-// Enable CORS for all origins - fully public
+
+// 1. HELMET - Security headers to hide server identity
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+      fontSrc: ["'self'", "https://fonts.gstatic.com"],
+      imgSrc: ["'self'", "data:", "https:"],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
+      connectSrc: ["'self'"]
+    }
+  },
+  hsts: {
+    maxAge: 31536000,
+    includeSubDomains: true,
+    preload: true
+  },
+  referrerPolicy: { policy: 'no-referrer' }, // Hide referrer to protect identity
+  noSniff: true,
+  hidePoweredBy: true, // Remove X-Powered-By header
+  xssFilter: true,
+  frameguard: { action: 'deny' }
+}));
+
+// 2. COMPRESSION - Reduce bandwidth and improve performance
+app.use(compression());
+
+// 3. RATE LIMITING - Prevent DDoS and brute force attacks
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per windowMs
+  message: 'Too many requests from this IP, please try again later.',
+  standardHeaders: true,
+  legacyHeaders: false,
+  handler: (req, res) => {
+    console.log(`⚠️ Rate limit exceeded from IP: ${req.ip}`);
+    res.status(429).json({ error: 'Too many requests. Please slow down.' });
+  }
+});
+
+// 4. STRICT RATE LIMITING for payment endpoints
+const paymentLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000, // 1 hour
+  max: 10, // Only 10 payment attempts per hour
+  message: 'Too many payment attempts, please try again later.',
+  skipSuccessfulRequests: true
+});
+
+app.use('/api/', limiter); // Apply to all API routes
+app.use('/api/create-payment', paymentLimiter);
+app.use('/api/verify-payment', paymentLimiter);
+
+// 5. ANONYMIZATION - Remove identifying headers and IP exposure
+app.use((req, res, next) => {
+  // Remove identifying headers
+  delete req.headers['x-forwarded-for'];
+  delete req.headers['x-real-ip'];
+  delete req.headers['cf-connecting-ip'];
+  
+  // Set privacy headers - hide all server info
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('X-XSS-Protection', '1; mode=block');
+  res.setHeader('Referrer-Policy', 'no-referrer');
+  res.setHeader('Permissions-Policy', 'geolocation=(), microphone=(), camera=()');
+  
+  // Remove location/region headers to hide identity
+  res.removeHeader('X-Server-Region');
+  res.removeHeader('X-Target-Market');
+  res.removeHeader('X-Powered-By');
+  res.removeHeader('Server');
+  
+  next();
+});
+
+// 6. CORS - Allow cross-origin but without credentials
 app.use(cors({
   origin: '*',
   credentials: false,
@@ -31,17 +135,24 @@ app.use(cors({
   allowedHeaders: ['Content-Type']
 }));
 
-// Add India-specific headers for optimization
+// 7. LOGGING - Monitor suspicious activity
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('X-Server-Region', REGION);
-  res.setHeader('X-Target-Market', TARGET_MARKET);
-  res.setHeader('X-Powered-By', 'Flipkart-Clone-Africa');
+  const suspicious = [
+    'admin', 'login', 'phpmyadmin', 'wp-admin', '.env', 
+    'config', 'backup', 'sql', 'database'
+  ];
+  
+  const isSuspicious = suspicious.some(term => req.url.toLowerCase().includes(term));
+  
+  if (isSuspicious) {
+    console.log(`🚨 SUSPICIOUS REQUEST: ${req.method} ${req.url} from ${req.ip}`);
+  }
+  
   next();
 });
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '1mb' })); // Limit payload size
+app.use(express.urlencoded({ extended: true, limit: '1mb' }));
 
 // Serve all static files publicly with no restrictions
 app.use(express.static(path.join(__dirname, 'public'), {
@@ -80,12 +191,7 @@ function getCategories() {
 app.get('/health', (req, res) => {
   res.status(200).json({
     status: 'ok',
-    server: {
-      region: REGION,
-      host: 'Africa (South Africa - Johannesburg)',
-      targetMarket: TARGET_MARKET
-    },
-    location: 'India',
+    server: 'online',
     timestamp: new Date().toISOString(),
     message: '✅ Server is running in Africa, optimized for India users'
   });
@@ -133,7 +239,6 @@ app.get('/api/products', (req, res) => {
   res.json({
     success: true,
     count: products.length,
-    region: REGION,
     data: products
   });
 });
@@ -147,14 +252,14 @@ app.get('/api/products/:id', (req, res) => {
   if (product) {
     res.json({
       success: true,
-      region: REGION,
+      
       data: product
     });
   } else {
     res.status(404).json({
       success: false,
       error: 'Product not found',
-      region: REGION
+      
     });
   }
 });
@@ -165,7 +270,7 @@ app.get('/api/categories', (req, res) => {
   res.json({
     success: true,
     count: categories.length,
-    region: REGION,
+    
     data: categories
   });
 });
@@ -179,7 +284,7 @@ app.get('/api/categories/:category', (req, res) => {
     success: true,
     category,
     count: products.length,
-    region: REGION,
+    
     data: products
   });
 });
@@ -194,7 +299,7 @@ app.get('/api/featured', (req, res) => {
   res.json({
     success: true,
     count: featured.length,
-    region: REGION,
+    
     data: featured
   });
 });
@@ -206,7 +311,7 @@ app.get('/api/search', (req, res) => {
     return res.status(400).json({
       success: false,
       error: 'Search query required',
-      region: REGION
+      
     });
   }
 
@@ -221,7 +326,7 @@ app.get('/api/search', (req, res) => {
     success: true,
     query: q,
     count: products.length,
-    region: REGION,
+    
     data: products
   });
 });
@@ -233,8 +338,6 @@ app.get('/api/stats', (req, res) => {
 
   res.json({
     success: true,
-    region: REGION,
-    targetMarket: TARGET_MARKET,
     stats: {
       totalProducts: products.length,
       totalCategories: categories.length,
@@ -252,16 +355,9 @@ app.get('/api/stats', (req, res) => {
 app.get('/api/india-info', (req, res) => {
   res.json({
     success: true,
-    server: {
-      host: REGION,
-      region: 'South Africa - Johannesburg',
-      coordinates: {
-        latitude: -26.2023,
-        longitude: 28.0436
-      }
-    },
+    server: 'online',
     service: {
-      market: TARGET_MARKET,
+      market: 'Global',
       country: 'India',
       currency: 'INR (₹)',
       language: 'English, Hindi',
@@ -635,56 +731,72 @@ app.get('/robots.txt', (req, res) => {
 });
 
 // ============================================
-// ERROR HANDLING
+// ERROR HANDLING - Secure error responses
 // ============================================
 
 app.use((req, res) => {
-  res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
+  // Don't reveal 404 page structure for security
+  res.status(404).json({ 
+    error: 'Not Found',
+    message: 'The requested resource does not exist'
+  });
+});
+
+// Global error handler - hide internal errors
+app.use((err, req, res, next) => {
+  console.error('❌ Server Error:', err.stack);
+  
+  // Never expose error details to client
+  res.status(err.status || 500).json({
+    error: 'Internal Server Error',
+    message: 'Something went wrong. Please try again later.'
+  });
 });
 
 // ============================================
-// START SERVER
+// START SERVER WITH LOAD BALANCING
 // ============================================
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`
-╔════════════════════════════════════════════════════════════╗
-║          🛍️  FLIPKART CLONE - SERVER STARTED              ║
-╚════════════════════════════════════════════════════════════╝
+╔═══════════════════════════════════════════════════════════════╗
+║     🛍️  FLIPKART CLONE - SECURED SERVER (Worker ${process.pid})   ║
+╚═══════════════════════════════════════════════════════════════╝
 
-📍 Server Region: ${REGION}
-🌐 Local URL: http://localhost:${PORT}
-🌍 Production URL: Deploy to Vercel/Render
-📊 API Base: http://localhost:${PORT}/api
+🔒 SECURITY FEATURES ENABLED:
+   ✅ Load Balancing (${os.cpus().length} CPU cores)
+   ✅ Rate Limiting (100 req/15min)
+   ✅ Payment Protection (10 attempts/hour)
+   ✅ Identity Anonymization
+   ✅ DDoS Protection
+   ✅ XSS & Injection Prevention
+   ✅ Secure Headers (Helmet)
+   ✅ Request Compression
+   ✅ Auto Worker Restart
 
-✅ Available Routes:
+🌐 Server Status:
+   📍 Port: ${PORT}
+   🔄 Worker PID: ${process.pid}
+   💻 CPU Cores: ${os.cpus().length}
+   🚀 Status: ONLINE & PROTECTED
 
-HOME & PAGES:
-  GET  /                    Homepage
-  GET  /product/:id         Product details
-  GET  /cart                Shopping cart
-  GET  /checkout            Checkout page
-  GET  /category/:name      Category page
+🔐 Privacy Protection:
+   ✅ No IP exposure
+   ✅ No location headers
+   ✅ No server fingerprinting
+   ✅ Anonymous referrer policy
 
-API ENDPOINTS:
-  GET  /api/products                All products
-  GET  /api/products/:id            Single product
-  GET  /api/categories              All categories
-  GET  /api/categories/:category    Products in category
-  GET  /api/featured                Featured products
-  GET  /api/search?q=query         Search products
-  GET  /api/stats                   Site statistics
-
-SEO:
-  GET  /sitemap.xml         XML sitemap
-  GET  /robots.txt          Robots file
-  GET  /404.html            Error page
-
-HEALTH:
-  GET  /health              Health check
-
-Ready to serve! 🚀
+Ready to serve securely! 🛡️
   `);
+});
+
+// Graceful shutdown
+process.on('SIGTERM', () => {
+  console.log(`⚠️ Worker ${process.pid} received SIGTERM, shutting down gracefully...`);
+  server.close(() => {
+    console.log(`✅ Worker ${process.pid} closed`);
+    process.exit(0);
+  });
 });
 
 module.exports = app;

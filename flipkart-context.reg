@@ -1,8 +1,0 @@
-Windows Registry Editor Version 5.00
-
-[HKEY_CLASSES_ROOT\Directory\Background\shell\FlipkartStartServer]
-@="Flipkart: Start Server Here"
-"Icon"="powershell.exe"
-
-[HKEY_CLASSES_ROOT\Directory\Background\shell\FlipkartStartServer\command]
-@="powershell.exe -NoExit -ExecutionPolicy Bypass -Command \"cd '%V'; .\\scripts\\start-server.ps1\""
