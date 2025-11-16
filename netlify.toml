@@ -1,6 +1,10 @@
 [build]
   publish = "public"
   command = "echo 'Static site - no build needed'"
+  ignore = "git diff --quiet HEAD^ HEAD -- . ; exit 1"
+
+[build.environment]
+  NODE_ENV = "production"
 
 [dev]
   command = "node index.js"
