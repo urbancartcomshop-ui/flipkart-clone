@@ -9,7 +9,14 @@
         "reviews":  2145,
         "description":  "OnePlus Buds Pro 2 with advanced noise cancellation and premium audio quality",
         "category":  "Electronics",
-        "image":  "images/product-1.jpg"
+        "image":  "images/product-1.jpg",
+        "images": [
+            "images/products/product-1-img-1.jpg",
+            "images/products/product-1-img-2.jpg",
+            "images/products/product-1-img-3.jpg",
+            "images/products/product-1-img-4.jpg",
+            "images/products/product-1-img-5.jpg"
+        ]
     },
     {
         "id":  2,
@@ -21,7 +28,14 @@
         "reviews":  1856,
         "description":  "JBL Wave Beam with 32Hr Playtime, IP54, Smart Ambient \u0026 TalkThru Mode",
         "category":  "Electronics",
-        "image":  "images/product-2.jpg"
+        "image":  "images/product-2.jpg",
+        "images": [
+            "images/products/product-2-img-1.jpg",
+            "images/products/product-2-img-2.jpg",
+            "images/products/product-2-img-3.jpg",
+            "images/products/product-2-img-4.jpg",
+            "images/products/product-2-img-5.jpg"
+        ]
     },
     {
         "id":  3,
@@ -33,7 +47,14 @@
         "reviews":  1678,
         "description":  "Noise Colorfit Icon 2 1.8\u0027\u0027 Display with Bluetooth Calling, AI Voice Assistant",
         "category":  "Electronics",
-        "image":  "images/product-3.jpg"
+        "image":  "images/product-3.jpg",
+        "images": [
+            "images/products/product-3-img-1.jpg",
+            "images/products/product-3-img-2.jpg",
+            "images/products/product-3-img-3.jpg",
+            "images/products/product-3-img-4.jpg",
+            "images/products/product-3-img-5.jpg"
+        ]
     },
     {
         "id":  4,
@@ -45,7 +66,14 @@
         "reviews":  2234,
         "description":  "JBL Partybox 310 - 18Hrs Playtime, JBL Pro Sound, Dynamic Light Show, IPX4",
         "category":  "Electronics",
-        "image":  "images/product-4.jpg"
+        "image":  "images/product-4.jpg",
+        "images": [
+            "images/products/product-4-img-1.jpg",
+            "images/products/product-4-img-2.jpg",
+            "images/products/product-4-img-3.jpg",
+            "images/products/product-4-img-4.jpg",
+            "images/products/product-4-img-5.jpg"
+        ]
     },
     {
         "id":  5,
@@ -57,7 +85,14 @@
         "reviews":  945,
         "description":  "MAHARAJA WHITELINE Neo Pro MX-261 500 W Mixer Grinder with 3 Jars",
         "category":  "Appliances",
-        "image":  "images/product-5.jpg"
+        "image":  "images/product-5.jpg",
+        "images": [
+            "images/products/product-5-img-1.jpg",
+            "images/products/product-5-img-2.jpg",
+            "images/products/product-5-img-3.jpg",
+            "images/products/product-5-img-4.jpg",
+            "images/products/product-5-img-5.jpg"
+        ]
     },
     {
         "id":  6,
@@ -69,7 +104,14 @@
         "reviews":  1534,
         "description":  "Khaitan 3 Burner BP-JIO Black MS Frame Toughened Glass Manual Gas Stove",
         "category":  "Appliances",
-        "image":  "images/product-6.jpg"
+        "image":  "images/product-6.jpg",
+        "images": [
+            "images/products/product-6-img-1.jpg",
+            "images/products/product-6-img-2.jpg",
+            "images/products/product-6-img-3.jpg",
+            "images/products/product-6-img-4.jpg",
+            "images/products/product-6-img-5.jpg"
+        ]
     },
     {
         "id":  7,
@@ -81,7 +123,14 @@
         "reviews":  1823,
         "description":  "OnePlus Bullets Wireless Z2 with 45dB Hybrid ANC Bluetooth Technology",
         "category":  "Electronics",
-        "image":  "images/product-7.jpg"
+        "image":  "images/product-7.jpg",
+        "images": [
+            "images/products/product-7-img-1.jpg",
+            "images/products/product-7-img-2.jpg",
+            "images/products/product-7-img-3.jpg",
+            "images/products/product-7-img-4.jpg",
+            "images/products/product-7-img-5.jpg"
+        ]
     },
     {
         "id":  8,
@@ -93,7 +142,14 @@
         "reviews":  2012,
         "description":  "SONY HT-S20R with Dolby Digital, Subwoofer, Rear Speakers, 400 W Power",
         "category":  "Electronics",
-        "image":  "images/product-8.jpg"
+        "image":  "images/product-8.jpg",
+        "images": [
+            "images/products/product-8-img-1.jpg",
+            "images/products/product-8-img-2.jpg",
+            "images/products/product-8-img-3.jpg",
+            "images/products/product-8-img-4.jpg",
+            "images/products/product-8-img-5.jpg"
+        ]
     },
     {
         "id":  9,
@@ -105,7 +161,14 @@
         "reviews":  1567,
         "description":  "Mi 20000 mAh 18 W Power Bank with Fast Charging for Mobile Devices",
         "category":  "Electronics",
-        "image":  "images/product-9.jpg"
+        "image":  "images/product-9.jpg",
+        "images": [
+            "images/products/product-9-img-1.jpg",
+            "images/products/product-9-img-2.jpg",
+            "images/products/product-9-img-3.jpg",
+            "images/products/product-9-img-4.jpg",
+            "images/products/product-9-img-5.jpg"
+        ]
     },
     {
         "id":  10,
@@ -117,7 +180,14 @@
         "reviews":  2567,
         "description":  "SONY WH-1000XM4 Premium Bluetooth Headset with Industry-leading Noise Cancellation",
         "category":  "Electronics",
-        "image":  "images/product-10.jpg"
+        "image":  "images/product-10.jpg",
+        "images": [
+            "images/products/product-10-img-1.jpg",
+            "images/products/product-10-img-2.jpg",
+            "images/products/product-10-img-3.jpg",
+            "images/products/product-10-img-4.jpg",
+            "images/products/product-10-img-5.jpg"
+        ]
     },
     {
         "id":  11,
@@ -129,7 +199,14 @@
         "reviews":  834,
         "description":  "HAVELLS Altro Electric Kettle 1.5 L with Auto Shutoff Safety Feature",
         "category":  "Appliances",
-        "image":  "images/product-11.jpg"
+        "image":  "images/product-11.jpg",
+        "images": [
+            "images/products/product-11-img-1.jpg",
+            "images/products/product-11-img-2.jpg",
+            "images/products/product-11-img-3.jpg",
+            "images/products/product-11-img-4.jpg",
+            "images/products/product-11-img-5.jpg"
+        ]
     },
     {
         "id":  12,
@@ -141,7 +218,14 @@
         "reviews":  1423,
         "description":  "SAMSUNG 28 L Convection Microwave Oven with Multiple Cooking Modes",
         "category":  "Appliances",
-        "image":  "images/product-12.jpg"
+        "image":  "images/product-12.jpg",
+        "images": [
+            "images/products/product-12-img-1.jpg",
+            "images/products/product-12-img-2.jpg",
+            "images/products/product-12-img-3.jpg",
+            "images/products/product-12-img-4.jpg",
+            "images/products/product-12-img-5.jpg"
+        ]
     },
     {
         "id":  13,
@@ -153,7 +237,14 @@
         "reviews":  1156,
         "description":  "BAJAJ 15 L Storage Water Geyser Suitable for Large Wall Spaces",
         "category":  "Appliances",
-        "image":  "images/product-13.jpg"
+        "image":  "images/product-13.jpg",
+        "images": [
+            "images/products/product-13-img-1.jpg",
+            "images/products/product-13-img-2.jpg",
+            "images/products/product-13-img-3.jpg",
+            "images/products/product-13-img-4.jpg",
+            "images/products/product-13-img-5.jpg"
+        ]
     },
     {
         "id":  14,
@@ -165,7 +256,14 @@
         "reviews":  967,
         "description":  "Hindware 45 L Room/Personal Air Cooler with Advanced Cooling Technology",
         "category":  "Appliances",
-        "image":  "images/product-14.jpg"
+        "image":  "images/product-14.jpg",
+        "images": [
+            "images/products/product-14-img-1.jpg",
+            "images/products/product-14-img-2.jpg",
+            "images/products/product-14-img-3.jpg",
+            "images/products/product-14-img-4.jpg",
+            "images/products/product-14-img-5.jpg"
+        ]
     },
     {
         "id":  15,
@@ -177,7 +275,14 @@
         "reviews":  1234,
         "description":  "Crompton 40 L Room/Personal Air Cooler with Energy-Efficient Operation",
         "category":  "Appliances",
-        "image":  "images/product-15.jpg"
+        "image":  "images/product-15.jpg",
+        "images": [
+            "images/products/product-15-img-1.jpg",
+            "images/products/product-15-img-2.jpg",
+            "images/products/product-15-img-3.jpg",
+            "images/products/product-15-img-4.jpg",
+            "images/products/product-15-img-5.jpg"
+        ]
     },
     {
         "id":  16,
@@ -189,7 +294,14 @@
         "reviews":  1845,
         "description":  "boAt Aavante Bar Orion with Multiple Connectivity Ports, EQ Modes 160 W",
         "category":  "Electronics",
-        "image":  "images/product-16.jpg"
+        "image":  "images/product-16.jpg",
+        "images": [
+            "images/products/product-16-img-1.jpg",
+            "images/products/product-16-img-2.jpg",
+            "images/products/product-16-img-3.jpg",
+            "images/products/product-16-img-4.jpg",
+            "images/products/product-16-img-5.jpg"
+        ]
     },
     {
         "id":  17,
@@ -201,7 +313,14 @@
         "reviews":  756,
         "description":  "Musify Karaoke Mini Home Theatre with Free MIC - 15 W Bluetooth Speaker",
         "category":  "Electronics",
-        "image":  "images/product-17.jpg"
+        "image":  "images/product-17.jpg",
+        "images": [
+            "images/products/product-17-img-1.jpg",
+            "images/products/product-17-img-2.jpg",
+            "images/products/product-17-img-3.jpg",
+            "images/products/product-17-img-4.jpg",
+            "images/products/product-17-img-5.jpg"
+        ]
     },
     {
         "id":  18,
@@ -213,7 +332,14 @@
         "reviews":  1678,
         "description":  "realme Buds Air 5 with 50dB ANC, 12.4mm Dynamic Bass Driver, 38hrs Playback",
         "category":  "Electronics",
-        "image":  "images/product-18.jpg"
+        "image":  "images/product-18.jpg",
+        "images": [
+            "images/products/product-18-img-1.jpg",
+            "images/products/product-18-img-2.jpg",
+            "images/products/product-18-img-3.jpg",
+            "images/products/product-18-img-4.jpg",
+            "images/products/product-18-img-5.jpg"
+        ]
     },
     {
         "id":  19,
@@ -225,7 +351,14 @@
         "reviews":  892,
         "description":  "SAFARI Medium Check-in Suitcase 66 cm with 4 Wheels and Durable Material",
         "category":  "Travel",
-        "image":  "images/product-19.jpg"
+        "image":  "images/product-19.jpg",
+        "images": [
+            "images/products/product-19-img-1.jpg",
+            "images/products/product-19-img-2.jpg",
+            "images/products/product-19-img-3.jpg",
+            "images/products/product-19-img-4.jpg",
+            "images/products/product-19-img-5.jpg"
+        ]
     },
     {
         "id":  20,
@@ -237,7 +370,14 @@
         "reviews":  1534,
         "description":  "Boult Z40 with Zen ENC Mic, 60H Battery Life, Low Latency Gaming, Made In India",
         "category":  "Electronics",
-        "image":  "images/product-20.jpg"
+        "image":  "images/product-20.jpg",
+        "images": [
+            "images/products/product-20-img-1.jpg",
+            "images/products/product-20-img-2.jpg",
+            "images/products/product-20-img-3.jpg",
+            "images/products/product-20-img-4.jpg",
+            "images/products/product-20-img-5.jpg"
+        ]
     },
     {
         "id":  21,
@@ -249,7 +389,14 @@
         "reviews":  1923,
         "description":  "Realme Narzo 60 Pro with 120Hz Display and Powerful Performance",
         "category":  "Electronics",
-        "image":  "images/product-21.jpg"
+        "image":  "images/product-21.jpg",
+        "images": [
+            "images/products/product-21-img-1.jpg",
+            "images/products/product-21-img-2.jpg",
+            "images/products/product-21-img-3.jpg",
+            "images/products/product-21-img-4.jpg",
+            "images/products/product-21-img-5.jpg"
+        ]
     },
     {
         "id":  22,
@@ -261,7 +408,14 @@
         "reviews":  2156,
         "description":  "Samsung Galaxy A53 5G with Powerful Camera and 5G Connectivity",
         "category":  "Electronics",
-        "image":  "images/product-22.jpg"
+        "image":  "images/product-22.jpg",
+        "images": [
+            "images/products/product-22-img-1.jpg",
+            "images/products/product-22-img-2.jpg",
+            "images/products/product-22-img-3.jpg",
+            "images/products/product-22-img-4.jpg",
+            "images/products/product-22-img-5.jpg"
+        ]
     },
     {
         "id":  23,
@@ -273,7 +427,14 @@
         "reviews":  1345,
         "description":  "LG 32 inch HD LED TV with Sharp Picture Quality and Wide Viewing Angle",
         "category":  "Electronics",
-        "image":  "images/product-23.jpg"
+        "image":  "images/product-23.jpg",
+        "images": [
+            "images/products/product-23-img-1.jpg",
+            "images/products/product-23-img-2.jpg",
+            "images/products/product-23-img-3.jpg",
+            "images/products/product-23-img-4.jpg",
+            "images/products/product-23-img-5.jpg"
+        ]
     },
     {
         "id":  24,
@@ -285,7 +446,14 @@
         "reviews":  1678,
         "description":  "Panasonic 55 inch 4K LED TV with Stunning Picture and Immersive Sound",
         "category":  "Electronics",
-        "image":  "images/product-24.jpg"
+        "image":  "images/product-24.jpg",
+        "images": [
+            "images/products/product-24-img-1.jpg",
+            "images/products/product-24-img-2.jpg",
+            "images/products/product-24-img-3.jpg",
+            "images/products/product-24-img-4.jpg",
+            "images/products/product-24-img-5.jpg"
+        ]
     },
     {
         "id":  25,
@@ -297,7 +465,14 @@
         "reviews":  1234,
         "description":  "Philips 42 inch Full HD LED TV with Premium Design and Great Picture",
         "category":  "Electronics",
-        "image":  "images/product-25.jpg"
+        "image":  "images/product-25.jpg",
+        "images": [
+            "images/products/product-25-img-1.jpg",
+            "images/products/product-25-img-2.jpg",
+            "images/products/product-25-img-3.jpg",
+            "images/products/product-25-img-4.jpg",
+            "images/products/product-25-img-5.jpg"
+        ]
     },
     {
         "id":  26,
@@ -309,7 +484,14 @@
         "reviews":  1567,
         "description":  "Godrej 6 kg Fully Automatic Washing Machine with Advanced Technology",
         "category":  "Appliances",
-        "image":  "images/product-26.jpg"
+        "image":  "images/product-26.jpg",
+        "images": [
+            "images/products/product-26-img-1.jpg",
+            "images/products/product-26-img-2.jpg",
+            "images/products/product-26-img-3.jpg",
+            "images/products/product-26-img-4.jpg",
+            "images/products/product-26-img-5.jpg"
+        ]
     },
     {
         "id":  27,
@@ -321,7 +503,14 @@
         "reviews":  1834,
         "description":  "IFB 8 kg Fully Automatic Washing Machine with Superior Cleaning",
         "category":  "Appliances",
-        "image":  "images/product-27.jpg"
+        "image":  "images/product-27.jpg",
+        "images": [
+            "images/products/product-27-img-1.jpg",
+            "images/products/product-27-img-2.jpg",
+            "images/products/product-27-img-3.jpg",
+            "images/products/product-27-img-4.jpg",
+            "images/products/product-27-img-5.jpg"
+        ]
     },
     {
         "id":  28,
@@ -333,7 +522,14 @@
         "reviews":  1123,
         "description":  "Hisense 280L Single Door Refrigerator with Efficient Cooling System",
         "category":  "Appliances",
-        "image":  "images/product-28.jpg"
+        "image":  "images/product-28.jpg",
+        "images": [
+            "images/products/product-28-img-1.jpg",
+            "images/products/product-28-img-2.jpg",
+            "images/products/product-28-img-3.jpg",
+            "images/products/product-28-img-4.jpg",
+            "images/products/product-28-img-5.jpg"
+        ]
     },
     {
         "id":  29,
@@ -345,7 +541,14 @@
         "reviews":  1456,
         "description":  "LG 315L Frost-Free Refrigerator with Inverter Technology for Energy Savings",
         "category":  "Appliances",
-        "image":  "images/product-29.jpg"
+        "image":  "images/product-29.jpg",
+        "images": [
+            "images/products/product-29-img-1.jpg",
+            "images/products/product-29-img-2.jpg",
+            "images/products/product-29-img-3.jpg",
+            "images/products/product-29-img-4.jpg",
+            "images/products/product-29-img-5.jpg"
+        ]
     },
     {
         "id":  30,
@@ -357,7 +560,14 @@
         "reviews":  1934,
         "description":  "Voltas 1.5 Ton Split AC with Copper Condenser and Advanced Temperature Control",
         "category":  "Appliances",
-        "image":  "images/product-30.jpg"
+        "image":  "images/product-30.jpg",
+        "images": [
+            "images/products/product-30-img-1.jpg",
+            "images/products/product-30-img-2.jpg",
+            "images/products/product-30-img-3.jpg",
+            "images/products/product-30-img-4.jpg",
+            "images/products/product-30-img-5.jpg"
+        ]
     },
     {
         "id":  31,
@@ -369,7 +579,14 @@
         "reviews":  2345,
         "description":  "Prestige 3L Pressure Cooker with Stainless Steel Construction and Safety Features",
         "category":  "Appliances",
-        "image":  "images/product-31.jpg"
+        "image":  "images/product-31.jpg",
+        "images": [
+            "images/products/product-31-img-1.jpg",
+            "images/products/product-31-img-2.jpg",
+            "images/products/product-31-img-3.jpg",
+            "images/products/product-31-img-4.jpg",
+            "images/products/product-31-img-5.jpg"
+        ]
     },
     {
         "id":  32,
@@ -381,6 +598,13 @@
         "reviews":  1876,
         "description":  "Wonderchef 5L Outer Lid Pressure Cooker with Durable Construction",
         "category":  "Appliances",
-        "image":  "images/product-32.jpg"
+        "image":  "images/product-32.jpg",
+        "images": [
+            "images/products/product-32-img-1.jpg",
+            "images/products/product-32-img-2.jpg",
+            "images/products/product-32-img-3.jpg",
+            "images/products/product-32-img-4.jpg",
+            "images/products/product-32-img-5.jpg"
+        ]
     }
 ]
