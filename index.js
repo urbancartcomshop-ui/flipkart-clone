@@ -312,7 +312,7 @@ app.get('/', (req, res) => {
   `;
   
   // Read the HTML template
-  let html = fs.readFileSync(path.join(__dirname, 'public', 'index.html'), 'utf8');
+  let html = fs.readFileSync(path.join(__dirname, 'public', 'homepage.html'), 'utf8');
   
   // Replace loading placeholder with actual products
   const bestSellersHTML = bestSellers.map(generateProductCard).join('');
