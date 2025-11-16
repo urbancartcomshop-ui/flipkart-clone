@@ -9,6 +9,10 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const cors = require('cors');
+require('dotenv').config();
+
+// Initialize Stripe with environment variable
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY || 'sk_test_placeholder');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -299,6 +303,147 @@ app.get('/category/:name', (req, res) => {
 });
 
 // ============================================
+// PAYMENT GATEWAY - STRIPE INTEGRATION
+// ============================================
+
+// Create payment intent for credit card payments
+app.post('/api/create-payment-intent', async (req, res) => {
+  try {
+    const { amount, currency = 'INR', description, customerEmail } = req.body;
+
+    if (!amount || amount <= 0) {
+      return res.status(400).json({ error: 'Invalid amount' });
+    }
+
+    // Create payment intent with Stripe
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: Math.round(amount * 100), // Convert to paise for INR
+      currency: currency.toLowerCase(),
+      description: description || 'Flipkart Purchase',
+      receipt_email: customerEmail,
+      metadata: {
+        source: 'flipkart-clone',
+        market: 'India',
+        region: 'Africa'
+      }
+    });
+
+    res.status(200).json({
+      success: true,
+      clientSecret: paymentIntent.client_secret,
+      paymentIntentId: paymentIntent.id,
+      amount: paymentIntent.amount,
+      currency: paymentIntent.currency,
+      status: paymentIntent.status
+    });
+  } catch (error) {
+    console.error('Payment Intent Error:', error);
+    res.status(500).json({
+      success: false,
+      error: error.message || 'Failed to create payment intent'
+    });
+  }
+});
+
+// Confirm payment and process order
+app.post('/api/confirm-payment', async (req, res) => {
+  try {
+    const { paymentIntentId, orderId, items, customerEmail } = req.body;
+
+    if (!paymentIntentId) {
+      return res.status(400).json({ error: 'Payment Intent ID required' });
+    }
+
+    // Retrieve payment intent to verify status
+    const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
+
+    if (paymentIntent.status === 'succeeded') {
+      // Payment successful - store order
+      const order = {
+        orderId: orderId || `ORDER-${Date.now()}`,
+        paymentIntentId: paymentIntentId,
+        amount: paymentIntent.amount / 100, // Convert back to rupees
+        currency: paymentIntent.currency.toUpperCase(),
+        items: items || [],
+        customerEmail: customerEmail,
+        status: 'paid',
+        paymentMethod: 'credit_card',
+        paymentDate: new Date().toISOString(),
+        receiptUrl: paymentIntent.charges.data[0]?.receipt_url || null
+      };
+
+      // Log order (in production, save to database)
+      console.log('✅ Order Confirmed:', order);
+
+      res.status(200).json({
+        success: true,
+        message: 'Payment successful! Order confirmed.',
+        order: order,
+        receipt: paymentIntent.charges.data[0]?.receipt_url
+      });
+    } else if (paymentIntent.status === 'processing') {
+      res.status(200).json({
+        success: false,
+        message: 'Payment is processing. Please wait.',
+        status: 'processing'
+      });
+    } else {
+      res.status(400).json({
+        success: false,
+        message: 'Payment failed. Please try again.',
+        status: paymentIntent.status
+      });
+    }
+  } catch (error) {
+    console.error('Payment Confirmation Error:', error);
+    res.status(500).json({
+      success: false,
+      error: error.message || 'Failed to confirm payment'
+    });
+  }
+});
+
+// Get publishable key for Stripe.js frontend
+app.get('/api/stripe-key', (req, res) => {
+  res.json({
+    publishableKey: process.env.STRIPE_PUBLISHABLE_KEY || 'pk_test_placeholder'
+  });
+});
+
+// Webhook to handle Stripe events
+app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
+  const sig = req.headers['stripe-signature'];
+  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+
+  try {
+    if (!webhookSecret) {
+      console.log('⚠️ Webhook secret not configured');
+      return res.sendStatus(200);
+    }
+
+    const event = stripe.webhooks.constructEvent(req.body, sig, webhookSecret);
+
+    switch (event.type) {
+      case 'payment_intent.succeeded':
+        console.log('✅ Payment succeeded:', event.data.object.id);
+        break;
+      case 'payment_intent.payment_failed':
+        console.log('❌ Payment failed:', event.data.object.id);
+        break;
+      case 'charge.refunded':
+        console.log('💰 Refund processed:', event.data.object.id);
+        break;
+      default:
+        console.log('ℹ️ Unhandled event type:', event.type);
+    }
+
+    res.sendStatus(200);
+  } catch (error) {
+    console.error('Webhook Error:', error);
+    res.sendStatus(400);
+  }
+});
+
 // SEO ROUTES
 // ============================================
 
