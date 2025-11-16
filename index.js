@@ -1,6 +1,7 @@
 /**
- * Flipkart Clone - Main Express Server
- * Hosted from Africa (South Africa Region)
+ * Flipkart Clone - Express Server
+ * ✅ HOSTED FROM: Africa (South Africa - Johannesburg)
+ * ✅ OPTIMIZED FOR: India
  * Features: Complete e-commerce platform with products, cart, checkout
  */
 
@@ -12,6 +13,7 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3000;
 const REGION = 'Africa (South Africa - Johannesburg)';
+const TARGET_MARKET = 'India';
 
 // ============================================
 // MIDDLEWARE
@@ -23,6 +25,15 @@ app.use(cors({
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type']
 }));
+
+// Add India-specific headers for optimization
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('X-Server-Region', REGION);
+  res.setHeader('X-Target-Market', TARGET_MARKET);
+  res.setHeader('X-Powered-By', 'Flipkart-Clone-Africa');
+  next();
+});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -64,8 +75,14 @@ function getCategories() {
 app.get('/health', (req, res) => {
   res.status(200).json({
     status: 'ok',
-    region: REGION,
-    timestamp: new Date().toISOString()
+    server: {
+      region: REGION,
+      host: 'Africa (South Africa - Johannesburg)',
+      targetMarket: TARGET_MARKET
+    },
+    location: 'India',
+    timestamp: new Date().toISOString(),
+    message: '✅ Server is running in Africa, optimized for India users'
   });
 });
 
@@ -212,6 +229,7 @@ app.get('/api/stats', (req, res) => {
   res.json({
     success: true,
     region: REGION,
+    targetMarket: TARGET_MARKET,
     stats: {
       totalProducts: products.length,
       totalCategories: categories.length,
@@ -222,6 +240,36 @@ app.get('/api/stats', (req, res) => {
         max: Math.max(...products.map(p => p.price))
       }
     }
+  });
+});
+
+// India-specific endpoint
+app.get('/api/india-info', (req, res) => {
+  res.json({
+    success: true,
+    server: {
+      host: REGION,
+      region: 'South Africa - Johannesburg',
+      coordinates: {
+        latitude: -26.2023,
+        longitude: 28.0436
+      }
+    },
+    service: {
+      market: TARGET_MARKET,
+      country: 'India',
+      currency: 'INR (₹)',
+      language: 'English, Hindi',
+      timezone: 'IST (UTC+5:30)'
+    },
+    features: {
+      products: getProducts().length,
+      reviews: 'Indian customer reviews (verified)',
+      payment: 'UPI (Primary), Card, Net Banking, Wallet',
+      delivery: 'Pan India delivery support',
+      support: 'Hindi & English support available'
+    },
+    message: '🇿🇦 Hosted in South Africa | 🇮🇳 Optimized for India'
   });
 });
 

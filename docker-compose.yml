@@ -10,9 +10,19 @@ services:
       - PORT=3000
       - NODE_ENV=production
       - REGION=Africa (South Africa - Johannesburg)
+      - TARGET_MARKET=India
+      - SERVER_HOST=South Africa
+      - SERVICE_MARKET=India
     volumes:
       - ./public:/app/public
       - ./docs:/app/docs
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000/health', (r) => {if (r.statusCode !== 200) throw new Error(r.statusCode)})"]
