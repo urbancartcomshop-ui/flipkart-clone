@@ -375,13 +375,19 @@
         // Load products from local API
         async function loadProducts() {
             try {
-                console.log('Fetching products from local API...');
-                const response = await fetch('/api/products');
+                console.log('Starting fetch...');
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
                 
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
+                const response = await fetch('/api/products', {
+                    signal: controller.signal,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                clearTimeout(timeoutId);
                 
+                console.log('Fetch completed, parsing JSON...');
                 const result = await response.json();
                 allProducts = result.data || [];
                 filteredProducts = allProducts;
@@ -389,6 +395,16 @@
                 displayProducts(filteredProducts);
             } catch (error) {
                 console.error('Error loading products:', error);
+                document.getElementById('productsGrid').innerHTML = `
+                    <div class="loading" style="grid-column: 1 / -1;">
+                        <div style="color: #d32f2f;">⚠️ Failed to load products</div>
+                        <div style="font-size: 11px; margin-top: 8px; color: #999;">
+                            Error: ${error.message}
+                        </div>
+                        <button onclick="location.reload()" style="margin-top: 12px; padding: 8px 16px; background: #2874f0; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                            Retry
+                        </button>
+                    </div>
                 document.getElementById('productsGrid').innerHTML = `
                     <div class="loading" style="grid-column: 1 / -1;">
                         <div style="color: #d32f2f;">⚠️ Failed to load products</div>
