@@ -812,8 +812,12 @@
             }
         });
 
-        // Initialize
-        fetchProducts();
+        // Initialize when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', fetchProducts);
+        } else {
+            fetchProducts();
+        }
     </script>
 </body>
 </html>
