@@ -536,60 +536,8 @@
         </div>
     </div>
 
-    <div class="modal" id="paymentModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span>💳 Secure Payment with Stripe</span>
-                <button class="modal-close" onclick="closePaymentModal()">✕</button>
-            </div>
-
-            <div class="payment-methods">
-                <div class="payment-method">
-                    <input type="radio" name="payment" id="stripe-card" value="stripe" checked>
-                    <label for="stripe-card">💳 Credit/Debit Card (Secure)</label>
-                </div>
-                <div class="payment-method">
-                    <input type="radio" name="payment" id="upi" value="upi">
-                    <label for="upi">💳 UPI (Google Pay, PhonePe, Paytm)</label>
-                    <input type="text" class="upi-input" id="upiInput" placeholder="Enter UPI ID (e.g., name@upi)" style="display: none; margin-top: 8px;">
-                </div>
-                <div class="payment-method">
-                    <input type="radio" name="payment" id="net-banking" value="netbanking">
-                    <label for="net-banking">🏦 Net Banking</label>
-                </div>
-                <div class="payment-method">
-                    <input type="radio" name="payment" id="wallet" value="wallet">
-                    <label for="wallet">👛 Digital Wallet</label>
-                </div>
-            </div>
-
-            <!-- Stripe Card Element Container -->
-            <div id="stripe-container" style="margin: 16px 0; padding: 12px; border: 1px solid #ddd; border-radius: 2px;">
-                <div id="card-element"></div>
-                <div id="card-errors" role="alert" style="color: #d32f2f; margin-top: 8px; font-size: 12px;"></div>
-            </div>
-
-            <!-- Email Input for Receipt -->
-            <div style="margin-bottom: 16px;">
-                <input type="email" id="customerEmail" placeholder="Email for receipt" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 2px; font-size: 14px;">
-            </div>
-
-            <div class="modal-buttons">
-                <button class="modal-btn modal-btn-confirm" id="payBtn" onclick="processStripePayment()">Pay ₹<span id="payAmount">0</span></button>
-                <button class="modal-btn modal-btn-cancel" onclick="closePaymentModal()">Cancel</button>
-            </div>
-
-            <p style="font-size: 11px; color: #999; margin-top: 12px; text-align: center;">
-                🔒 Secured by Stripe. Your card details are encrypted and safe.
-            </p>
-        </div>
-    </div>
-
     <script>
-        let product = null;
-        let stripe = null;
-        let elements = null;
-        let cardElement = null;
+        let currentProduct = null;
 
         const indianReviews = [
             { name: "Raj Kumar", city: "Mumbai, India", rating: 5, text: "Excellent product! Delivery was fast. Highly recommended! ⭐⭐⭐⭐⭐", date: "2 days ago" },
@@ -640,39 +588,6 @@
                 });
             });
         });
-
-        async function initializeStripe() {
-            try {
-                const response = await fetch('/api/stripe-key');
-                const { publishableKey } = await response.json();
-                
-                stripe = Stripe(publishableKey);
-                elements = stripe.elements();
-                cardElement = elements.create('card', {
-                    style: {
-                        base: {
-                            fontSize: '14px',
-                            fontFamily: 'Roboto, sans-serif',
-                            color: '#212121'
-                        }
-                    }
-                });
-                
-                cardElement.mount('#card-element');
-                
-                // Handle card errors
-                cardElement.addEventListener('change', (event) => {
-                    const displayError = document.getElementById('card-errors');
-                    if (event.error) {
-                        displayError.textContent = event.error.message;
-                    } else {
-                        displayError.textContent = '';
-                    }
-                });
-            } catch (error) {
-                console.error('Stripe initialization error:', error);
-            }
-        }
 
         function displayProduct() {
             if (!product) return;
@@ -751,123 +666,6 @@
             window.location.href = '/address.html';
         }
 
-        function closePaymentModal() {
-            document.getElementById('paymentModal').classList.remove('show');
-        }
-
-        async function processStripePayment() {
-            const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
-            const customerEmail = document.getElementById('customerEmail').value;
-
-            if (!customerEmail || !customerEmail.includes('@')) {
-                showNotification('⚠️ Please enter a valid email address');
-                return;
-            }
-
-            if (paymentMethod === 'stripe') {
-                await handleStripePayment(customerEmail);
-            } else if (paymentMethod === 'upi') {
-                handleUPIPayment();
-            } else {
-                handleOtherPayment(paymentMethod, customerEmail);
-            }
-        }
-
-        async function handleStripePayment(customerEmail) {
-            const payBtn = document.getElementById('payBtn');
-            payBtn.disabled = true;
-            payBtn.textContent = 'Processing...';
-
-            try {
-                // Step 1: Create payment intent
-                const intentResponse = await fetch('/api/create-payment-intent', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        amount: product.price,
-                        currency: 'INR',
-                        description: `Purchase of ${product.name}`,
-                        customerEmail: customerEmail
-                    })
-                });
-
-                const intentData = await intentResponse.json();
-                if (!intentData.success) {
-                    throw new Error(intentData.error);
-                }
-
-                // Step 2: Confirm card payment with Stripe
-                const { paymentIntent, error } = await stripe.confirmCardPayment(intentData.clientSecret, {
-                    payment_method: {
-                        card: cardElement,
-                        billing_details: { email: customerEmail }
-                    }
-                });
-
-                if (error) {
-                    showNotification(`❌ Payment failed: ${error.message}`);
-                    payBtn.disabled = false;
-                    payBtn.textContent = `Pay ₹${product.price}`;
-                    return;
-                }
-
-                // Step 3: Confirm payment on backend
-                const confirmResponse = await fetch('/api/confirm-payment', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        paymentIntentId: paymentIntent.id,
-                        orderId: `ORDER-${Date.now()}`,
-                        items: [{ id: product.id, name: product.name, price: product.price, quantity: 1 }],
-                        customerEmail: customerEmail
-                    })
-                });
-
-                const confirmData = await confirmResponse.json();
-
-                if (confirmData.success) {
-                    closePaymentModal();
-                    addToCart();
-                    showNotification('✅ Payment successful! Order confirmed. 🎉');
-                    setTimeout(() => {
-                        alert(`💳 Payment Successful!\n\nOrder ID: ${confirmData.order.orderId}\nAmount: ₹${confirmData.order.amount}\n\nReceipt sent to: ${customerEmail}\n\nThank you for your purchase!`);
-                    }, 500);
-                } else {
-                    throw new Error(confirmData.error || 'Payment confirmation failed');
-                }
-            } catch (err) {
-                console.error('Payment error:', err);
-                showNotification(`❌ Error: ${err.message}`);
-            } finally {
-                payBtn.disabled = false;
-                payBtn.textContent = `Pay ₹${product.price}`;
-            }
-        }
-
-        function handleUPIPayment() {
-            const upiId = document.getElementById('upiInput').value || 'merchant@upi';
-            const message = `UPI Payment Initiated\n\nTo: ${upiId}\nAmount: ₹${product.price}\nProduct: ${product.name}\n\n✅ Transaction Successful!`;
-            
-            closePaymentModal();
-            addToCart();
-            showNotification('✅ UPI Payment confirmed! 🎉');
-            setTimeout(() => alert(message), 500);
-        }
-
-        function handleOtherPayment(method, email) {
-            const methodNames = {
-                'netbanking': 'Net Banking',
-                'wallet': 'Digital Wallet'
-            };
-            
-            const message = `${methodNames[method]} Payment\n\nAmount: ₹${product.price}\nProduct: ${product.name}\n\n✅ Transaction Successful!`;
-            
-            closePaymentModal();
-            addToCart();
-            showNotification('✅ Payment confirmed! 🎉');
-            setTimeout(() => alert(message), 500);
-        }
-
         function goBack() {
             window.location.href = '/';
         }
@@ -879,13 +677,6 @@
             document.body.appendChild(notif);
             setTimeout(() => notif.remove(), 3000);
         }
-
-        window.addEventListener('click', (event) => {
-            const modal = document.getElementById('paymentModal');
-            if (event.target === modal) {
-                closePaymentModal();
-            }
-        });
     </script>
 </body>
 </html>
