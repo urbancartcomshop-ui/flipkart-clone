@@ -290,25 +290,26 @@ app.get('/', (req, res) => {
   
   // Generate product cards HTML
   const generateProductCard = (product) => `
-    <a href="/product-details.html?id=${product.id}" class="product-card" style="text-decoration: none; color: inherit;">
-      <div class="product-image">
-        <img src="/${product.image}" alt="${product.name}" loading="lazy" 
-             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22150%22 height=%22150%22%3E%3Crect fill=%22%23f5f5f5%22 width=%22150%22 height=%22150%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2212%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23999%22%3EProduct%3C/text%3E%3C/svg%3E'">
-      </div>
+    <div class="product-card" onclick="viewProduct(${product.id})">
+      <img src="/${product.image}" alt="${product.name}" class="product-image" onerror="this.src='/images/placeholder.jpg'">
       <div class="product-info">
         <div class="product-name">${product.name}</div>
         <div class="product-rating">
           <span class="rating-star">★</span>
-          <span>${product.rating} (${product.reviews})</span>
+          <span>${product.rating}</span>
+          <span>(${product.reviews})</span>
         </div>
-        <div class="product-prices">
+        <div class="product-price">
           <span class="price">₹${product.price}</span>
-          <span class="original-price">₹${product.original_price}</span>
-          <span class="discount">${product.discount}% off</span>
+          ${product.original_price ? `<span class="original-price">₹${product.original_price}</span>` : ''}
+          ${product.discount ? `<span class="discount">${product.discount}% OFF</span>` : ''}
         </div>
-        <div class="product-badge">View Details →</div>
+        <div style="display: flex; gap: 10px;">
+          <button class="add-to-cart" onclick="addToCart(event, ${product.id})" style="flex: 1;">🛒 Add to Cart</button>
+          <button class="add-to-cart" onclick="buyNow(event, ${product.id})" style="flex: 1; background: #ff9f00;">⚡ Buy Now</button>
+        </div>
       </div>
-    </a>
+    </div>
   `;
   
   // Read the HTML template
