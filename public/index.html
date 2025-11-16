@@ -817,9 +817,23 @@
 
         // Initialize when DOM is ready
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', fetchProducts);
+            document.addEventListener('DOMContentLoaded', function() {
+                // Check if products are already loaded via server-side rendering
+                const grid = document.getElementById('bestSellersGrid');
+                if (grid && grid.dataset.ssr === 'true') {
+                    console.log('[FLIPKART] Products already loaded via SSR, skipping fetch');
+                    return;
+                }
+                fetchProducts();
+            });
         } else {
-            fetchProducts();
+            // Check if products are already loaded via server-side rendering
+            const grid = document.getElementById('bestSellersGrid');
+            if (grid && grid.dataset.ssr === 'true') {
+                console.log('[FLIPKART] Products already loaded via SSR, skipping fetch');
+            } else {
+                fetchProducts();
+            }
         }
     </script>
 </body>
