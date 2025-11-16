@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flipkart Clone - Online Shopping (No Login Required)</title>
+    <meta name="description" content="Online Shopping Site in India - Shop Online for Mobiles, Books, Fashion, Groceries and more on Flipkart">
+    <title>Online Shopping Site in India - Shop Online for Mobiles, Books, Fashion & More on Flipkart</title>
     <style>
         * {
             margin: 0;
@@ -11,181 +12,245 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f1f3f6;
-            color: #212121;
+        html, body {
+            height: 100%;
         }
 
-        header {
-            background: linear-gradient(135deg, #2874f0 0%, #1e4db7 100%);
-            padding: 15px 20px;
-            color: white;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        body {
+            font-family: Roboto, Arial, sans-serif;
+            background: #f0f0f0;
+            color: #212121;
+            overflow-x: hidden;
+        }
+
+        /* HEADER */
+        .header {
+            background: linear-gradient(90deg, #1f51ba 0%, #2874f0 50%, #1f51ba 100%);
+            padding: 0;
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 1px 1px 0 rgba(0,0,0,0.16);
         }
 
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
+        .header-top {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 15px;
+            align-items: center;
+            padding: 12px 16px;
+            background: inherit;
         }
 
         .logo {
-            font-size: 24px;
-            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0;
             text-decoration: none;
             color: white;
+            font-size: 22px;
+            font-weight: 600;
+            font-style: italic;
+            letter-spacing: -1px;
         }
 
-        .search-bar {
+        .logo-text {
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        .logo-explore {
+            color: #ffe066;
+            font-size: 10px;
+            font-weight: 400;
+            margin-left: 2px;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        .search-container {
             flex: 1;
-            min-width: 200px;
-            max-width: 400px;
-        }
-
-        .search-bar input {
-            width: 100%;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            font-size: 14px;
-        }
-
-        .nav-icons {
+            margin: 0 16px;
             display: flex;
-            gap: 15px;
+            align-items: center;
+            background: white;
+            border-radius: 2px;
+            height: 36px;
+        }
+
+        .search-input {
+            flex: 1;
+            border: none;
+            padding: 8px 12px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .search-input::placeholder {
+            color: #bbb;
+        }
+
+        .search-btn {
+            background: none;
+            border: none;
+            padding: 0 12px;
+            cursor: pointer;
+            color: #2874f0;
+            font-size: 16px;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 20px;
             align-items: center;
         }
 
-        .nav-icons a {
+        .header-link {
             color: white;
             text-decoration: none;
             font-size: 14px;
             font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
             cursor: pointer;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 0 10px;
+        .header-link:hover {
+            opacity: 0.9;
         }
 
-        .info-bar {
-            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
-            padding: 15px;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            color: #1565c0;
-            border-left: 4px solid #2874f0;
-            font-weight: 500;
+        /* BANNER */
+        .banner-slider {
+            width: 100%;
+            height: 380px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .banner {
-            background: white;
-            border-radius: 4px;
-            margin-bottom: 30px;
-            padding: 30px;
+        .banner-content {
             text-align: center;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+            color: white;
         }
 
-        .banner h2 {
-            color: #2874f0;
-            margin-bottom: 10px;
-            font-size: 28px;
+        .banner-content h1 {
+            font-size: 48px;
+            font-weight: 600;
+            margin-bottom: 16px;
         }
 
-        .banner p {
-            color: #666;
-            font-size: 15px;
+        .banner-content p {
+            font-size: 18px;
+            margin-bottom: 24px;
+            opacity: 0.9;
         }
 
-        .categories {
+        /* CATEGORIES */
+        .categories-section {
+            background: white;
+            padding: 16px 0;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 1px 0 rgba(0,0,0,0.08);
+        }
+
+        .categories-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        .categories-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 15px;
-            margin-bottom: 35px;
+            grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+            gap: 8px;
         }
 
-        .category-card {
+        .category-item {
             background: white;
-            padding: 20px;
-            border-radius: 4px;
+            padding: 16px 8px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+            transition: all 0.2s;
+            border-radius: 2px;
+            border: 1px solid #e0e0e0;
         }
 
-        .category-card:hover {
-            box-shadow: 0 4px 12px rgba(40, 116, 240, 0.25);
-            transform: translateY(-3px);
+        .category-item:hover {
+            box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+            background: #fafafa;
         }
 
         .category-icon {
             font-size: 40px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
-        .category-card h3 {
+        .category-name {
+            font-size: 12px;
+            color: #212121;
+            font-weight: 500;
+        }
+
+        /* PRODUCTS SECTION */
+        .products-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        .products-heading {
             font-size: 14px;
-            color: #212121;
             font-weight: 600;
-        }
-
-        .products-section h2 {
-            margin-bottom: 20px;
             color: #212121;
-            font-size: 22px;
-            font-weight: 600;
+            margin: 20px 0;
+            padding: 16px;
+            background: white;
+            box-shadow: 0 1px 1px 0 rgba(0,0,0,0.08);
         }
 
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 15px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 8px;
+            margin-bottom: 24px;
         }
 
         .product-card {
             background: white;
-            border-radius: 4px;
+            border-radius: 2px;
             overflow: hidden;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
             cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1);
         }
 
         .product-card:hover {
-            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+            box-shadow: 0 2px 8px 0 rgba(0,0,0,0.15);
             transform: translateY(-4px);
         }
 
         .product-image {
             width: 100%;
             height: 200px;
-            object-fit: cover;
+            object-fit: contain;
             background: #f5f5f5;
+            padding: 16px;
         }
 
-        .product-info {
+        .product-details {
             padding: 12px;
         }
 
-        .product-name {
-            font-size: 13px;
-            font-weight: 500;
-            margin-bottom: 6px;
+        .product-title {
+            font-size: 12px;
             color: #212121;
-            height: 36px;
+            margin-bottom: 4px;
+            height: 32px;
             overflow: hidden;
             display: -webkit-box;
             -webkit-line-clamp: 2;
@@ -200,8 +265,17 @@
             font-size: 11px;
         }
 
-        .rating-star {
-            color: #ff9f43;
+        .rating-value {
+            background: #388e3c;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 2px;
+            font-weight: 500;
+        }
+
+        .rating-count {
+            color: #878787;
+            font-size: 10px;
         }
 
         .product-price {
@@ -211,174 +285,278 @@
             margin-bottom: 8px;
         }
 
-        .price {
-            font-size: 15px;
-            font-weight: bold;
-            color: #2874f0;
+        .price-current {
+            font-size: 16px;
+            font-weight: 600;
+            color: #212121;
         }
 
-        .original-price {
-            font-size: 10px;
+        .price-original {
+            font-size: 12px;
+            color: #878787;
             text-decoration: line-through;
-            color: #999;
         }
 
-        .discount {
-            font-size: 11px;
+        .price-discount {
+            font-size: 12px;
             color: #388e3c;
-            font-weight: bold;
+            font-weight: 600;
         }
 
-        .add-to-cart {
+        .product-description {
+            font-size: 12px;
+            color: #878787;
+            margin-bottom: 8px;
+            height: 24px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+        }
+
+        .add-to-cart-btn {
             width: 100%;
             padding: 8px;
             background: #2874f0;
             color: white;
             border: none;
-            border-radius: 3px;
-            cursor: pointer;
+            border-radius: 2px;
             font-size: 12px;
             font-weight: 600;
-            transition: all 0.3s ease;
+            cursor: pointer;
+            transition: all 0.2s;
         }
 
-        .add-to-cart:hover {
-            background: #1e4db7;
+        .add-to-cart-btn:hover {
+            background: #1f51ba;
         }
 
-        .add-to-cart:active {
-            transform: scale(0.98);
+        /* FOOTER */
+        footer {
+            background: #172337;
+            color: white;
+            padding: 40px 16px;
+            margin-top: 40px;
         }
 
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .footer-section h4 {
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 8px;
+        }
+
+        .footer-section a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #444;
+            padding-top: 16px;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+        }
+
+        /* LOADING */
         .loading {
             text-align: center;
             padding: 40px;
+            font-size: 14px;
             color: #999;
-            font-size: 15px;
         }
 
-        footer {
-            background: #212121;
-            color: white;
-            padding: 30px 20px;
-            margin-top: 50px;
-            text-align: center;
-        }
-
-        footer p {
-            margin: 8px 0;
-            font-size: 13px;
-        }
-
+        /* RESPONSIVE */
         @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 10px;
+            .header-top {
+                flex-wrap: wrap;
+                gap: 8px;
             }
 
-            .search-bar {
-                max-width: 100%;
-            }
-
-            .products-grid {
-                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-                gap: 10px;
-            }
-
-            .categories {
-                grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-                gap: 10px;
-            }
-
-            .banner {
-                padding: 20px;
-            }
-
-            .banner h2 {
-                font-size: 22px;
+            .search-container {
+                flex-basis: 100%;
+                margin: 8px 0;
+                order: 3;
             }
 
             .logo {
-                font-size: 20px;
+                font-size: 18px;
+            }
+
+            .categories-grid {
+                grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 4px;
+            }
+
+            .banner-slider {
+                height: 250px;
+            }
+
+            .banner-content h1 {
+                font-size: 32px;
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
-        .error-message {
-            background: #ffebee;
-            color: #c62828;
-            padding: 15px;
-            border-radius: 4px;
-            margin: 20px 0;
-            display: none;
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+
+            .header-right {
+                gap: 12px;
+            }
+
+            .header-link {
+                font-size: 12px;
+                gap: 4px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <a href="/" class="logo">🛍️ Flipkart</a>
-            <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="Search products, brands..." />
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-top">
+            <a href="/" class="logo">
+                <span class="logo-text">Flipkart</span>
+                <span class="logo-explore">Explore</span>
+                <span style="color: #ffe066; font-size: 8px; margin-top: 6px;">Plus</span>
+            </a>
+            <div class="search-container">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search for products, brands and more">
+                <button class="search-btn">🔍</button>
             </div>
-            <div class="nav-icons">
-                <a href="/cart">🛒 Cart</a>
-                <a href="javascript:void(0)">✨ Guest</a>
+            <div class="header-right">
+                <a href="/login" class="header-link">👤 Login</a>
+                <a href="/signup" class="header-link">✓ Become a Seller</a>
+                <a href="/cart" class="header-link">🛒 Cart</a>
             </div>
         </div>
     </header>
 
-    <div class="container">
-        <div class="info-bar">
-            ✨ Browse & Shop Freely • No Login Required • Africa-Based Server • Global CDN
+    <!-- BANNER -->
+    <div class="banner-slider">
+        <div class="banner-content">
+            <h1>Big Savings Await!</h1>
+            <p>Shop the latest deals and offers</p>
         </div>
+    </div>
 
-        <div class="banner">
-            <h2>Welcome to Flipkart Clone</h2>
-            <p>Amazing deals on Electronics, Fashion, Home & More. Start shopping now!</p>
-        </div>
-
-        <div class="products-section">
-            <h2>📦 Shop by Category</h2>
-            <div class="categories">
-                <div class="category-card" onclick="filterByCategory('Electronics')">
+    <!-- CATEGORIES -->
+    <div class="categories-section">
+        <div class="categories-container">
+            <div class="categories-grid" id="categoriesGrid">
+                <div class="category-item" onclick="filterByCategory('Electronics')">
                     <div class="category-icon">📱</div>
-                    <h3>Electronics</h3>
+                    <div class="category-name">Electronics</div>
                 </div>
-                <div class="category-card" onclick="filterByCategory('Furniture')">
+                <div class="category-item" onclick="filterByCategory('Furniture')">
                     <div class="category-icon">🪑</div>
-                    <h3>Furniture</h3>
+                    <div class="category-name">Furniture</div>
                 </div>
-                <div class="category-card" onclick="filterByCategory('Appliances')">
+                <div class="category-item" onclick="filterByCategory('Appliances')">
                     <div class="category-icon">🔌</div>
-                    <h3>Appliances</h3>
+                    <div class="category-name">Appliances</div>
                 </div>
-                <div class="category-card" onclick="filterByCategory('Sports')">
+                <div class="category-item" onclick="filterByCategory('Sports')">
                     <div class="category-icon">⚽</div>
-                    <h3>Sports</h3>
+                    <div class="category-name">Sports</div>
                 </div>
-                <div class="category-card" onclick="filterByCategory('Travel')">
+                <div class="category-item" onclick="filterByCategory('Travel')">
                     <div class="category-icon">✈️</div>
-                    <h3>Travel</h3>
+                    <div class="category-name">Travel</div>
                 </div>
-                <div class="category-card" onclick="filterByCategory('All')">
-                    <div class="category-icon">✨</div>
-                    <h3>View All</h3>
+                <div class="category-item" onclick="filterByCategory('All')">
+                    <div class="category-icon">🔥</div>
+                    <div class="category-name">Best Deals</div>
                 </div>
-            </div>
-        </div>
-
-        <div class="products-section">
-            <h2>🔥 Featured Products</h2>
-            <div id="productsGrid" class="products-grid">
-                <div class="loading">⏳ Loading amazing products...</div>
             </div>
         </div>
     </div>
 
+    <!-- PRODUCTS -->
+    <div class="products-container">
+        <div class="products-heading">Best Offers</div>
+        <div class="products-grid" id="productsGrid">
+            <div class="loading">Loading products...</div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
     <footer>
-        <p><strong>Flipkart Clone</strong></p>
-        <p>Browse Free • No Sign-up • Africa-Based Infrastructure</p>
-        <p>&copy; 2025 • Hosted on Vercel with Global CDN</p>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Help</h4>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Shipping</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Policy</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Return Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Social</h4>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Online Shopping. All rights reserved.</p>
+        </div>
     </footer>
 
     <script>
@@ -389,22 +567,14 @@
                 const response = await fetch('/api/products');
                 const data = await response.json();
                 allProducts = data.data || data || [];
-                
-                if (!Array.isArray(allProducts) || allProducts.length === 0) {
-                    throw new Error('No products');
-                }
-                
                 displayProducts(allProducts);
             } catch (error) {
-                console.error('API Error:', error);
+                console.error('Error:', error);
                 fetch('/products.json')
                     .then(r => r.json())
                     .then(data => {
                         allProducts = Array.isArray(data) ? data : data.data || [];
                         displayProducts(allProducts);
-                    })
-                    .catch(e => {
-                        document.getElementById('productsGrid').innerHTML = '<div class="loading">Could not load products</div>';
                     });
             }
         }
@@ -418,19 +588,21 @@
             }
 
             grid.innerHTML = products.map(p => `
-                <div class="product-card" onclick="viewProduct(${p.id})">
+                <div class="product-card" onclick="goToProduct(${p.id})">
                     <img src="${p.image || '/images/placeholder.jpg'}" alt="${p.name}" class="product-image" onerror="this.src='/images/placeholder.jpg'">
-                    <div class="product-info">
-                        <div class="product-name">${p.name || 'Product'}</div>
+                    <div class="product-details">
+                        <div class="product-title">${p.name || 'Product'}</div>
                         <div class="product-rating">
-                            <span class="rating-star">★</span>
-                            <span>${(p.rating || 4).toFixed(1)}</span>
+                            <span class="rating-value">${(p.rating || 4).toFixed(1)} ★</span>
+                            <span class="rating-count">${p.reviews || 0} reviews</span>
                         </div>
                         <div class="product-price">
-                            <span class="price">₹${p.price || 0}</span>
-                            ${p.discount ? `<span class="discount">${p.discount}%</span>` : ''}
+                            <span class="price-current">₹${p.price || 0}</span>
+                            ${p.original_price ? `<span class="price-original">₹${p.original_price}</span>` : ''}
+                            ${p.discount ? `<span class="price-discount">${p.discount}% off</span>` : ''}
                         </div>
-                        <button class="add-to-cart" onclick="addCart(event, ${p.id})">Add to Cart</button>
+                        <div class="product-description">${p.description || ''}</div>
+                        <button class="add-to-cart-btn" onclick="addToCart(event, ${p.id})">Add to Cart</button>
                     </div>
                 </div>
             `).join('');
@@ -441,38 +613,40 @@
                 displayProducts(allProducts);
             } else {
                 const filtered = allProducts.filter(p => (p.category || '').includes(cat));
-                displayProducts(filtered.length > 0 ? filtered : allProducts.slice(0, 8));
+                displayProducts(filtered.length > 0 ? filtered : allProducts.slice(0, 12));
             }
         }
 
-        function viewProduct(id) {
+        function goToProduct(id) {
             localStorage.setItem('productId', id);
             window.location.href = `/product.html?id=${id}`;
         }
 
-        function addCart(e, id) {
+        function addToCart(e, id) {
             e.stopPropagation();
             const cart = JSON.parse(localStorage.getItem('cart') || '[]');
             cart.push(id);
             localStorage.setItem('cart', JSON.stringify(cart));
             
             const btn = e.target;
-            btn.textContent = '✓ Added';
-            btn.style.background = '#4caf50';
+            btn.textContent = 'Added to Cart ✓';
+            btn.style.background = '#388e3c';
             setTimeout(() => {
                 btn.textContent = 'Add to Cart';
                 btn.style.background = '#2874f0';
-            }, 1500);
+            }, 2000);
         }
 
         document.getElementById('searchInput').addEventListener('keypress', e => {
             if (e.key === 'Enter') {
-                const q = e.target.value.toLowerCase();
-                const filtered = allProducts.filter(p =>
-                    (p.name || '').toLowerCase().includes(q) ||
-                    (p.description || '').toLowerCase().includes(q)
-                );
-                displayProducts(filtered.length > 0 ? filtered : allProducts);
+                const q = e.target.value.toLowerCase().trim();
+                if (q) {
+                    const filtered = allProducts.filter(p =>
+                        (p.name || '').toLowerCase().includes(q) ||
+                        (p.description || '').toLowerCase().includes(q)
+                    );
+                    displayProducts(filtered.length > 0 ? filtered : allProducts);
+                }
             }
         });
 
