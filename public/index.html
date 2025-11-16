@@ -19,143 +19,175 @@
 
         /* HEADER */
         .header {
-            background: linear-gradient(90deg, #1f4ca6 0%, #2874f0 50%, #1f4ca6 100%);
-            padding: 12px 20px;
+            background: #2874f0;
+            padding: 8px 0;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+        }
+
+        .header-container {
+            max-width: 1248px;
+            margin: 0 auto;
+            padding: 0 16px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
             gap: 20px;
         }
 
         .header-left {
             display: flex;
             align-items: center;
-            gap: 30px;
+            gap: 20px;
             flex: 1;
         }
 
         .logo {
             color: white;
-            font-size: 28px;
-            font-weight: 600;
-            letter-spacing: -1px;
+            font-size: 24px;
+            font-weight: 700;
+            font-style: italic;
+            text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 4px;
+            letter-spacing: -0.5px;
         }
 
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: #FFE500;
-            border-radius: 3px;
+        .logo-plus {
+            color: #FFE500;
+            font-size: 11px;
+            font-weight: 400;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #1f4ca6;
-            font-weight: bold;
-            font-size: 20px;
+            flex-direction: column;
+            line-height: 1;
+        }
+
+        .logo-explore {
+            font-size: 8px;
+            font-style: italic;
+            margin-top: -2px;
         }
 
         .search-container {
             flex: 1;
-            max-width: 500px;
+            max-width: 560px;
             position: relative;
         }
 
         .search-box {
             width: 100%;
-            padding: 10px 16px 10px 16px;
-            border: none;
-            border-radius: 2px;
-            font-size: 14px;
             background: white;
+            border-radius: 2px;
             display: flex;
             align-items: center;
+            padding: 0 12px;
+            height: 36px;
         }
 
         .search-box input {
             width: 100%;
             border: none;
             outline: none;
-            padding: 10px 12px;
+            padding: 0 12px;
             font-size: 14px;
+            background: transparent;
         }
 
         .search-box button {
             background: none;
             border: none;
             cursor: pointer;
-            color: #878787;
-            font-size: 16px;
-            padding: 0 8px;
+            color: #2874f0;
+            font-size: 18px;
+            padding: 0;
+            display: flex;
+            align-items: center;
         }
 
         .header-right {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 32px;
             color: white;
         }
 
         .header-link {
             color: white;
             text-decoration: none;
-            font-size: 14px;
+            font-size: 16px;
+            font-weight: 500;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             cursor: pointer;
             transition: opacity 0.2s;
+            white-space: nowrap;
         }
 
         .header-link:hover {
-            opacity: 0.8;
-        }
-
-        .header-link-text {
-            max-width: 60px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            opacity: 0.85;
         }
 
         /* NAVIGATION */
         .navigation {
             background: white;
-            border-bottom: 1px solid #e0e0e0;
+            box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
             padding: 0;
+        }
+
+        .nav-container {
+            max-width: 1248px;
+            margin: 0 auto;
+            padding: 0 8px;
             display: flex;
             gap: 0;
             overflow-x: auto;
-            overflow-y: hidden;
             -webkit-overflow-scrolling: touch;
         }
 
+        .nav-container::-webkit-scrollbar {
+            display: none;
+        }
+
         .nav-item {
-            padding: 16px 20px;
+            padding: 12px 16px;
             cursor: pointer;
             white-space: nowrap;
             font-size: 14px;
-            color: #212121;
+            font-weight: 500;
+            color: #878787;
             border: none;
             background: none;
             flex-shrink: 0;
             transition: all 0.2s;
-            border-bottom: 3px solid transparent;
+            position: relative;
         }
 
         .nav-item:hover {
-            background-color: #f5f5f5;
+            color: #2874f0;
         }
 
         .nav-item.active {
             color: #2874f0;
-            border-bottom-color: #2874f0;
+        }
+
+        .nav-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #2874f0;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            max-width: 1248px;
+            margin: 0 auto;
+            padding: 8px 16px;
         }
 
         /* BANNER/CAROUSEL */
@@ -527,78 +559,85 @@
 <body>
     <!-- HEADER -->
     <header class="header">
-        <div class="header-left">
-            <div class="logo">
-                <div class="logo-icon">⚡</div>
-                <span>Flipkart</span>
-            </div>
-            <div class="search-container">
-                <div class="search-box">
-                    <input type="text" id="searchInput" placeholder="Search for products, brands and more" autocomplete="off">
-                    <button id="searchBtn">🔍</button>
+        <div class="header-container">
+            <div class="header-left">
+                <a class="logo" href="/">
+                    Flipkart
+                    <div class="logo-plus">
+                        <span style="font-size: 10px;">+</span>
+                        <span class="logo-explore">Explore</span>
+                    </div>
+                </a>
+                <div class="search-container">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Search for Products, Brands and More" autocomplete="off">
+                        <button id="searchBtn">🔍</button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="header-right">
-            <a class="header-link" href="#account">
-                <span>👤</span>
-                <span class="header-link-text">Account</span>
-            </a>
-            <a class="header-link" href="#cart">
-                <span>🛒</span>
-                <span class="header-link-text">Cart</span>
-            </a>
-            <a class="header-link" href="#orders">
-                <span>📦</span>
-                <span class="header-link-text">Orders</span>
-            </a>
+            <div class="header-right">
+                <a class="header-link" href="#login">Login</a>
+                <a class="header-link" href="#cart">
+                    <span>🛒</span>
+                    <span>Cart</span>
+                </a>
+                <a class="header-link" href="#seller">Become a Seller</a>
+                <a class="header-link" href="#more">⋮</a>
+            </div>
         </div>
     </header>
 
     <!-- NAVIGATION -->
     <nav class="navigation">
-        <button class="nav-item active" data-category="all">All</button>
-        <button class="nav-item" data-category="Electronics">Electronics</button>
-        <button class="nav-item" data-category="Appliances">Appliances</button>
-        <button class="nav-item" data-category="Travel">Travel</button>
-        <button class="nav-item" data-category="Fashion">Fashion</button>
-        <button class="nav-item" data-category="Home">Home</button>
-        <button class="nav-item" data-category="Sports">Sports</button>
+        <div class="nav-container">
+            <button class="nav-item active" data-category="all">Electronics</button>
+            <button class="nav-item" data-category="Fashion">TVs & Appliances</button>
+            <button class="nav-item" data-category="Electronics">Men</button>
+            <button class="nav-item" data-category="Appliances">Women</button>
+            <button class="nav-item" data-category="Travel">Baby & Kids</button>
+            <button class="nav-item" data-category="Home">Home & Furniture</button>
+            <button class="nav-item" data-category="Sports">Sports, Books & More</button>
+            <button class="nav-item" data-category="all">Flights</button>
+            <button class="nav-item" data-category="all">Offer Zone</button>
+        </div>
     </nav>
 
-    <!-- BANNER/CAROUSEL -->
-    <div class="banner">
-        <div class="carousel">
-            <div class="carousel-slide active">📱 Great Electronics Deals</div>
-            <div class="carousel-slide">🏠 Home Appliances</div>
-            <div class="carousel-slide">✈️ Travel & More</div>
-            <div class="carousel-slide">👕 Fashion Week</div>
-            <div class="carousel-slide">🎮 Gaming Paradise</div>
-            <div class="carousel-nav" id="carouselNav"></div>
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+        <!-- BANNER/CAROUSEL -->
+        <div class="banner">
+            <div class="carousel">
+                <div class="carousel-slide active">📱 Great Electronics Deals</div>
+                <div class="carousel-slide">🏠 Home Appliances</div>
+                <div class="carousel-slide">✈️ Travel & More</div>
+                <div class="carousel-slide">👕 Fashion Week</div>
+                <div class="carousel-slide">🎮 Gaming Paradise</div>
+                <div class="carousel-nav" id="carouselNav"></div>
+            </div>
         </div>
+
+        <!-- BEST SELLERS -->
+        <section class="section">
+            <div class="section-title">
+                <span>Best of Electronics</span>
+                <a class="view-all" href="#viewall">VIEW ALL</a>
+            </div>
+            <div class="products-grid" id="bestSellersGrid">
+                <div class="loading">Loading products...</div>
+            </div>
+        </section>
+
+        <!-- TOP RATED -->
+        <section class="section">
+            <div class="section-title">
+                <span>Top Deals on Appliances</span>
+                <a class="view-all" href="#viewall">VIEW ALL</a>
+            </div>
+            <div class="products-grid" id="topRatedGrid">
+                <div class="loading">Loading products...</div>
+            </div>
+        </section>
     </div>
-
-    <!-- BEST SELLERS -->
-    <section class="section">
-        <div class="section-title">
-            <span>Best Sellers</span>
-            <a class="view-all" href="#viewall">View All</a>
-        </div>
-        <div class="products-grid" id="bestSellersGrid">
-            <div class="loading">Loading products...</div>
-        </div>
-    </section>
-
-    <!-- TOP RATED -->
-    <section class="section">
-        <div class="section-title">
-            <span>Top Rated Products</span>
-            <a class="view-all" href="#viewall">View All</a>
-        </div>
-        <div class="products-grid" id="topRatedGrid">
-            <div class="loading">Loading products...</div>
-        </div>
-    </section>
 
     <!-- FOOTER -->
     <footer class="footer">
@@ -641,44 +680,41 @@
         let allProducts = [];
 
         // Fetch products from API
-        async function fetchProducts() {
-            try {
-                console.log('Starting fetch...');
-                const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
-                
-                const response = await fetch('/api/products', {
-                    signal: controller.signal,
-                    headers: {
-                        'Accept': 'application/json'
+        function fetchProducts() {
+            console.log('Fetching products...');
+            
+            fetch('/api/products')
+                .then(response => {
+                    console.log('Response received:', response.status);
+                    return response.json();
+                })
+                .then(result => {
+                    console.log('Data parsed:', result);
+                    
+                    // Handle both array and object response formats
+                    if (Array.isArray(result)) {
+                        allProducts = result;
+                    } else if (result.data && Array.isArray(result.data)) {
+                        allProducts = result.data;
+                    } else {
+                        console.error('Invalid response format:', result);
+                        allProducts = [];
                     }
+                    
+                    console.log('Products loaded:', allProducts.length);
+                    
+                    if (allProducts.length > 0) {
+                        renderProducts('all');
+                    } else {
+                        document.getElementById('bestSellersGrid').innerHTML = '<div class="empty">No products available</div>';
+                        document.getElementById('topRatedGrid').innerHTML = '<div class="empty">No products available</div>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching products:', error);
+                    document.getElementById('bestSellersGrid').innerHTML = '<div class="empty">Error loading products. Please refresh.</div>';
+                    document.getElementById('topRatedGrid').innerHTML = '<div class="empty">Error loading products. Please refresh.</div>';
                 });
-                clearTimeout(timeoutId);
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                
-                console.log('Fetch completed, parsing JSON...');
-                const result = await response.json();
-                console.log('API Response:', result);
-                
-                // Handle both array and object response formats
-                if (Array.isArray(result)) {
-                    allProducts = result;
-                } else if (result.data && Array.isArray(result.data)) {
-                    allProducts = result.data;
-                } else {
-                    throw new Error('Invalid response format');
-                }
-                
-                console.log(`Loaded ${allProducts.length} products`);
-                renderProducts('all');
-            } catch (error) {
-                console.error('Error fetching products:', error);
-                document.getElementById('bestSellersGrid').innerHTML = '<div class="empty">Failed to load products: ' + error.message + '</div>';
-                document.getElementById('topRatedGrid').innerHTML = '<div class="empty">Failed to load products: ' + error.message + '</div>';
-            }
         }
 
         // Render product cards
