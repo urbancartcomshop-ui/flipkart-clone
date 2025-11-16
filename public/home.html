@@ -354,6 +354,24 @@
             background: #ff8c00;
         }
 
+        .buy-btn {
+            width: 100%;
+            padding: 8px;
+            background: #2874f0;
+            color: white;
+            border: none;
+            border-radius: 2px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            touch-action: manipulation;
+        }
+
+        .buy-btn:hover {
+            background: #1d5fc4;
+        }
+
         .wishlist-btn {
             position: absolute;
             top: 6px;
@@ -715,7 +733,7 @@
                             <span class="original-price">₹${product.original_price.toLocaleString()}</span>
                         </div>
                         <div class="delivery">✓ Free Delivery</div>
-                        <button class="add-to-cart-btn" onclick="addToCart(${product.id})">Add to Cart</button>
+                        <button class="buy-btn" onclick="buyNow(${product.id})">Buy Now</button>
                     </div>
                 </div>
             `).join('');
@@ -838,7 +856,11 @@
             
             localStorage.setItem('cart', JSON.stringify(cart));
             updateCartCount();
-            alert(`${product.name} added to cart!`);
+        }
+
+        // Buy now - go to product page
+        function buyNow(productId) {
+            window.location.href = `/product?id=${productId}`;
         }
 
         // Toggle wishlist
@@ -863,19 +885,23 @@
             document.getElementById('cartCount').textContent = count;
         }
 
-        // Search
+        // Search with debounce
+        let searchTimeout;
         document.getElementById('searchInput').addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase();
-            if (query.trim() === '') {
-                filteredProducts = [...allProducts];
-            } else {
-                filteredProducts = allProducts.filter(p =>
-                    p.name.toLowerCase().includes(query) ||
-                    p.description.toLowerCase().includes(query) ||
-                    p.category.toLowerCase().includes(query)
-                );
-            }
-            renderProducts();
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                const query = e.target.value.toLowerCase();
+                if (query.trim() === '') {
+                    filteredProducts = [...allProducts];
+                } else {
+                    filteredProducts = allProducts.filter(p =>
+                        p.name.toLowerCase().includes(query) ||
+                        p.description.toLowerCase().includes(query) ||
+                        p.category.toLowerCase().includes(query)
+                    );
+                }
+                renderProducts();
+            }, 300);
         });
 
         // Initialize

@@ -3,51 +3,641 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Details</title>
-    <link rel="stylesheet" href="/style.css">
+    <title>Product Details - Flipkart</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f5f5;
+            color: #212121;
+        }
+
+        .header {
+            background: linear-gradient(90deg, #2874f0 0%, #2874f0 100%);
+            color: white;
+            padding: 10px 8px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: space-between;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            display: flex;
+            gap: 2px;
+            white-space: nowrap;
+        }
+
+        .logo span {
+            color: #ffe500;
+        }
+
+        .back-btn {
+            color: white;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 4px 8px;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 16px 8px;
+        }
+
+        .product-container {
+            background: white;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .product-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            padding: 16px;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 400px;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-details {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .product-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #212121;
+            line-height: 1.4;
+        }
+
+        .product-meta {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .rating {
+            background: #388e3c;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 2px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .reviews {
+            color: #666;
+            font-size: 12px;
+        }
+
+        .price-section {
+            border: 1px solid #e0e0e0;
+            padding: 12px;
+            border-radius: 4px;
+            background: #f9f9f9;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .price-row span:first-child {
+            color: #666;
+        }
+
+        .total-price {
+            font-size: 24px;
+            font-weight: 600;
+            color: #212121;
+            border-top: 1px solid #e0e0e0;
+            padding-top: 8px;
+            margin-top: 8px;
+        }
+
+        .discount-tag {
+            color: #388e3c;
+            font-weight: 600;
+        }
+
+        .delivery-info {
+            padding: 12px;
+            background: #f5f5f5;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        .delivery-item {
+            margin-bottom: 8px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .delivery-item span:first-child {
+            color: #388e3c;
+            font-weight: 600;
+        }
+
+        .buy-btn {
+            width: 100%;
+            padding: 12px;
+            background: #2874f0;
+            color: white;
+            border: none;
+            border-radius: 2px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .buy-btn:hover {
+            background: #1d5fc4;
+        }
+
+        .wishlist-btn {
+            width: 100%;
+            padding: 12px;
+            background: white;
+            color: #2874f0;
+            border: 2px solid #2874f0;
+            border-radius: 2px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .wishlist-btn:hover {
+            background: #f0f0f0;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #e0e0e0;
+            background: white;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 12px 16px;
+            background: #f5f5f5;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            background: white;
+            border-bottom: 3px solid #2874f0;
+            color: #2874f0;
+        }
+
+        .tab-content {
+            padding: 16px;
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .description-text {
+            line-height: 1.6;
+            color: #666;
+            font-size: 13px;
+        }
+
+        .review {
+            border-bottom: 1px solid #e0e0e0;
+            padding: 12px 0;
+        }
+
+        .review:last-child {
+            border-bottom: none;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            align-items: center;
+        }
+
+        .reviewer-name {
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .review-rating {
+            color: #fbc02d;
+            font-size: 12px;
+        }
+
+        .review-text {
+            color: #666;
+            font-size: 12px;
+            line-height: 1.5;
+            margin-top: 8px;
+        }
+
+        .payment-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .payment-modal.active {
+            display: flex;
+        }
+
+        .payment-box {
+            background: white;
+            border-radius: 8px;
+            padding: 24px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .payment-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .payment-method {
+            border: 1px solid #e0e0e0;
+            padding: 12px;
+            margin-bottom: 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s;
+        }
+
+        .payment-method:hover {
+            border-color: #2874f0;
+            background: #f5f5f5;
+        }
+
+        .payment-method input[type="radio"] {
+            cursor: pointer;
+            width: 16px;
+            height: 16px;
+        }
+
+        .payment-method.selected {
+            border-color: #2874f0;
+            background: #e3f2fd;
+        }
+
+        .upi-input-group {
+            margin-top: 16px;
+            display: none;
+        }
+
+        .upi-input-group.active {
+            display: block;
+        }
+
+        .upi-input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .proceed-btn {
+            width: 100%;
+            padding: 12px;
+            background: #2874f0;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .proceed-btn:hover {
+            background: #1d5fc4;
+        }
+
+        .close-modal {
+            float: right;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .product-main {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .product-image {
+                height: 300px;
+            }
+
+            .product-title {
+                font-size: 16px;
+            }
+
+            .tabs {
+                flex-wrap: wrap;
+            }
+
+            .tab {
+                flex: 1;
+                min-width: 150px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <header class="header">
+        <div class="header-container">
+            <button class="back-btn" onclick="window.history.back()">← </button>
+            <div class="logo">
+                Flipkart<span>.</span>
+            </div>
+        </div>
+    </header>
 
-<header class="navbar">
-    <div class="logo">
-        <span class="flipkart-text">flipkart</span>
-        <span class="logo-plus">+</span>
+    <div class="container">
+        <div class="product-container">
+            <div class="product-main">
+                <div class="product-image">
+                    <img id="productImage" src="" alt="Product">
+                </div>
+
+                <div class="product-details">
+                    <h1 class="product-title" id="productTitle"></h1>
+
+                    <div class="product-meta">
+                        <span class="rating" id="productRating"></span>
+                        <span class="reviews" id="productReviews"></span>
+                    </div>
+
+                    <div class="price-section">
+                        <div class="price-row">
+                            <span>Price:</span>
+                            <span id="productPrice" style="font-size: 18px; font-weight: 600; color: #212121;"></span>
+                        </div>
+                        <div class="price-row">
+                            <span>Original Price:</span>
+                            <span id="originalPrice" style="text-decoration: line-through; color: #999;"></span>
+                        </div>
+                        <div class="price-row">
+                            <span>Discount:</span>
+                            <span class="discount-tag" id="discountPercent"></span>
+                        </div>
+                        <div class="total-price">
+                            ₹<span id="totalAmount"></span>
+                        </div>
+                    </div>
+
+                    <div class="delivery-info">
+                        <div class="delivery-item">
+                            <span>✓</span>
+                            <span>Free Delivery on this product</span>
+                        </div>
+                        <div class="delivery-item">
+                            <span>✓</span>
+                            <span>7 days return policy</span>
+                        </div>
+                        <div class="delivery-item">
+                            <span>✓</span>
+                            <span>Delivery within 3-5 days</span>
+                        </div>
+                    </div>
+
+                    <button class="buy-btn" onclick="openPaymentModal()">Buy Now</button>
+                    <button class="wishlist-btn" onclick="addToWishlist()">♡ Add to Wishlist</button>
+                </div>
+            </div>
+
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('description')">Description</button>
+                <button class="tab" onclick="switchTab('reviews')">Reviews</button>
+            </div>
+
+            <div id="description" class="tab-content active">
+                <div class="description-text" id="descriptionText"></div>
+            </div>
+
+            <div id="reviews" class="tab-content">
+                <div id="reviewsList"></div>
+            </div>
+        </div>
     </div>
-    <nav class="menu">
-        <a href="index.html">Home</a>
-        <a href="cart.html">🛒 Cart</a>
-        <button id="darkToggle" class="dark-btn">🌙</button>
-    </nav>
-</header>
 
-<div class="product-details">
-    <div class="product-image-container">
-        <img id="prodImg" src="" alt="">
-        <div class="wishlist-btn">❤️ Wishlist</div>
+    <!-- PAYMENT MODAL -->
+    <div id="paymentModal" class="payment-modal">
+        <div class="payment-box">
+            <span class="close-modal" onclick="closePaymentModal()">&times;</span>
+            <div class="payment-title">Select Payment Method</div>
+
+            <label class="payment-method selected" onclick="selectPayment('upi')">
+                <input type="radio" name="payment" value="upi" checked>
+                <span>UPI (Recommended)</span>
+            </label>
+
+            <label class="payment-method" onclick="selectPayment('card')">
+                <input type="radio" name="payment" value="card">
+                <span>Credit/Debit Card</span>
+            </label>
+
+            <label class="payment-method" onclick="selectPayment('netbanking')">
+                <input type="radio" name="payment" value="netbanking">
+                <span>Net Banking</span>
+            </label>
+
+            <label class="payment-method" onclick="selectPayment('wallet')">
+                <input type="radio" name="payment" value="wallet">
+                <span>Flipkart Wallet</span>
+            </label>
+
+            <div id="upiInputGroup" class="upi-input-group active">
+                <input type="text" id="upiId" placeholder="Enter UPI ID (e.g., yourname@upi)">
+            </div>
+
+            <button class="proceed-btn" onclick="processPayment()">Proceed to Pay</button>
+        </div>
     </div>
-    <div class="product-info">
-        <h2 id="prodName"></h2>
-        <div class="product-rating">
-            <span class="star-rating" id="starRating">⭐ 4.5</span>
-            <span class="review-count" id="reviewCount">(2.5K reviews)</span>
-        </div>
-        <p id="prodDescription" class="prod-description"></p>
-        <div class="price-section">
-            <p id="prodPrice" class="price"></p>
-            <p class="discount">FREE Delivery</p>
-        </div>
-        <div class="specifications">
-            <h3>Key Specifications</h3>
-            <ul id="specsList"></ul>
-        </div>
-        <div class="action-buttons">
 
-            <button class="btn buy-now" id="buyNow">⚡ Buy Now</button>
-        </div>
-    </div>
-</div>
+    <script>
+        const sampleReviews = {
+            1: [
+                { name: 'Rajesh Kumar', city: 'Mumbai', rating: 5, text: 'Excellent product! Sound quality is amazing. Battery lasts very long. Highly recommended for everyone.' },
+                { name: 'Priya Singh', city: 'Delhi', rating: 5, text: 'Best buds I have ever used. Worth every penny. Noise cancellation is superb.' },
+                { name: 'Amit Patel', city: 'Bangalore', rating: 4, text: 'Good product overall. Some issues with connectivity but mostly working fine.' }
+            ],
+            2: [
+                { name: 'Deepak Sharma', city: 'Hyderabad', rating: 5, text: 'Amazing sound quality at this price! Bluetooth connectivity is perfect.' },
+                { name: 'Neha Gupta', city: 'Chennai', rating: 5, text: 'Very comfortable to wear. Battery backup is excellent. Recommended!' },
+                { name: 'Arjun Reddy', city: 'Kolkata', rating: 4, text: 'Good product. Slightly heavy but works great.' }
+            ],
+            3: [
+                { name: 'Sanjana Malhotra', city: 'Pune', rating: 5, text: 'Perfect smartwatch for daily use. AMOLED display is crystal clear and very responsive.' },
+                { name: 'Vikram Joshi', city: 'Ahmedabad', rating: 5, text: 'Best smartwatch under 10k. AI assistant is very useful. Recommended for fitness tracking.' },
+                { name: 'Anjali Kapoor', city: 'Jaipur', rating: 4, text: 'Good value for money. Battery lasts 2-3 days easily.' }
+            ]
+        };
 
-<footer>
+        let currentProduct = null;
+        let selectedPayment = 'upi';
+
+        async function loadProduct() {
+            const params = new URLSearchParams(window.location.search);
+            const productId = parseInt(params.get('id'));
+
+            try {
+                const response = await fetch(`/api/products/${productId}`);
+                if (!response.ok) throw new Error('Product not found');
+                const result = await response.json();
+                currentProduct = result.data;
+                renderProduct();
+            } catch (error) {
+                console.error('Error loading product:', error);
+                document.querySelector('.container').innerHTML = '<p style="padding: 20px;">Product not found. Please try again.</p>';
+            }
+        }
+
+        function renderProduct() {
+            if (!currentProduct) return;
+
+            document.getElementById('productImage').src = currentProduct.image || 'https://via.placeholder.com/400';
+            document.getElementById('productTitle').textContent = currentProduct.name;
+            document.getElementById('productRating').textContent = `⭐ ${currentProduct.rating}`;
+            document.getElementById('productReviews').textContent = `${currentProduct.reviews.toLocaleString()} Reviews`;
+            document.getElementById('productPrice').textContent = `₹${currentProduct.price.toLocaleString()}`;
+            document.getElementById('originalPrice').textContent = `₹${currentProduct.original_price.toLocaleString()}`;
+            document.getElementById('discountPercent').textContent = `${currentProduct.discount}% OFF`;
+            document.getElementById('totalAmount').textContent = currentProduct.price.toLocaleString();
+            document.getElementById('descriptionText').textContent = currentProduct.description;
+
+            // Load reviews
+            const reviews = sampleReviews[currentProduct.id] || [];
+            const reviewsHtml = reviews.map(review => `
+                <div class="review">
+                    <div class="review-header">
+                        <span class="reviewer-name">${review.name}</span>
+                        <span class="review-rating">⭐ ${review.rating}</span>
+                    </div>
+                    <div style="font-size: 12px; color: #999; margin-bottom: 6px;">${review.city}</div>
+                    <div class="review-text">${review.text}</div>
+                </div>
+            `).join('');
+
+            document.getElementById('reviewsList').innerHTML = reviewsHtml || '<p style="color: #666;">No reviews yet</p>';
+        }
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function openPaymentModal() {
+            document.getElementById('paymentModal').classList.add('active');
+        }
+
+        function closePaymentModal() {
+            document.getElementById('paymentModal').classList.remove('active');
+        }
+
+        function selectPayment(method) {
+            selectedPayment = method;
+            document.querySelectorAll('.payment-method').forEach(el => el.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            
+            // Show/hide UPI input
+            const upiGroup = document.getElementById('upiInputGroup');
+            if (method === 'upi') {
+                upiGroup.classList.add('active');
+            } else {
+                upiGroup.classList.remove('active');
+            }
+        }
+
+        function processPayment() {
+            if (selectedPayment === 'upi') {
+                const upiId = document.getElementById('upiId').value;
+                if (!upiId) {
+                    alert('Please enter UPI ID');
+                    return;
+                }
+            }
+
+            alert(`Payment of ₹${currentProduct.price} initiated via ${selectedPayment.toUpperCase()}. Thank you for your purchase!`);
+            closePaymentModal();
+        }
+
+        function addToWishlist() {
+            alert(`${currentProduct.name} added to wishlist!`);
+        }
+
+        // Initialize
+        loadProduct();
+    </script>
+</body>
+</html>
     © 2025 Flipkart Clone.
 </footer>
 
