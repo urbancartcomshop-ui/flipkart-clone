@@ -669,20 +669,21 @@ let touchEndX = 0;
 let products = [];
 
 function loadProductsDataset() {
-    return fetch('products.json')
+    return fetch('/api/products')
         .then(r => r.json())
-        .then(data => {
+        .then(result => {
+            const data = result.data || [];
             products = data.map(p => ({
                 id: p.id,
                 name: p.name,
                 price: p.price,
-                originalPrice: p.originalPrice,
-                image: (p.images && p.images[0]) || 'https://via.placeholder.com/400',
-                images: p.images || [],
+                originalPrice: p.original_price,
+                image: p.image || 'https://via.placeholder.com/400',
+                images: p.images || [p.image],
                 discount: p.discount,
                 rating: p.rating,
                 reviews: p.reviews,
-                desc: p.desc,
+                desc: p.description,
                 category: p.category || 'Electronics'
             }));
             loadProduct();
