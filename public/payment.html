@@ -37,36 +37,44 @@
             <h2>Select UPI App</h2>
             <p style="color: #666; margin-bottom: 20px;">Choose your preferred UPI app to complete the payment</p>
             
-            <!-- UPI App Selection -->
+            <!-- UPI App Selection - Click to pay directly -->
             <div class="upi-apps" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin: 20px 0;">
-                <div class="upi-app-option" onclick="selectUPIApp('Google Pay')" data-app="gpay">
+                <div class="upi-app-option" onclick="payWithUPIApp('Google Pay', 'gpay')" data-app="gpay">
                     <div style="font-size: 40px; text-align: center;">📱</div>
                     <div style="text-align: center; font-weight: 500; color: #212121;">Google Pay</div>
+                    <div style="text-align: center; font-size: 12px; color: #666; margin-top: 5px;">Click to pay</div>
                 </div>
-                <div class="upi-app-option" onclick="selectUPIApp('PhonePe')" data-app="phonepe">
+                <div class="upi-app-option" onclick="payWithUPIApp('PhonePe', 'phonepe')" data-app="phonepe">
                     <div style="font-size: 40px; text-align: center;">💜</div>
                     <div style="text-align: center; font-weight: 500; color: #212121;">PhonePe</div>
+                    <div style="text-align: center; font-size: 12px; color: #666; margin-top: 5px;">Click to pay</div>
                 </div>
-                <div class="upi-app-option" onclick="selectUPIApp('Paytm')" data-app="paytm">
+                <div class="upi-app-option" onclick="payWithUPIApp('Paytm', 'paytm')" data-app="paytm">
                     <div style="font-size: 40px; text-align: center;">💙</div>
                     <div style="text-align: center; font-weight: 500; color: #212121;">Paytm</div>
+                    <div style="text-align: center; font-size: 12px; color: #666; margin-top: 5px;">Click to pay</div>
                 </div>
-                <div class="upi-app-option" onclick="selectUPIApp('Amazon Pay')" data-app="amazonpay">
+                <div class="upi-app-option" onclick="payWithUPIApp('Amazon Pay', 'amazonpay')" data-app="amazonpay">
                     <div style="font-size: 40px; text-align: center;">🟠</div>
                     <div style="text-align: center; font-weight: 500; color: #212121;">Amazon Pay</div>
+                    <div style="text-align: center; font-size: 12px; color: #666; margin-top: 5px;">Click to pay</div>
                 </div>
-                <div class="upi-app-option" onclick="selectUPIApp('BHIM')" data-app="bhim">
+                <div class="upi-app-option" onclick="payWithUPIApp('BHIM', 'bhim')" data-app="bhim">
                     <div style="font-size: 40px; text-align: center;">🇮🇳</div>
                     <div style="text-align: center; font-weight: 500; color: #212121;">BHIM UPI</div>
+                    <div style="text-align: center; font-size: 12px; color: #666; margin-top: 5px;">Click to pay</div>
                 </div>
-                <div class="upi-app-option" onclick="selectUPIApp('Other UPI')" data-app="other">
+                <div class="upi-app-option" onclick="payWithUPIApp('Other UPI', 'other')" data-app="other">
                     <div style="font-size: 40px; text-align: center;">📲</div>
                     <div style="text-align: center; font-weight: 500; color: #212121;">Other UPI</div>
+                    <div style="text-align: center; font-size: 12px; color: #666; margin-top: 5px;">Click to pay</div>
                 </div>
             </div>
 
-            <div id="selectedApp" style="display: none; text-align: center; padding: 15px; background: #e8f5e9; border-radius: 8px; margin: 20px 0;">
-                <strong style="color: #2e7d32;">Selected: <span id="appName"></span></strong>
+            <div id="processingMessage" style="display: none; text-align: center; padding: 20px; background: #fff3cd; border-radius: 8px; margin: 20px 0;">
+                <h3 style="color: #856404;">🔄 Opening UPI App...</h3>
+                <p style="color: #856404; margin-top: 10px;">Please complete the payment in your <strong id="selectedAppName"></strong></p>
+                <p style="color: #856404; font-size: 14px; margin-top: 10px;">If app doesn't open, use the QR code below</p>
             </div>
 
             <div id="upiSection" style="display: block;">
@@ -87,32 +95,31 @@
                     </div>
                 </div>
 
-                <button class="pay-button" onclick="initiateUPIPayment()">
-                    💳 Pay with UPI
+                <button class="pay-button" onclick="showQRCode()" id="showQRBtn" style="display: none; background: #2874f0;">
+                    📱 Show QR Code & Payment Link
                 </button>
 
                 <div id="upiPaymentSection" style="display: none;">
                     <div class="qr-section">
                         <h3>Scan QR Code to Pay</h3>
+                        <p style="color: #666; font-size: 14px; margin-bottom: 15px;">Amount: <strong id="paymentAmount"></strong></p>
                         <div id="qrCode"></div>
-                        <p style="margin: 10px 0; color: #666;">OR</p>
-                        <a id="upiLink" href="#" class="upi-link" target="_blank">
-                            Open UPI App
-                        </a>
-                        <p style="margin-top: 15px; color: #666; font-size: 14px;">
-                            UPI ID: <strong id="upiId">Loading...</strong>
+                        <p style="margin: 15px 0; color: #666; font-size: 14px;">
+                            Paying to: <strong id="upiId">cc.9199915057220975@axisbank</strong>
                         </p>
+                        <a id="upiLink" href="#" class="upi-link">
+                            🔄 Try Opening App Again
+                        </a>
                     </div>
 
                     <div class="verification">
-                        <h4>After Payment:</h4>
+                        <h4>✅ After completing payment:</h4>
                         <ol style="margin-left: 20px; margin-top: 10px;">
-                            <li>Complete payment in your UPI app</li>
-                            <li>Take a screenshot of the payment confirmation</li>
-                            <li>Click "I have paid" below</li>
-                            <li>We'll verify and confirm your order within 5-10 minutes</li>
+                            <li>Return to this page after payment</li>
+                            <li>Enter your UPI transaction ID below (optional)</li>
+                            <li>Click "I have paid" to confirm</li>
                         </ol>
-                        <input type="text" class="upi-input" id="transactionId" placeholder="Enter UPI Transaction ID (optional)">
+                        <input type="text" class="upi-input" id="transactionId" placeholder="Enter UPI Transaction ID (12-digit number)">
                         <button class="pay-button" onclick="confirmPayment()" style="background: #00C853;">
                             ✅ I have paid
                         </button>
@@ -149,80 +156,80 @@
             window.location.href = '/address.html';
         }
 
-        // Select UPI app
-        function selectUPIApp(appName) {
+        // Pay directly with UPI app - INSTANT REDIRECT
+        async function payWithUPIApp(appName, appCode) {
             selectedUPIApp = appName;
             
-            // Update UI
+            // Mark selected
             document.querySelectorAll('.upi-app-option').forEach(el => el.classList.remove('selected'));
             event.target.closest('.upi-app-option').classList.add('selected');
             
-            // Show selected app
-            document.getElementById('selectedApp').style.display = 'block';
-            document.getElementById('appName').textContent = appName;
-        }
-
-        // UPI is the only payment method
-        function selectPayment(method) {
-            // Only UPI available
-            document.getElementById('upiSection').style.display = 'block';
-        }
-
-        async function initiateUPIPayment() {
-            if (!selectedUPIApp) {
-                alert('Please select a UPI app first!');
-                return;
-            }
+            // Show processing message
+            document.getElementById('processingMessage').style.display = 'block';
+            document.getElementById('selectedAppName').textContent = appName;
+            document.getElementById('showQRBtn').style.display = 'block';
 
             const orderId = `ORD-${Date.now()}`;
             const amount = total;
 
             if (amount <= 0) {
-                alert('Cart is empty! Please add items to cart first.');
+                alert('Cart is empty!');
                 return;
             }
 
-            try {
-                const response = await fetch('/api/upi/create-payment', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        amount: amount,
-                        orderId: orderId,
-                        customerName: address.fullName,
-                        customerEmail: 'customer@email.com',
-                        upiApp: selectedUPIApp
-                    })
-                });
+            // Create UPI payment URL - YOUR AXIS BANK CREDIT CARD UPI ID
+            const upiId = 'cc.9199915057220975@axisbank';
+            const merchantName = 'Axis Bank Credit Card';
+            const upiUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(merchantName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(`Order ${orderId}`)}`;
+            
+            // Store payment data
+            currentPaymentData = {
+                paymentId: `PAY-${Date.now()}`,
+                orderId: orderId,
+                amount: amount,
+                upiUrl: upiUrl,
+                upiId: upiId,
+                app: appName
+            };
 
-                const data = await response.json();
-                
-                if (data.success) {
-                    currentPaymentData = data.payment;
-                    
-                    // Show UPI payment section
-                    document.getElementById('upiPaymentSection').style.display = 'block';
-                    document.getElementById('orderId').textContent = data.payment.orderId;
-                    
-                    // Generate QR Code
-                    const qrContainer = document.getElementById('qrCode');
-                    qrContainer.innerHTML = '';
-                    QRCode.toCanvas(qrContainer, data.payment.upiUrl, { width: 256 }, function (error) {
-                        if (error) console.error(error);
-                    });
-                    
-                    // Set UPI link
-                    document.getElementById('upiLink').href = data.payment.upiUrl;
-                    document.getElementById('upiId').textContent = data.payment.upiId;
-                    
-                    console.log('Payment initiated:', data);
-                } else {
-                    alert('Failed to initiate payment: ' + data.error);
-                }
-            } catch (error) {
-                console.error('Payment error:', error);
-                alert('Error initiating payment. Please try again.');
+            // INSTANTLY redirect to UPI app
+            console.log('[PAYMENT] Opening UPI app:', appName, upiUrl);
+            window.location.href = upiUrl;
+
+            // After 3 seconds, show QR code option
+            setTimeout(() => {
+                showQRCode();
+            }, 3000);
+        }
+
+        // Show QR code as fallback
+        function showQRCode() {
+            if (!currentPaymentData) {
+                alert('Please select a UPI app first');
+                return;
             }
+
+            document.getElementById('upiPaymentSection').style.display = 'block';
+            document.getElementById('paymentAmount').textContent = `₹${currentPaymentData.amount.toLocaleString()}`;
+            document.getElementById('upiId').textContent = currentPaymentData.upiId;
+            
+            // Generate QR Code
+            const qrContainer = document.getElementById('qrCode');
+            qrContainer.innerHTML = '';
+            QRCode.toCanvas(document.createElement('canvas'), currentPaymentData.upiUrl, { 
+                width: 256,
+                margin: 2
+            }, function (error, canvas) {
+                if (error) {
+                    console.error(error);
+                } else {
+                    qrContainer.appendChild(canvas);
+                }
+            });
+            
+            // Set UPI link
+            document.getElementById('upiLink').href = currentPaymentData.upiUrl;
+            document.getElementById('orderId').textContent = currentPaymentData.orderId;
         }
 
         async function confirmPayment() {
