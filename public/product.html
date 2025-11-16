@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Details - Flipkart</title>
+    <title>Product Details - Flipkart Clone</title>
     <style>
         * {
             margin: 0;
@@ -18,30 +18,28 @@
         }
 
         .header {
-            background: linear-gradient(90deg, #2874f0 0%, #2874f0 100%);
+            background: linear-gradient(135deg, #2874f0 0%, #1e40af 100%);
             color: white;
-            padding: 10px 8px;
+            padding: 12px 16px;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
         .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 16px;
             justify-content: space-between;
-            max-width: 1280px;
-            margin: 0 auto;
         }
 
         .logo {
-            font-size: 20px;
-            font-weight: bold;
-            display: flex;
-            gap: 2px;
-            white-space: nowrap;
+            font-size: 24px;
+            font-weight: 900;
+            cursor: pointer;
         }
 
         .logo span {
@@ -50,34 +48,54 @@
 
         .back-btn {
             color: white;
-            background: none;
-            border: none;
-            font-size: 20px;
+            text-decoration: none;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
             cursor: pointer;
-            padding: 4px 8px;
+            padding: 6px 12px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 2px;
+            border: none;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.3);
         }
 
         .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 16px 8px;
-        }
-
-        .product-container {
+            max-width: 1200px;
+            margin: 32px auto;
+            padding: 0 16px;
             background: white;
             border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .product-main {
+        .product-wrapper {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            padding: 16px;
+            gap: 32px;
+            padding: 32px;
         }
 
-        .product-image {
+        @media (max-width: 768px) {
+            .product-wrapper {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                padding: 16px;
+            }
+        }
+
+        .image-section {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .main-image {
             width: 100%;
             height: 400px;
             background: #f5f5f5;
@@ -86,243 +104,296 @@
             justify-content: center;
             border-radius: 4px;
             overflow: hidden;
+            position: relative;
         }
 
-        .product-image img {
+        .main-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        .product-details {
+        .discount-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: #388e3c;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 2px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .image-controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        .image-controls button {
+            flex: 1;
+            padding: 10px;
+            background: #2874f0;
+            color: white;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .image-controls button:hover {
+            background: #1e40af;
+        }
+
+        .details-section {
             display: flex;
             flex-direction: column;
             gap: 16px;
         }
 
         .product-title {
-            font-size: 18px;
+            font-size: 24px;
             font-weight: 600;
-            color: #212121;
             line-height: 1.4;
         }
 
-        .product-meta {
+        .rating-section {
             display: flex;
-            gap: 12px;
             align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: #f5f5f5;
+            border-radius: 2px;
         }
 
-        .rating {
+        .rating-stars {
             background: #388e3c;
             color: white;
             padding: 4px 8px;
             border-radius: 2px;
-            font-size: 12px;
             font-weight: 600;
+            font-size: 14px;
         }
 
-        .reviews {
+        .rating-text {
             color: #666;
-            font-size: 12px;
+            font-size: 14px;
         }
 
         .price-section {
-            border: 1px solid #e0e0e0;
-            padding: 12px;
-            border-radius: 4px;
-            background: #f9f9f9;
-        }
-
-        .price-row {
             display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            font-size: 14px;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            background: #f5f5f5;
+            border-radius: 2px;
+            border-left: 4px solid #388e3c;
         }
 
-        .price-row span:first-child {
-            color: #666;
-        }
-
-        .total-price {
-            font-size: 24px;
+        .current-price {
+            font-size: 32px;
             font-weight: 600;
             color: #212121;
-            border-top: 1px solid #e0e0e0;
-            padding-top: 8px;
-            margin-top: 8px;
         }
 
-        .discount-tag {
+        .original-price {
+            font-size: 18px;
+            color: #999;
+            text-decoration: line-through;
+        }
+
+        .you-save {
+            font-size: 14px;
             color: #388e3c;
             font-weight: 600;
         }
 
-        .delivery-info {
-            padding: 12px;
+        .description {
+            padding: 16px;
             background: #f5f5f5;
-            border-radius: 4px;
-            font-size: 13px;
+            border-radius: 2px;
+            border-left: 4px solid #2874f0;
         }
 
-        .delivery-item {
+        .description h3 {
             margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .description p {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #666;
+        }
+
+        .action-buttons {
             display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 2px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             gap: 8px;
         }
 
-        .delivery-item span:first-child {
-            color: #388e3c;
-            font-weight: 600;
+        .btn-cart {
+            background: #ff9f43;
+            color: white;
         }
 
-        .buy-btn {
-            width: 100%;
-            padding: 12px;
+        .btn-cart:hover {
+            background: #e67e22;
+        }
+
+        .btn-buy {
             background: #2874f0;
             color: white;
-            border: none;
-            border-radius: 2px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s;
         }
 
-        .buy-btn:hover {
-            background: #1d5fc4;
+        .btn-buy:hover {
+            background: #1e40af;
         }
 
-        .wishlist-btn {
-            width: 100%;
-            padding: 12px;
+        .btn-wishlist {
             background: white;
             color: #2874f0;
             border: 2px solid #2874f0;
-            border-radius: 2px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
         }
 
-        .wishlist-btn:hover {
-            background: #f0f0f0;
-        }
-
-        .tabs {
-            display: flex;
-            border-bottom: 1px solid #e0e0e0;
-            background: white;
-        }
-
-        .tab {
-            flex: 1;
-            padding: 12px 16px;
+        .btn-wishlist:hover {
             background: #f5f5f5;
-            border: none;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: 500;
-            transition: all 0.3s;
         }
 
-        .tab.active {
-            background: white;
-            border-bottom: 3px solid #2874f0;
-            color: #2874f0;
+        .reviews-section {
+            margin-top: 32px;
+            padding-top: 32px;
+            border-top: 2px solid #e0e0e0;
         }
 
-        .tab-content {
+        .reviews-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .reviews-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .review-card {
             padding: 16px;
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .description-text {
-            line-height: 1.6;
-            color: #666;
-            font-size: 13px;
-        }
-
-        .review {
-            border-bottom: 1px solid #e0e0e0;
-            padding: 12px 0;
-        }
-
-        .review:last-child {
-            border-bottom: none;
+            background: #f5f5f5;
+            border-radius: 4px;
+            border-left: 4px solid #2874f0;
         }
 
         .review-header {
             display: flex;
             justify-content: space-between;
+            align-items: start;
             margin-bottom: 8px;
-            align-items: center;
         }
 
         .reviewer-name {
             font-weight: 600;
-            font-size: 13px;
+            font-size: 14px;
+        }
+
+        .review-city {
+            font-size: 12px;
+            color: #999;
         }
 
         .review-rating {
-            color: #fbc02d;
+            background: #388e3c;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 2px;
+            font-weight: 600;
             font-size: 12px;
         }
 
         .review-text {
+            font-size: 13px;
+            line-height: 1.6;
             color: #666;
-            font-size: 12px;
-            line-height: 1.5;
+        }
+
+        .review-date {
+            font-size: 11px;
+            color: #999;
             margin-top: 8px;
         }
 
-        .payment-modal {
+        .modal {
             display: none;
             position: fixed;
-            top: 0;
+            z-index: 2000;
             left: 0;
+            top: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 1000;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal.show {
+            display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .payment-modal.active {
-            display: flex;
-        }
-
-        .payment-box {
-            background: white;
-            border-radius: 8px;
-            padding: 24px;
+        .modal-content {
+            background-color: white;
+            padding: 32px;
+            border-radius: 4px;
             max-width: 500px;
             width: 90%;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
         }
 
-        .payment-title {
-            font-size: 18px;
+        .modal-header {
+            font-size: 20px;
             font-weight: 600;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .payment-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 16px;
         }
 
         .payment-method {
-            border: 1px solid #e0e0e0;
             padding: 12px;
-            margin-bottom: 12px;
-            border-radius: 4px;
+            border: 2px solid #ddd;
+            border-radius: 2px;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 12px;
             transition: all 0.3s;
         }
 
@@ -331,79 +402,79 @@
             background: #f5f5f5;
         }
 
-        .payment-method input[type="radio"] {
+        .payment-method input {
+            margin-right: 8px;
+        }
+
+        .payment-method label {
             cursor: pointer;
-            width: 16px;
-            height: 16px;
+            font-weight: 500;
         }
 
-        .payment-method.selected {
-            border-color: #2874f0;
-            background: #e3f2fd;
+        .modal-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
         }
 
-        .upi-input-group {
-            margin-top: 16px;
-            display: none;
+        .modal-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 2px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
         }
 
-        .upi-input-group.active {
-            display: block;
+        .modal-btn-confirm {
+            background: #2874f0;
+            color: white;
         }
 
-        .upi-input-group input {
+        .modal-btn-confirm:hover {
+            background: #1e40af;
+        }
+
+        .modal-btn-cancel {
+            background: #f5f5f5;
+            color: #212121;
+        }
+
+        .modal-btn-cancel:hover {
+            background: #e0e0e0;
+        }
+
+        .upi-input {
             width: 100%;
             padding: 10px;
             border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 14px;
-            margin-bottom: 12px;
-        }
-
-        .proceed-btn {
-            width: 100%;
-            padding: 12px;
-            background: #2874f0;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-weight: 600;
-            cursor: pointer;
+            border-radius: 2px;
+            margin-top: 8px;
             font-size: 14px;
         }
 
-        .proceed-btn:hover {
-            background: #1d5fc4;
+        .notification {
+            position: fixed;
+            top: 80px;
+            right: 16px;
+            background: white;
+            border-left: 4px solid #388e3c;
+            padding: 12px 16px;
+            border-radius: 2px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 2000;
+            animation: slideIn 0.3s ease-out;
         }
 
-        .close-modal {
-            float: right;
-            font-size: 24px;
-            cursor: pointer;
-            color: #666;
-        }
-
-        @media (max-width: 768px) {
-            .product-main {
-                grid-template-columns: 1fr;
-                gap: 12px;
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
             }
-
-            .product-image {
-                height: 300px;
-            }
-
-            .product-title {
-                font-size: 16px;
-            }
-
-            .tabs {
-                flex-wrap: wrap;
-            }
-
-            .tab {
-                flex: 1;
-                min-width: 150px;
+            to {
+                transform: translateX(0);
+                opacity: 1;
             }
         }
     </style>
@@ -411,236 +482,225 @@
 <body>
     <header class="header">
         <div class="header-container">
-            <button class="back-btn" onclick="window.history.back()">← </button>
-            <div class="logo">
-                Flipkart<span>.</span>
-            </div>
+            <div class="logo">Flip<span>kart</span></div>
+            <button class="back-btn" onclick="goBack()">← Back to Products</button>
         </div>
     </header>
 
     <div class="container">
-        <div class="product-container">
-            <div class="product-main">
-                <div class="product-image">
-                    <img id="productImage" src="" alt="Product">
+        <div class="product-wrapper" id="productDetails">
+            <div class="image-section">
+                <div class="main-image">
+                    <img id="productImage" src="" alt="Product Image">
+                    <div class="discount-badge" id="discountBadge"></div>
                 </div>
-
-                <div class="product-details">
-                    <h1 class="product-title" id="productTitle"></h1>
-
-                    <div class="product-meta">
-                        <span class="rating" id="productRating"></span>
-                        <span class="reviews" id="productReviews"></span>
-                    </div>
-
-                    <div class="price-section">
-                        <div class="price-row">
-                            <span>Price:</span>
-                            <span id="productPrice" style="font-size: 18px; font-weight: 600; color: #212121;"></span>
-                        </div>
-                        <div class="price-row">
-                            <span>Original Price:</span>
-                            <span id="originalPrice" style="text-decoration: line-through; color: #999;"></span>
-                        </div>
-                        <div class="price-row">
-                            <span>Discount:</span>
-                            <span class="discount-tag" id="discountPercent"></span>
-                        </div>
-                        <div class="total-price">
-                            ₹<span id="totalAmount"></span>
-                        </div>
-                    </div>
-
-                    <div class="delivery-info">
-                        <div class="delivery-item">
-                            <span>✓</span>
-                            <span>Free Delivery on this product</span>
-                        </div>
-                        <div class="delivery-item">
-                            <span>✓</span>
-                            <span>7 days return policy</span>
-                        </div>
-                        <div class="delivery-item">
-                            <span>✓</span>
-                            <span>Delivery within 3-5 days</span>
-                        </div>
-                    </div>
-
-                    <button class="buy-btn" onclick="openPaymentModal()">Buy Now</button>
-                    <button class="wishlist-btn" onclick="addToWishlist()">♡ Add to Wishlist</button>
+                <div class="image-controls">
+                    <button onclick="addToCart()">🛒 Add to Cart</button>
+                    <button onclick="openPaymentModal()">💳 Buy Now</button>
                 </div>
             </div>
 
-            <div class="tabs">
-                <button class="tab active" onclick="switchTab('description')">Description</button>
-                <button class="tab" onclick="switchTab('reviews')">Reviews</button>
-            </div>
+            <div class="details-section">
+                <h1 class="product-title" id="productTitle"></h1>
 
-            <div id="description" class="tab-content active">
-                <div class="description-text" id="descriptionText"></div>
-            </div>
+                <div class="rating-section">
+                    <span class="rating-stars" id="productRating"></span>
+                    <span class="rating-text" id="productReviews"></span>
+                </div>
 
-            <div id="reviews" class="tab-content">
-                <div id="reviewsList"></div>
+                <div class="price-section">
+                    <div>
+                        <div class="current-price" id="productPrice"></div>
+                        <div class="original-price" id="productOriginalPrice"></div>
+                        <div class="you-save" id="youSave"></div>
+                    </div>
+                </div>
+
+                <div class="description">
+                    <h3>📦 About this product</h3>
+                    <p id="productDescription"></p>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-cart" onclick="addToCart()">🛒 Add to Cart</button>
+                    <button class="btn btn-buy" onclick="openPaymentModal()">💳 Buy Now</button>
+                    <button class="btn btn-wishlist" onclick="addToWishlist()">❤️ Wishlist</button>
+                </div>
             </div>
+        </div>
+
+        <div class="reviews-section">
+            <h2 class="reviews-title">⭐ Customer Reviews</h2>
+            <div class="reviews-list" id="reviewsList"></div>
         </div>
     </div>
 
-    <!-- PAYMENT MODAL -->
-    <div id="paymentModal" class="payment-modal">
-        <div class="payment-box">
-            <span class="close-modal" onclick="closePaymentModal()">&times;</span>
-            <div class="payment-title">Select Payment Method</div>
-
-            <label class="payment-method selected" onclick="selectPayment('upi')">
-                <input type="radio" name="payment" value="upi" checked>
-                <span>UPI (Recommended)</span>
-            </label>
-
-            <label class="payment-method" onclick="selectPayment('card')">
-                <input type="radio" name="payment" value="card">
-                <span>Credit/Debit Card</span>
-            </label>
-
-            <label class="payment-method" onclick="selectPayment('netbanking')">
-                <input type="radio" name="payment" value="netbanking">
-                <span>Net Banking</span>
-            </label>
-
-            <label class="payment-method" onclick="selectPayment('wallet')">
-                <input type="radio" name="payment" value="wallet">
-                <span>Flipkart Wallet</span>
-            </label>
-
-            <div id="upiInputGroup" class="upi-input-group active">
-                <input type="text" id="upiId" placeholder="Enter UPI ID (e.g., yourname@upi)">
+    <div class="modal" id="paymentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>Choose Payment Method</span>
+                <button class="modal-close" onclick="closePaymentModal()">✕</button>
             </div>
 
-            <button class="proceed-btn" onclick="processPayment()">Proceed to Pay</button>
+            <div class="payment-methods">
+                <div class="payment-method">
+                    <input type="radio" name="payment" id="upi" value="upi" checked>
+                    <label for="upi">💳 UPI (Google Pay, PhonePe, Paytm)</label>
+                    <input type="text" class="upi-input" id="upiInput" placeholder="Enter UPI ID (e.g., name@upi)" style="display: none; margin-top: 8px;">
+                </div>
+                <div class="payment-method">
+                    <input type="radio" name="payment" id="card" value="card">
+                    <label for="card">💳 Credit/Debit Card</label>
+                </div>
+                <div class="payment-method">
+                    <input type="radio" name="payment" id="net-banking" value="netbanking">
+                    <label for="net-banking">🏦 Net Banking</label>
+                </div>
+                <div class="payment-method">
+                    <input type="radio" name="payment" id="wallet" value="wallet">
+                    <label for="wallet">👛 Digital Wallet</label>
+                </div>
+            </div>
+
+            <script>
+                document.getElementById('upi').addEventListener('change', function() {
+                    document.getElementById('upiInput').style.display = this.checked ? 'block' : 'none';
+                });
+            </script>
+
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-confirm" onclick="processPayment()">Proceed to Payment</button>
+                <button class="modal-btn modal-btn-cancel" onclick="closePaymentModal()">Cancel</button>
+            </div>
         </div>
     </div>
 
     <script>
-        const sampleReviews = {
-            1: [
-                { name: 'Rajesh Kumar', city: 'Mumbai', rating: 5, text: 'Excellent product! Sound quality is amazing. Battery lasts very long. Highly recommended for everyone.' },
-                { name: 'Priya Singh', city: 'Delhi', rating: 5, text: 'Best buds I have ever used. Worth every penny. Noise cancellation is superb.' },
-                { name: 'Amit Patel', city: 'Bangalore', rating: 4, text: 'Good product overall. Some issues with connectivity but mostly working fine.' }
-            ],
-            2: [
-                { name: 'Deepak Sharma', city: 'Hyderabad', rating: 5, text: 'Amazing sound quality at this price! Bluetooth connectivity is perfect.' },
-                { name: 'Neha Gupta', city: 'Chennai', rating: 5, text: 'Very comfortable to wear. Battery backup is excellent. Recommended!' },
-                { name: 'Arjun Reddy', city: 'Kolkata', rating: 4, text: 'Good product. Slightly heavy but works great.' }
-            ],
-            3: [
-                { name: 'Sanjana Malhotra', city: 'Pune', rating: 5, text: 'Perfect smartwatch for daily use. AMOLED display is crystal clear and very responsive.' },
-                { name: 'Vikram Joshi', city: 'Ahmedabad', rating: 5, text: 'Best smartwatch under 10k. AI assistant is very useful. Recommended for fitness tracking.' },
-                { name: 'Anjali Kapoor', city: 'Jaipur', rating: 4, text: 'Good value for money. Battery lasts 2-3 days easily.' }
-            ]
-        };
+        let product = null;
 
-        let currentProduct = null;
-        let selectedPayment = 'upi';
+        const indianReviews = [
+            { name: "Raj Kumar", city: "Mumbai, India", rating: 5, text: "Excellent product! Delivery was fast. Highly recommended! ⭐⭐⭐⭐⭐", date: "2 days ago" },
+            { name: "Priya Sharma", city: "Delhi, India", rating: 4.5, text: "Great quality and good price. Will buy again. 👍", date: "1 week ago" },
+            { name: "Amit Patel", city: "Bangalore, India", rating: 5, text: "Perfect! Exactly as described. Amazing value for money! 🎉", date: "2 weeks ago" },
+            { name: "Sneha Desai", city: "Pune, India", rating: 4, text: "Good product. Took some time but worth the wait.", date: "3 weeks ago" },
+            { name: "Vikram Singh", city: "Chennai, India", rating: 5, text: "Best purchase! Super fast delivery to South India. Five stars! ⭐", date: "1 month ago" }
+        ];
 
-        async function loadProduct() {
-            const params = new URLSearchParams(window.location.search);
-            const productId = parseInt(params.get('id'));
+        document.addEventListener('DOMContentLoaded', async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
 
-            try {
-                const response = await fetch(`/api/products/${productId}`);
-                if (!response.ok) throw new Error('Product not found');
-                const result = await response.json();
-                currentProduct = result.data;
-                renderProduct();
-            } catch (error) {
-                console.error('Error loading product:', error);
-                document.querySelector('.container').innerHTML = '<p style="padding: 20px;">Product not found. Please try again.</p>';
-            }
-        }
-
-        function renderProduct() {
-            if (!currentProduct) return;
-
-            document.getElementById('productImage').src = currentProduct.image || 'https://via.placeholder.com/400';
-            document.getElementById('productTitle').textContent = currentProduct.name;
-            document.getElementById('productRating').textContent = `⭐ ${currentProduct.rating}`;
-            document.getElementById('productReviews').textContent = `${currentProduct.reviews.toLocaleString()} Reviews`;
-            document.getElementById('productPrice').textContent = `₹${currentProduct.price.toLocaleString()}`;
-            document.getElementById('originalPrice').textContent = `₹${currentProduct.original_price.toLocaleString()}`;
-            document.getElementById('discountPercent').textContent = `${currentProduct.discount}% OFF`;
-            document.getElementById('totalAmount').textContent = currentProduct.price.toLocaleString();
-            document.getElementById('descriptionText').textContent = currentProduct.description;
-
-            // Load reviews
-            const reviews = sampleReviews[currentProduct.id] || [];
-            const reviewsHtml = reviews.map(review => `
-                <div class="review">
-                    <div class="review-header">
-                        <span class="reviewer-name">${review.name}</span>
-                        <span class="review-rating">⭐ ${review.rating}</span>
-                    </div>
-                    <div style="font-size: 12px; color: #999; margin-bottom: 6px;">${review.city}</div>
-                    <div class="review-text">${review.text}</div>
-                </div>
-            `).join('');
-
-            document.getElementById('reviewsList').innerHTML = reviewsHtml || '<p style="color: #666;">No reviews yet</p>';
-        }
-
-        function switchTab(tabName) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
-            document.getElementById(tabName).classList.add('active');
-            event.target.classList.add('active');
-        }
-
-        function openPaymentModal() {
-            document.getElementById('paymentModal').classList.add('active');
-        }
-
-        function closePaymentModal() {
-            document.getElementById('paymentModal').classList.remove('active');
-        }
-
-        function selectPayment(method) {
-            selectedPayment = method;
-            document.querySelectorAll('.payment-method').forEach(el => el.classList.remove('selected'));
-            event.currentTarget.classList.add('selected');
-            
-            // Show/hide UPI input
-            const upiGroup = document.getElementById('upiInputGroup');
-            if (method === 'upi') {
-                upiGroup.classList.add('active');
+            const storedProduct = localStorage.getItem('selectedProduct');
+            if (storedProduct) {
+                product = JSON.parse(storedProduct);
+                displayProduct();
             } else {
-                upiGroup.classList.remove('active');
-            }
-        }
-
-        function processPayment() {
-            if (selectedPayment === 'upi') {
-                const upiId = document.getElementById('upiId').value;
-                if (!upiId) {
-                    alert('Please enter UPI ID');
-                    return;
+                try {
+                    const response = await fetch('/products.json');
+                    const products = await response.json();
+                    product = products.find(p => p.id == productId);
+                    if (product) displayProduct();
+                } catch (e) {
+                    console.error('Error loading product:', e);
                 }
             }
+        });
 
-            alert(`Payment of ₹${currentProduct.price} initiated via ${selectedPayment.toUpperCase()}. Thank you for your purchase!`);
-            closePaymentModal();
+        function displayProduct() {
+            if (!product) return;
+
+            document.getElementById('productTitle').textContent = product.name;
+            document.getElementById('productImage').src = product.image;
+            document.getElementById('productImage').onerror = function() {
+                this.src = 'https://via.placeholder.com/400?text=Product';
+            };
+            document.getElementById('discountBadge').textContent = `${product.discount}% OFF`;
+            document.getElementById('productRating').textContent = `★ ${product.rating}`;
+            document.getElementById('productReviews').textContent = `${product.reviews.toLocaleString()} verified purchases`;
+            document.getElementById('productPrice').textContent = `₹${product.price}`;
+            document.getElementById('productOriginalPrice').textContent = `₹${product.original_price}`;
+            document.getElementById('youSave').textContent = `You save ₹${product.original_price - product.price}`;
+            document.getElementById('productDescription').textContent = product.description;
+
+            const reviewsList = document.getElementById('reviewsList');
+            reviewsList.innerHTML = indianReviews.map(review => `
+                <div class="review-card">
+                    <div class="review-header">
+                        <div>
+                            <div class="reviewer-name">${review.name}</div>
+                            <div class="review-city">📍 ${review.city}</div>
+                        </div>
+                        <span class="review-rating">★ ${review.rating}</span>
+                    </div>
+                    <div class="review-text">"${review.text}"</div>
+                    <div class="review-date">${review.date}</div>
+                </div>
+            `).join('');
+        }
+
+        function addToCart() {
+            if (product) {
+                let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+                cart.push(product);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                showNotification(`${product.name} added to cart! 🛒`);
+            }
         }
 
         function addToWishlist() {
-            alert(`${currentProduct.name} added to wishlist!`);
+            if (product) {
+                let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+                wishlist.push(product);
+                localStorage.setItem('wishlist', JSON.stringify(wishlist));
+                showNotification(`${product.name} added to wishlist! ❤️`);
+            }
         }
 
-        // Initialize
-        loadProduct();
-    </script>
-</body>
-</html>
-    © 2025 Flipkart Clone.
-</footer>
+        function openPaymentModal() {
+            document.getElementById('paymentModal').classList.add('show');
+        }
 
-<script src="script.js"></script>
+        function closePaymentModal() {
+            document.getElementById('paymentModal').classList.remove('show');
+        }
+
+        function processPayment() {
+            const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+            let message = '';
+
+            if (paymentMethod === 'upi') {
+                const upiId = document.getElementById('upiInput').value || 'user@upi';
+                message = `UPI Payment initiated to ${upiId}\n\nAmount: ₹${product.price}\n\nTransaction successful! 🎉`;
+            } else {
+                message = `${paymentMethod.toUpperCase()} Payment Initiated\n\nAmount: ₹${product.price}\n\nTransaction successful! 🎉`;
+            }
+
+            closePaymentModal();
+            addToCart();
+            showNotification(message);
+            setTimeout(() => {
+                alert(message);
+            }, 500);
+        }
+
+        function goBack() {
+            window.location.href = '/';
+        }
+
+        function showNotification(message) {
+            const notif = document.createElement('div');
+            notif.className = 'notification';
+            notif.textContent = message;
+            document.body.appendChild(notif);
+            setTimeout(() => notif.remove(), 3000);
+        }
+
+        window.addEventListener('click', (event) => {
+            const modal = document.getElementById('paymentModal');
+            if (event.target === modal) {
+                closePaymentModal();
+            }
+        });
+    </script>
 </body>
 </html>
