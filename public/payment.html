@@ -146,24 +146,39 @@
         // Get cart total from localStorage
         const cart = JSON.parse(localStorage.getItem('cart') || '[]');
         const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+        // CRITICAL: Block page if cart is empty or total is 0
+        if (cart.length === 0 || total === 0 || total < 10) {
+            alert('❌ Your cart is empty or invalid! Redirecting to homepage...');
+            localStorage.removeItem('cart');
+            localStorage.removeItem('deliveryAddress');
+            window.location.replace('/');
+            throw new Error('Invalid cart'); // Stop script execution
+        }
+
         document.getElementById('subtotal').textContent = `₹${total.toLocaleString()}`;
         document.getElementById('totalAmount').textContent = `₹${total.toLocaleString()}`;
-
-        // Check if cart is not empty
-        if (cart.length === 0 || total === 0) {
-            alert('Your cart is empty! Please add items first.');
-            window.location.href = '/';
-        }
 
         // Check if address is provided
         const address = JSON.parse(localStorage.getItem('deliveryAddress') || 'null');
         if (!address) {
             alert('Please provide delivery address first!');
-            window.location.href = '/address.html';
+            window.location.replace('/address.html');
+            throw new Error('No address'); // Stop script execution
         }
 
         // Pay directly with UPI app - INSTANT REDIRECT
         async function payWithUPIApp(appName, appCode) {
+            // CRITICAL: Double-check cart before payment
+            const currentCart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const currentTotal = currentCart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            if (currentCart.length === 0 || currentTotal === 0 || currentTotal < 10) {
+                alert('❌ ERROR: Cart is empty or invalid! Cannot process payment.');
+                window.location.replace('/');
+                return;
+            }
+            
             selectedUPIApp = appName;
             
             // Mark selected
@@ -176,12 +191,7 @@
             document.getElementById('showQRBtn').style.display = 'block';
 
             const orderId = `ORD-${Date.now()}`;
-            const amount = total;
-
-            if (amount <= 0) {
-                alert('Cart is empty!');
-                return;
-            }
+            const amount = currentTotal;  // Use fresh total
 
             // Create UPI payment URL - YOUR AXIS BANK CREDIT CARD UPI ID
             const upiId = 'cc.9199915057220975@axisbank';
@@ -199,7 +209,7 @@
             };
 
             // INSTANTLY redirect to UPI app
-            console.log('[PAYMENT] Opening UPI app:', appName, upiUrl);
+            console.log('[PAYMENT] Opening UPI app:', appName, 'Amount: ₹' + amount, upiUrl);
             
             // Try to open UPI app
             window.location.href = upiUrl;

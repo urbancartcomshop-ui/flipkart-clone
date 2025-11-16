@@ -141,10 +141,12 @@
         const cart = JSON.parse(localStorage.getItem('cart') || '[]');
         const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
-        // Check if cart is empty
-        if (cart.length === 0 || total === 0) {
-            alert('Your cart is empty! Please add items to proceed.');
-            window.location.href = '/';
+        // CRITICAL: Block if cart is empty
+        if (cart.length === 0 || total === 0 || total < 10) {
+            alert('❌ Your cart is empty! Please add items to proceed.');
+            localStorage.removeItem('cart');
+            window.location.replace('/');
+            throw new Error('Invalid cart'); // Stop execution
         }
 
         // Display order items
@@ -164,6 +166,16 @@
         // Handle form submission
         document.getElementById('addressForm').addEventListener('submit', function(e) {
             e.preventDefault();
+
+            // CRITICAL: Verify cart again before proceeding
+            const currentCart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const currentTotal = currentCart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            if (currentCart.length === 0 || currentTotal === 0 || currentTotal < 10) {
+                alert('❌ ERROR: Cart became empty! Cannot proceed.');
+                window.location.replace('/');
+                return;
+            }
 
             // Collect address data
             const addressData = {
