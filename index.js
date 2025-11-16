@@ -282,9 +282,71 @@ app.get('/api/india-info', (req, res) => {
 // HTML ROUTES
 // ============================================
 
-// Serve main pages
+// SERVER-SIDE RENDERED HOMEPAGE - NO JAVASCRIPT NEEDED!
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'home.html'));
+  const products = getProducts();
+  const bestSellers = products.slice(0, 12);
+  const topRated = products.filter(p => p.rating >= 4.5).slice(0, 12);
+  
+  // Generate product cards HTML
+  const generateProductCard = (product) => `
+    <a href="/product-details.html?id=${product.id}" class="product-card" style="text-decoration: none; color: inherit;">
+      <div class="product-image">
+        <img src="/${product.image}" alt="${product.name}" loading="lazy" 
+             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22150%22 height=%22150%22%3E%3Crect fill=%22%23f5f5f5%22 width=%22150%22 height=%22150%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2212%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23999%22%3EProduct%3C/text%3E%3C/svg%3E'">
+      </div>
+      <div class="product-info">
+        <div class="product-name">${product.name}</div>
+        <div class="product-rating">
+          <span class="rating-star">★</span>
+          <span>${product.rating} (${product.reviews})</span>
+        </div>
+        <div class="product-prices">
+          <span class="price">₹${product.price}</span>
+          <span class="original-price">₹${product.original_price}</span>
+          <span class="discount">${product.discount}% off</span>
+        </div>
+        <div class="product-badge">View Details →</div>
+      </div>
+    </a>
+  `;
+  
+  // Read the HTML template
+  let html = fs.readFileSync(path.join(__dirname, 'public', 'index.html'), 'utf8');
+  
+  // Replace loading placeholder with actual products
+  const bestSellersHTML = bestSellers.map(generateProductCard).join('');
+  const topRatedHTML = topRated.map(generateProductCard).join('');
+  
+  html = html.replace(
+    '<div class="products-grid" id="bestSellersGrid">',
+    `<div class="products-grid" id="bestSellersGrid" data-ssr="true">`
+  );
+  
+  html = html.replace(
+    '<div class="loading">Loading products...</div>',
+    bestSellersHTML
+  );
+  
+  html = html.replace(
+    /<div class="products-grid" id="topRatedGrid">\s*<div class="loading">Loading products...<\/div>/,
+    `<div class="products-grid" id="topRatedGrid" data-ssr="true">${topRatedHTML}`
+  );
+  
+  // Remove or comment out the JavaScript that tries to fetch products
+  html = html.replace(
+    '// Initialize when DOM is ready',
+    `// SERVER-SIDE RENDERED - Products already loaded!
+    console.log('[FLIPKART] Server-side rendering active - ${products.length} products loaded');
+    // Initialize when DOM is ready (DISABLED - using SSR)`
+  );
+  
+  html = html.replace(
+    'fetchProducts();',
+    '// fetchProducts(); // DISABLED - using server-side rendering'
+  );
+  
+  res.send(html);
 });
 
 app.get('/product/:id', (req, res) => {
