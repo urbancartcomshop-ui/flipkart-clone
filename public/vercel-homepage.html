@@ -382,7 +382,8 @@
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 
-                allProducts = await response.json();
+                const result = await response.json();
+                allProducts = result.data || [];
                 filteredProducts = allProducts;
                 console.log(`✓ Loaded ${allProducts.length} products`);
                 displayProducts(filteredProducts);
