@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Flipkart - Online Shopping Store | Best Prices | Free Delivery</title>
-    <link rel="dns-prefetch" href="//diwaliofferslive.xyz">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Flipkart - Online Shopping Store</title>
     <style>
         * {
             margin: 0;
@@ -12,556 +12,405 @@
             box-sizing: border-box;
         }
 
-        html {
-            -webkit-text-size-adjust: 100%;
-        }
-
         body {
-            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: Roboto, Arial, sans-serif;
             background: #f5f5f5;
             color: #212121;
-            line-height: 1.4;
-            -webkit-font-smoothing: antialiased;
         }
 
-        /* ============= HEADER ============= */
-        .header {
+        /* HEADER */
+        header {
             background: linear-gradient(90deg, #1e40af 0%, #2874f0 100%);
             color: white;
-            padding: 8px 12px;
+            padding: 12px 16px;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            will-change: transform;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
 
-        .header-content {
+        .header-top {
             max-width: 1280px;
             margin: 0 auto;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 16px;
             justify-content: space-between;
-            flex-wrap: wrap;
         }
 
         .logo {
-            font-size: 24px;
-            font-weight: 800;
-            cursor: pointer;
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: -1px;
             display: flex;
-            align-items: baseline;
             gap: 2px;
-            white-space: nowrap;
-            flex-shrink: 0;
         }
 
-        .logo-main {
+        .logo-text {
             color: #ffe500;
         }
 
         .logo-sub {
-            font-size: 9px;
+            font-size: 10px;
             font-weight: 400;
             color: white;
-            margin-left: 2px;
-            display: none;
         }
 
-        .search-box-container {
+        .search-bar {
             flex: 1;
-            min-width: 180px;
+            max-width: 500px;
             display: flex;
-            gap: 4px;
-            max-width: 400px;
+            gap: 8px;
         }
 
-        .search-input {
+        .search-bar input {
             flex: 1;
-            padding: 8px 12px;
+            padding: 10px 16px;
             border: none;
             border-radius: 2px;
-            font-size: 13px;
-            outline: none;
-            background: white;
-            color: #212121;
+            font-size: 14px;
         }
 
-        .search-btn {
-            padding: 8px 12px;
+        .search-bar button {
+            padding: 10px 16px;
             background: white;
             color: #2874f0;
             border: none;
             border-radius: 2px;
-            cursor: pointer;
             font-weight: 600;
-            font-size: 13px;
+            cursor: pointer;
         }
 
-        .header-links {
-            display: none;
-            gap: 12px;
-        }
-
-        /* ============= CATEGORIES ============= */
-        .categories-nav {
+        /* CATEGORIES */
+        .categories {
             background: white;
-            border-bottom: 1px solid #e0e0e0;
+            border-bottom: 1px solid #ddd;
             position: sticky;
-            top: 48px;
+            top: 56px;
             z-index: 999;
             overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
         }
 
-        .categories-content {
+        .categories-inner {
+            max-width: 1280px;
+            margin: 0 auto;
             display: flex;
-            gap: 2px;
-            padding: 8px 12px;
-            scroll-behavior: smooth;
-            min-width: 100%;
+            gap: 0;
+            padding: 0;
         }
 
-        .category-btn {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 3px;
-            padding: 8px 12px;
+        .category {
+            flex: 0 0 auto;
+            padding: 12px 16px;
+            text-align: center;
             cursor: pointer;
             border: none;
             background: white;
             color: #212121;
-            font-size: 11px;
-            font-weight: 500;
+            font-size: 12px;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
             white-space: nowrap;
-            min-width: fit-content;
-            flex-shrink: 0;
-            transition: color 0.2s;
-            border-bottom: 2px solid transparent;
+            min-width: 80px;
         }
 
-        .category-btn:active {
+        .category:hover {
             background: #f5f5f5;
             color: #2874f0;
             border-bottom-color: #2874f0;
         }
 
-        .category-icon {
-            font-size: 18px;
-        }
-
-        /* ============= CAROUSEL ============= */
-        .carousel-container {
-            background: white;
-            margin: 8px 0 0 0;
-            overflow: hidden;
-        }
-
+        /* BANNER/CAROUSEL */
         .carousel {
-            position: relative;
-            width: 100%;
-            height: 180px;
+            max-width: 1280px;
+            margin: 16px auto;
+            margin-left: 16px;
+            margin-right: 16px;
+            background: linear-gradient(135deg, #2874f0, #1e40af);
+            border-radius: 2px;
+            height: 280px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #2874f0 0%, #1e40af 100%);
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            position: relative;
             overflow: hidden;
         }
 
-        .carousel-slide {
-            display: none;
-            width: 100%;
-            height: 100%;
-            animation: fadeIn 0.3s;
-        }
-
-        .carousel-slide.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .carousel-slide img {
+        .carousel img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .carousel-controls {
+        .carousel-text {
             position: absolute;
-            bottom: 12px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 6px;
-            z-index: 10;
+            text-align: center;
+            z-index: 2;
         }
 
-        .carousel-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.5);
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .carousel-dot.active {
+        /* PRODUCTS SECTION */
+        .section {
+            max-width: 1280px;
+            margin: 16px auto;
+            margin-left: 16px;
+            margin-right: 16px;
             background: white;
-            transform: scale(1.1);
+            padding: 16px;
+            border-radius: 2px;
         }
 
-        .carousel-btn {
-            display: none;
-        }
-
-        /* ============= BANNER ============= */
-        .deals-section {
-            background: white;
-            margin: 8px 0;
-            padding: 12px;
-        }
-
-        .deals-title {
-            font-size: 16px;
+        .section-title {
+            font-size: 18px;
             font-weight: 600;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        .deals-title::before {
+        .section-title::before {
             content: '';
-            display: inline-block;
-            width: 3px;
-            height: 16px;
+            width: 4px;
+            height: 20px;
             background: #2874f0;
         }
 
-        /* ============= PRODUCT GRID ============= */
-        .deals-grid {
+        .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-            gap: 8px;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 12px;
         }
 
-        .product-card {
+        .product {
             background: white;
+            border: 1px solid #ddd;
             border-radius: 2px;
             overflow: hidden;
             cursor: pointer;
             transition: box-shadow 0.2s;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.08);
-            border: 1px solid #e8e8e8;
-            display: flex;
-            flex-direction: column;
         }
 
-        .product-card:active {
-            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+        .product:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
 
-        .product-image-wrapper {
+        .product-img {
             width: 100%;
-            aspect-ratio: 1 / 1;
-            background: #fafafa;
+            aspect-ratio: 1;
+            background: #f5f5f5;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
             position: relative;
-            flex-shrink: 0;
         }
 
-        .product-image-wrapper img {
+        .product-img img {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            padding: 6px;
-            loading: lazy;
-            decoding: async;
+            padding: 8px;
         }
 
-        .product-image-wrapper img[data-src] {
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .product-image-wrapper img.loaded {
-            opacity: 1;
-        }
-
-        .discount-badge {
+        .discount {
             position: absolute;
-            top: 6px;
-            right: 6px;
+            top: 8px;
+            right: 8px;
             background: #388e3c;
             color: white;
-            padding: 3px 6px;
-            border-radius: 2px;
-            font-size: 11px;
+            padding: 4px 8px;
+            font-size: 12px;
             font-weight: 600;
+            border-radius: 2px;
             z-index: 2;
         }
 
-        .product-details {
-            padding: 10px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            overflow: hidden;
+        .product-info {
+            padding: 12px;
         }
 
         .product-name {
             font-size: 12px;
-            color: #212121;
             font-weight: 500;
+            color: #212121;
             line-height: 1.3;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
+            margin-bottom: 6px;
         }
 
         .product-rating {
             display: flex;
             align-items: center;
-            gap: 3px;
-            font-size: 10px;
-            margin-top: 2px;
+            gap: 4px;
+            font-size: 11px;
+            margin-bottom: 6px;
         }
 
         .stars {
             color: #388e3c;
             font-weight: 600;
-            font-size: 11px;
         }
 
         .rating-count {
             color: #999;
-            font-size: 10px;
         }
 
-        .product-price-section {
+        .product-price {
             display: flex;
-            align-items: center;
             gap: 4px;
-            margin-top: auto;
+            align-items: center;
         }
 
         .price {
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
-            color: #212121;
         }
 
         .original-price {
-            font-size: 10px;
+            font-size: 11px;
             color: #999;
             text-decoration: line-through;
         }
 
-        /* ============= LOADING STATE ============= */
-        .loading {
-            text-align: center;
-            padding: 30px 12px;
-            color: #666;
-            font-size: 13px;
-        }
-
-        .spinner {
-            border: 2px solid #f3f3f3;
-            border-top: 2px solid #2874f0;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 12px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* ============= FOOTER ============= */
-        .footer {
+        /* FOOTER */
+        footer {
             background: #212121;
             color: white;
-            padding: 20px 12px;
-            margin-top: 20px;
-            font-size: 12px;
+            padding: 32px 16px;
+            margin-top: 32px;
         }
 
-        .footer-content {
+        .footer-grid {
+            max-width: 1280px;
+            margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-bottom: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 24px;
+            margin-bottom: 24px;
         }
 
-        .footer-column h4 {
-            font-size: 12px;
+        .footer-col h4 {
+            font-size: 13px;
+            margin-bottom: 12px;
             font-weight: 600;
-            margin-bottom: 8px;
         }
 
-        .footer-column ul {
+        .footer-col ul {
             list-style: none;
         }
 
-        .footer-column li {
-            font-size: 11px;
-            margin-bottom: 4px;
+        .footer-col li {
+            font-size: 12px;
+            margin-bottom: 8px;
             color: #ccc;
         }
 
+        .footer-col a {
+            color: #ccc;
+            text-decoration: none;
+        }
+
+        .footer-col a:hover {
+            color: #ffe500;
+        }
+
         .footer-bottom {
-            border-top: 1px solid #444;
-            padding-top: 12px;
             text-align: center;
-            font-size: 11px;
+            border-top: 1px solid #444;
+            padding-top: 16px;
+            font-size: 12px;
             color: #999;
         }
 
-        /* ============= RESPONSIVE ============= */
-        @media (min-width: 600px) {
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 22px;
+            }
+
             .logo-sub {
-                display: inline;
+                display: none;
             }
 
-            .header-links {
-                display: flex;
+            .search-bar {
+                max-width: 200px;
             }
 
             .carousel {
-                height: 240px;
+                height: 200px;
+                margin-left: 8px;
+                margin-right: 8px;
             }
 
-            .deals-grid {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-                gap: 12px;
+            .section {
+                margin-left: 8px;
+                margin-right: 8px;
+                padding: 12px;
             }
 
-            .carousel-btn {
-                display: flex;
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 8px;
             }
-        }
-
-        @media (min-width: 768px) {
-            .carousel {
-                height: 300px;
-            }
-
-            .deals-grid {
-                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            }
-        }
-
-        /* ============= TOUCH OPTIMIZATION ============= */
-        button, a, .category-btn, .product-card {
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        input, textarea, select {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-        }
-
-        input[type="search"] {
-            -webkit-appearance: textfield;
         }
     </style>
 </head>
 <body>
     <!-- HEADER -->
-    <header class="header">
-        <div class="header-content">
+    <header>
+        <div class="header-top">
             <div class="logo">
-                <span class="logo-main">Flipkart</span>
+                <span class="logo-text">Flipkart</span>
                 <span class="logo-sub">Explore Now!</span>
             </div>
-            <div class="search-box-container">
-                <input type="search" class="search-input" id="searchInput" placeholder="Search..." autocomplete="off">
-                <button class="search-btn">🔍</button>
-            </div>
-            <div class="header-links">
-                <div style="color: white; font-size: 12px; text-align: center;">🏪<div>Seller</div></div>
-                <div style="color: white; font-size: 12px; text-align: center;">⚙️<div>Help</div></div>
-                <div style="color: white; font-size: 12px; text-align: center;">👤<div>Account</div></div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for products, brands and more" id="searchBox">
+                <button onclick="search()">🔍</button>
             </div>
         </div>
     </header>
 
     <!-- CATEGORIES -->
-    <nav class="categories-nav">
-        <div class="categories-content" id="categoriesContainer">
-            <button class="category-btn" data-category="all">🏠 Home</button>
-            <button class="category-btn" data-category="electronics">📱 Electronics</button>
-            <button class="category-btn" data-category="fashion">👗 Fashion</button>
-            <button class="category-btn" data-category="appliances">❄️ Appliances</button>
-            <button class="category-btn" data-category="travel">🧳 Travel</button>
-            <button class="category-btn" data-category="home">🏠 Home</button>
-            <button class="category-btn" data-category="sports">⚽ Sports</button>
-            <button class="category-btn" data-category="books">📚 Books</button>
+    <div class="categories">
+        <div class="categories-inner">
+            <button class="category" onclick="filterCategory('all')">🏠 Home</button>
+            <button class="category" onclick="filterCategory('electronics')">📱 Electronics</button>
+            <button class="category" onclick="filterCategory('appliances')">❄️ Appliances</button>
+            <button class="category" onclick="filterCategory('fashion')">👗 Fashion</button>
+            <button class="category" onclick="filterCategory('travel')">🧳 Travel</button>
+            <button class="category" onclick="filterCategory('home')">🏠 Home</button>
+            <button class="category" onclick="filterCategory('sports')">⚽ Sports</button>
+            <button class="category" onclick="filterCategory('books')">📚 Books</button>
         </div>
-    </nav>
+    </div>
 
-    <!-- CAROUSEL -->
-    <div class="carousel-container">
-        <div class="carousel" id="carousel">
-            <div class="carousel-slide active"><img src="https://diwaliofferslive.xyz/buds/3/public/SwOvZ3r.webp" alt="Banner 1" loading="eager"></div>
-            <div class="carousel-slide"><img src="https://diwaliofferslive.xyz/buds/3/public/SwOvZ3r.webp" alt="Banner 2" loading="lazy"></div>
-            <div class="carousel-slide"><img src="https://diwaliofferslive.xyz/buds/3/public/SwOvZ3r.webp" alt="Banner 3" loading="lazy"></div>
-            <div class="carousel-slide"><img src="https://diwaliofferslive.xyz/buds/3/public/SwOvZ3r.webp" alt="Banner 4" loading="lazy"></div>
-            <div class="carousel-slide"><img src="https://diwaliofferslive.xyz/buds/3/public/SwOvZ3r.webp" alt="Banner 5" loading="lazy"></div>
-
-            <div class="carousel-controls">
-                <div class="carousel-dot active" onclick="currentSlide(0)"></div>
-                <div class="carousel-dot" onclick="currentSlide(1)"></div>
-                <div class="carousel-dot" onclick="currentSlide(2)"></div>
-                <div class="carousel-dot" onclick="currentSlide(3)"></div>
-                <div class="carousel-dot" onclick="currentSlide(4)"></div>
-            </div>
-        </div>
+    <!-- BANNER -->
+    <div class="carousel">
+        <img src="https://diwaliofferslive.xyz/buds/3/public/SwOvZ3r.webp" alt="Banner" onerror="this.style.display='none'">
+        <div class="carousel-text" id="bannerText">🎉 Mega Sale - Up to 99% OFF 🎉</div>
     </div>
 
     <!-- BEST SELLERS -->
-    <div class="deals-section">
-        <div class="deals-title">Best Sellers</div>
-        <div class="deals-grid" id="productsGrid">
-            <div class="loading">
-                <div class="spinner"></div>
-                Loading...
-            </div>
-        </div>
+    <div class="section">
+        <div class="section-title">Best Sellers</div>
+        <div class="products-grid" id="bestsellers"></div>
     </div>
 
     <!-- TOP RATED -->
-    <div class="deals-section">
-        <div class="deals-title">Top Rated</div>
-        <div class="deals-grid" id="topRatedGrid">
-            <div class="loading">
-                <div class="spinner"></div>
-                Loading...
-            </div>
-        </div>
+    <div class="section">
+        <div class="section-title">Top Rated Products</div>
+        <div class="products-grid" id="toprated"></div>
     </div>
 
     <!-- FOOTER -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-column">
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
                 <h4>ABOUT</h4>
                 <ul>
                     <li><a href="#">About Flipkart</a></li>
@@ -569,7 +418,7 @@
                     <li><a href="#">Press</a></li>
                 </ul>
             </div>
-            <div class="footer-column">
+            <div class="footer-col">
                 <h4>HELP</h4>
                 <ul>
                     <li><a href="#">Payments</a></li>
@@ -577,7 +426,7 @@
                     <li><a href="#">Returns</a></li>
                 </ul>
             </div>
-            <div class="footer-column">
+            <div class="footer-col">
                 <h4>POLICY</h4>
                 <ul>
                     <li><a href="#">Privacy</a></li>
@@ -585,7 +434,7 @@
                     <li><a href="#">Terms</a></li>
                 </ul>
             </div>
-            <div class="footer-column">
+            <div class="footer-col">
                 <h4>SOCIAL</h4>
                 <ul>
                     <li><a href="#">Facebook</a></li>
@@ -599,141 +448,74 @@
 
     <script>
         let allProducts = [];
-        let currentSlideIndex = 0;
 
-        // Optimized carousel
-        function changeSlide(n) {
-            showSlide(currentSlideIndex += n);
-        }
-
-        function currentSlide(n) {
-            showSlide(currentSlideIndex = n);
-        }
-
-        function showSlide(n) {
-            const slides = document.querySelectorAll('.carousel-slide');
-            const dots = document.querySelectorAll('.carousel-dot');
-            if (n >= slides.length) currentSlideIndex = 0;
-            if (n < 0) currentSlideIndex = slides.length - 1;
-            slides.forEach(s => s.classList.remove('active'));
-            dots.forEach(d => d.classList.remove('active'));
-            slides[currentSlideIndex].classList.add('active');
-            dots[currentSlideIndex].classList.add('active');
-        }
-
-        // Auto rotate carousel
-        setInterval(() => { changeSlide(1); }, 4000);
-
-        // Lazy load images
-        function lazyLoadImages() {
-            if ('IntersectionObserver' in window) {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const img = entry.target;
-                            if (img.dataset.src) {
-                                img.src = img.dataset.src;
-                                img.removeAttribute('data-src');
-                                img.classList.add('loaded');
-                            }
-                            observer.unobserve(img);
-                        }
-                    });
-                });
-                document.querySelectorAll('img[data-src]').forEach(img => observer.observe(img));
-            }
-        }
-
-        // Load products
         async function loadProducts() {
             try {
-                const response = await fetch('/api/products');
-                if (!response.ok) throw new Error('Failed to fetch');
-                const result = await response.json();
-                allProducts = Array.isArray(result) ? result : (result.data || []);
-
+                const res = await fetch('/api/products');
+                const data = await res.json();
+                allProducts = Array.isArray(data) ? data : (data.data || []);
+                
                 if (!allProducts.length) {
-                    document.getElementById('productsGrid').innerHTML = '<p style="grid-column: 1/-1;">No products available</p>';
+                    document.getElementById('bestsellers').innerHTML = '<p>No products available</p>';
                     return;
                 }
 
-                // Render best sellers
-                const bestSellers = allProducts.slice(0, 10);
-                document.getElementById('productsGrid').innerHTML = bestSellers.map(p => createProductCard(p)).join('');
-
-                // Render top rated
-                const topRated = allProducts.slice(10, 20);
-                document.getElementById('topRatedGrid').innerHTML = topRated.map(p => createProductCard(p)).join('');
-
-                lazyLoadImages();
-            } catch (error) {
-                console.error('Error:', error);
-                document.getElementById('productsGrid').innerHTML = '<p style="grid-column: 1/-1; color: red;">Error loading products</p>';
+                render();
+            } catch (e) {
+                console.error('Error loading products:', e);
+                document.getElementById('bestsellers').innerHTML = '<p>Error loading products</p>';
             }
         }
 
-        function createProductCard(product) {
-            const imgSrc = product.image || 'https://via.placeholder.com/130/f5f5f5/999?text=Product';
+        function render() {
+            const bestsellers = allProducts.slice(0, 12);
+            const toprated = allProducts.slice(12, 24);
+
+            document.getElementById('bestsellers').innerHTML = bestsellers.map(createCard).join('');
+            document.getElementById('toprated').innerHTML = toprated.map(createCard).join('');
+        }
+
+        function createCard(p) {
             return `
-                <div class="product-card">
-                    <div class="product-image-wrapper">
-                        <img data-src="${imgSrc}" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 130 130'%3E%3Crect fill='%23fafafa' width='130' height='130'/%3E%3C/svg%3E" alt="${product.name}" loading="lazy" decoding="async">
-                        <div class="discount-badge">${product.discount}% OFF</div>
+                <div class="product">
+                    <div class="product-img">
+                        <img src="${p.image}" alt="${p.name}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 150 150%22%3E%3Crect fill=%22%23f5f5f5%22 width=%22150%22 height=%22150%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22%3EProduct%3C/text%3E%3C/svg%3E'">
+                        <div class="discount">${p.discount}% OFF</div>
                     </div>
-                    <div class="product-details">
-                        <div class="product-name">${product.name}</div>
+                    <div class="product-info">
+                        <div class="product-name">${p.name}</div>
                         <div class="product-rating">
-                            <span class="stars">★${(product.rating || 4).toFixed(1)}</span>
-                            <span class="rating-count">(${(product.reviews || 0).toLocaleString()})</span>
+                            <span class="stars">★${(p.rating || 4).toFixed(1)}</span>
+                            <span class="rating-count">(${(p.reviews || 0).toLocaleString()})</span>
                         </div>
-                        <div class="product-price-section">
-                            <span class="price">₹${(product.price || 0).toLocaleString()}</span>
-                            <span class="original-price">₹${(product.original_price || 0).toLocaleString()}</span>
+                        <div class="product-price">
+                            <span class="price">₹${(p.price || 0).toLocaleString()}</span>
+                            <span class="original-price">₹${(p.original_price || 0).toLocaleString()}</span>
                         </div>
                     </div>
                 </div>
             `;
         }
 
-        // Category filter
-        document.querySelectorAll('.category-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const category = btn.dataset.category;
-                let filtered = allProducts;
-                if (category !== 'all') {
-                    filtered = allProducts.filter(p => (p.category || '').toLowerCase() === category.toLowerCase());
-                }
-                document.getElementById('productsGrid').innerHTML = filtered.slice(0, 10).map(p => createProductCard(p)).join('') || '<p style="grid-column: 1/-1;">No products found</p>';
-                lazyLoadImages();
-            });
-        });
-
-        // Search
-        document.getElementById('searchInput').addEventListener('keyup', debounce((e) => {
-            const query = e.target.value.toLowerCase().trim();
-            if (!query) {
-                document.getElementById('productsGrid').innerHTML = allProducts.slice(0, 10).map(p => createProductCard(p)).join('');
+        function filterCategory(cat) {
+            if (cat === 'all') {
+                render();
             } else {
-                const filtered = allProducts.filter(p => p.name.toLowerCase().includes(query));
-                document.getElementById('productsGrid').innerHTML = filtered.map(p => createProductCard(p)).join('') || '<p style="grid-column: 1/-1;">No products found</p>';
+                const filtered = allProducts.filter(p => (p.category || '').toLowerCase() === cat);
+                document.getElementById('bestsellers').innerHTML = filtered.slice(0, 12).map(createCard).join('') || '<p>No products found</p>';
             }
-            lazyLoadImages();
-        }, 300));
-
-        // Debounce function
-        function debounce(func, wait) {
-            let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func(...args);
-                };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
         }
 
-        // Load on startup
+        function search() {
+            const query = document.getElementById('searchBox').value.toLowerCase();
+            if (!query) {
+                render();
+                return;
+            }
+            const results = allProducts.filter(p => p.name.toLowerCase().includes(query));
+            document.getElementById('bestsellers').innerHTML = results.map(createCard).join('') || '<p>No products found</p>';
+        }
+
         loadProducts();
     </script>
 </body>
