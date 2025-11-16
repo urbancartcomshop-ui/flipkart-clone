@@ -674,7 +674,7 @@
             }
 
             grid.innerHTML = products.map(product => `
-                <div class="product-card">
+                <div class="product-card" onclick="window.location.href='/product-details.html?id=${product.id}'">
                     <div class="product-image">
                         <img src="${product.image}" alt="${product.name}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22150%22 height=%22150%22%3E%3Crect fill=%22%23f5f5f5%22 width=%22150%22 height=%22150%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2212%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23999%22%3EProduct%3C/text%3E%3C/svg%3E'">
                     </div>
@@ -689,7 +689,7 @@
                             <span class="original-price">₹${product.original_price}</span>
                             <span class="discount">${product.discount}% off</span>
                         </div>
-                        <div class="product-badge">Shop Now</div>
+                        <div class="product-badge">View Details →</div>
                     </div>
                 </div>
             `).join('');
