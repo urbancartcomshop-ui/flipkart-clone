@@ -677,19 +677,21 @@
     </footer>
 
     <script>
+        console.log('[FLIPKART] Script starting...');
         let allProducts = [];
 
-        // Fetch products from API
+        // Fetch products from API - ULTRA SIMPLE VERSION
         function fetchProducts() {
-            console.log('Fetching products...');
+            console.log('[FLIPKART] Fetching products from /api/products');
             
             fetch('/api/products')
                 .then(response => {
-                    console.log('Response received:', response.status);
+                    console.log('[FLIPKART] Response received:', response.status, response.ok);
+                    if (!response.ok) throw new Error('HTTP ' + response.status);
                     return response.json();
                 })
                 .then(result => {
-                    console.log('Data parsed:', result);
+                    console.log('[FLIPKART] Data received:', typeof result, Array.isArray(result));
                     
                     // Handle both array and object response formats
                     if (Array.isArray(result)) {
@@ -697,23 +699,24 @@
                     } else if (result.data && Array.isArray(result.data)) {
                         allProducts = result.data;
                     } else {
-                        console.error('Invalid response format:', result);
-                        allProducts = [];
+                        console.error('[FLIPKART] Invalid format:', result);
+                        throw new Error('Invalid data format');
                     }
                     
-                    console.log('Products loaded:', allProducts.length);
+                    console.log('[FLIPKART] Products loaded:', allProducts.length);
                     
                     if (allProducts.length > 0) {
                         renderProducts('all');
+                        console.log('[FLIPKART] Products rendered successfully!');
                     } else {
-                        document.getElementById('bestSellersGrid').innerHTML = '<div class="empty">No products available</div>';
-                        document.getElementById('topRatedGrid').innerHTML = '<div class="empty">No products available</div>';
+                        throw new Error('No products in response');
                     }
                 })
                 .catch(error => {
-                    console.error('Error fetching products:', error);
-                    document.getElementById('bestSellersGrid').innerHTML = '<div class="empty">Error loading products. Please refresh.</div>';
-                    document.getElementById('topRatedGrid').innerHTML = '<div class="empty">Error loading products. Please refresh.</div>';
+                    console.error('[FLIPKART] ERROR:', error);
+                    const msg = 'Failed to load: ' + error.message;
+                    document.getElementById('bestSellersGrid').innerHTML = '<div class="empty">' + msg + '<br><a href="javascript:location.reload()">Reload Page</a></div>';
+                    document.getElementById('topRatedGrid').innerHTML = '<div class="empty">' + msg + '</div>';
                 });
         }
 
