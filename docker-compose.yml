@@ -1,11 +1,22 @@
 version: '3.8'
+
 services:
-  web:
+  flipkart-clone:
     build: .
+    container_name: flipkart-clone-server
     ports:
-      - "8080:8080"
+      - "3000:3000"
     environment:
-      - PORT=8080
-      - HOST_REGION=af-south-1
+      - PORT=3000
+      - NODE_ENV=production
+      - REGION=Africa (South Africa - Johannesburg)
     volumes:
-      - ./:/app:cached
+      - ./public:/app/public
+      - ./docs:/app/docs
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000/health', (r) => {if (r.statusCode !== 200) throw new Error(r.statusCode)})"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
