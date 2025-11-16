@@ -16,9 +16,24 @@ const REGION = 'Africa (South Africa - Johannesburg)';
 // ============================================
 // MIDDLEWARE
 // ============================================
-app.use(cors());
+// Enable CORS for all origins - fully public
+app.use(cors({
+  origin: '*',
+  credentials: false,
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type']
+}));
+
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.urlencoded({ extended: true }));
+
+// Serve all static files publicly with no restrictions
+app.use(express.static(path.join(__dirname, 'public'), {
+  setHeaders: (res, path) => {
+    res.setHeader('Cache-Control', 'public, max-age=3600');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+  }
+}));
 
 // ============================================
 // HELPER FUNCTIONS
