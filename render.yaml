@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: flipkart-clone
+    name: flipkart-store-2
     env: node
     region: oregon
     plan: free
