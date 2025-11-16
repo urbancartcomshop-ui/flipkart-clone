@@ -1,0 +1,10 @@
+﻿{
+    "name":  "flipkart-ecom-250602",
+    "repo":  {
+                 "branch":  "main",
+                 "provider":  "github",
+                 "dir":  "public",
+                 "cmd":  "echo Static",
+                 "repo":  "urbancartcomshop-ui/flipkart-clone"
+             }
+}
