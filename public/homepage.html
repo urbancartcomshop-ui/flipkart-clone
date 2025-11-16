@@ -320,8 +320,15 @@
         </div>
 
         <div class="products-section">
-            <h2>Featured Products</h2>
-            <div id="productsGrid" class="products-grid">
+            <h2>Best Sellers</h2>
+            <div class="products-grid" id="bestSellersGrid">
+                <div class="loading">Loading products...</div>
+            </div>
+        </div>
+
+        <div class="products-section">
+            <h2>Top Rated Products</h2>
+            <div class="products-grid" id="topRatedGrid">
                 <div class="loading">Loading products...</div>
             </div>
         </div>
@@ -336,8 +343,20 @@
         let allProducts = [];
         let currentCategory = 'All';
 
-        // Fetch products from API
+        // Check if server-side rendered
+        const bestSellersGrid = document.getElementById('bestSellersGrid');
+        const topRatedGrid = document.getElementById('topRatedGrid');
+        const isSSR = bestSellersGrid && bestSellersGrid.hasAttribute('data-ssr');
+
+        // Fetch products from API (only if not SSR)
         async function loadProducts() {
+            // If SSR, extract products from existing HTML
+            if (isSSR) {
+                console.log('[FLIPKART] Using server-side rendered products');
+                extractProductsFromDOM();
+                return;
+            }
+
             try {
                 const response = await fetch('/api/products');
                 const data = await response.json();
@@ -345,32 +364,49 @@
                 displayProducts(allProducts);
             } catch (error) {
                 console.error('Error loading products:', error);
-                document.getElementById('productsGrid').innerHTML = '<div class="loading">Error loading products. Using local data.</div>';
-                loadLocalProducts();
+                if (bestSellersGrid) bestSellersGrid.innerHTML = '<div class="loading">Error loading products.</div>';
             }
         }
 
-        // Load products from local JSON file if API fails
-        function loadLocalProducts() {
-            fetch('/products.json')
-                .then(res => res.json())
-                .then(data => {
-                    allProducts = Array.isArray(data) ? data : data.data || [];
-                    displayProducts(allProducts);
-                })
-                .catch(err => console.error('Error loading local products:', err));
+        // Extract products from SSR HTML
+        function extractProductsFromDOM() {
+            const productCards = document.querySelectorAll('.product-card');
+            allProducts = Array.from(productCards).map(card => {
+                const onclick = card.getAttribute('onclick');
+                const idMatch = onclick ? onclick.match(/viewProduct\((\d+)\)/) : null;
+                const id = idMatch ? parseInt(idMatch[1]) : 0;
+                
+                const name = card.querySelector('.product-name')?.textContent || '';
+                const priceText = card.querySelector('.price')?.textContent || '0';
+                const price = parseInt(priceText.replace(/[^\d]/g, ''));
+                const image = card.querySelector('.product-image')?.src || '';
+                const rating = parseFloat(card.querySelector('.product-rating span:nth-child(2)')?.textContent || '0');
+                
+                return { id, name, price, image, rating };
+            });
+            console.log(`[FLIPKART] Extracted ${allProducts.length} products from SSR HTML`);
         }
 
-        // Display products
+        // Display products in both grids
         function displayProducts(products) {
-            const grid = document.getElementById('productsGrid');
+            if (isSSR) return; // Don't overwrite SSR content
             
-            if (products.length === 0) {
-                grid.innerHTML = '<div class="loading">No products found.</div>';
-                return;
+            const halfPoint = Math.ceil(products.length / 2);
+            const bestSellers = products.slice(0, halfPoint);
+            const topRated = products.slice(halfPoint);
+            
+            if (bestSellersGrid) {
+                bestSellersGrid.innerHTML = bestSellers.map(generateProductHTML).join('');
             }
+            
+            if (topRatedGrid) {
+                topRatedGrid.innerHTML = topRated.map(generateProductHTML).join('');
+            }
+        }
 
-            grid.innerHTML = products.map(product => `
+        // Generate product HTML
+        function generateProductHTML(product) {
+            return `
                 <div class="product-card" onclick="viewProduct(${product.id})">
                     <img src="${product.image || '/images/placeholder.jpg'}" alt="${product.name}" class="product-image" onerror="this.src='/images/placeholder.jpg'">
                     <div class="product-info">
@@ -391,7 +427,7 @@
                         </div>
                     </div>
                 </div>
-            `).join('');
+            `;
         }
 
         // Filter by category
@@ -463,16 +499,19 @@
         }
 
         // Search functionality
-        document.getElementById('searchInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                const query = this.value.toLowerCase();
-                const filtered = allProducts.filter(p =>
-                    p.name.toLowerCase().includes(query) ||
-                    (p.description && p.description.toLowerCase().includes(query))
-                );
-                displayProducts(filtered);
-            }
-        });
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) {
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    const query = this.value.toLowerCase();
+                    const filtered = allProducts.filter(p =>
+                        p.name.toLowerCase().includes(query) ||
+                        (p.description && p.description.toLowerCase().includes(query))
+                    );
+                    displayProducts(filtered);
+                }
+            });
+        }
 
         // Load products on page load
         window.addEventListener('load', loadProducts);
