@@ -655,14 +655,29 @@
                 });
                 clearTimeout(timeoutId);
                 
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
                 console.log('Fetch completed, parsing JSON...');
                 const result = await response.json();
-                allProducts = result.data || [];
+                console.log('API Response:', result);
+                
+                // Handle both array and object response formats
+                if (Array.isArray(result)) {
+                    allProducts = result;
+                } else if (result.data && Array.isArray(result.data)) {
+                    allProducts = result.data;
+                } else {
+                    throw new Error('Invalid response format');
+                }
+                
                 console.log(`Loaded ${allProducts.length} products`);
                 renderProducts('all');
             } catch (error) {
                 console.error('Error fetching products:', error);
                 document.getElementById('bestSellersGrid').innerHTML = '<div class="empty">Failed to load products: ' + error.message + '</div>';
+                document.getElementById('topRatedGrid').innerHTML = '<div class="empty">Failed to load products: ' + error.message + '</div>';
             }
         }
 
@@ -690,7 +705,7 @@
             grid.innerHTML = products.map(product => `
                 <div class="product-card" onclick="window.location.href='/product-details.html?id=${product.id}'">
                     <div class="product-image">
-                        <img src="${product.image}" alt="${product.name}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22150%22 height=%22150%22%3E%3Crect fill=%22%23f5f5f5%22 width=%22150%22 height=%22150%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2212%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23999%22%3EProduct%3C/text%3E%3C/svg%3E'">
+                        <img src="/${product.image}" alt="${product.name}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22150%22 height=%22150%22%3E%3Crect fill=%22%23f5f5f5%22 width=%22150%22 height=%22150%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2212%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23999%22%3EProduct%3C/text%3E%3C/svg%3E'">
                     </div>
                     <div class="product-info">
                         <div class="product-name">${product.name}</div>
