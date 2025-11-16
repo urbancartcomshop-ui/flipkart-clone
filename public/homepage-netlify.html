@@ -463,7 +463,8 @@
 
         async function loadProducts() {
             try {
-                const response = await fetch('products.json');
+                console.log('Fetching products from Netlify API...');
+                const response = await fetch('/api/products');
                 allProducts = await response.json();
                 
                 // Display best sellers (first 8 products)

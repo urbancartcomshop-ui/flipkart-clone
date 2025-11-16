@@ -13,7 +13,7 @@
 # SPA fallback - all routes to index.html
 [[redirects]]
   from = "/*"
-  to = "/index.html"
+  to = "/homepage-netlify.html"
   status = 200
 
 # Ensure API calls go to function
@@ -23,7 +23,7 @@
   status = 200
 [[redirects]]
   from = "/*"
-  to = "/index.html"
+  to = "/homepage-netlify.html"
   status = 200
   conditions = {Query = {param = "!"}, Path = {match = "!/api/*"}}
 
