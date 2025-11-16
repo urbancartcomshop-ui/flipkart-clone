@@ -1,7 +1,7 @@
 [build]
   publish = "public"
-  command = "echo 'Static site - no build needed'"
-  ignore = "git diff --quiet HEAD^ HEAD -- . ; exit 1"
+  command = "npm run build"
+  functions = "netlify/functions"
 
 [build.environment]
   NODE_ENV = "production"
@@ -10,14 +10,11 @@
   command = "node index.js"
   port = 3000
 
-# API routes - proxy to Express server locally, serve from static for Netlify
+# SPA fallback - all routes to index.html
 [[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/api"
+  from = "/*"
+  to = "/index.html"
   status = 200
-  force = false
-
-# SPA fallback - all routes to index.html except API
 [[redirects]]
   from = "/*"
   to = "/index.html"

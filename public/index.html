@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Flipkart - Online Shopping Store</title>
+    <title>Flipkart Clone - Online Shopping</title>
     <style>
         * {
             margin: 0;
@@ -13,510 +12,743 @@
         }
 
         body {
-            font-family: Roboto, Arial, sans-serif;
-            background: #f5f5f5;
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: #f5f5f5;
             color: #212121;
         }
 
         /* HEADER */
-        header {
-            background: linear-gradient(90deg, #1e40af 0%, #2874f0 100%);
-            color: white;
-            padding: 12px 16px;
+        .header {
+            background: linear-gradient(90deg, #1f4ca6 0%, #2874f0 50%, #1f4ca6 100%);
+            padding: 12px 20px;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-        }
-
-        .header-top {
-            max-width: 1280px;
-            margin: 0 auto;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             display: flex;
             align-items: center;
-            gap: 16px;
             justify-content: space-between;
+            gap: 20px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            flex: 1;
         }
 
         .logo {
+            color: white;
             font-size: 28px;
-            font-weight: 900;
+            font-weight: 600;
             letter-spacing: -1px;
             display: flex;
-            gap: 2px;
-        }
-
-        .logo-text {
-            color: #ffe500;
-        }
-
-        .logo-sub {
-            font-size: 10px;
-            font-weight: 400;
-            color: white;
-        }
-
-        .search-bar {
-            flex: 1;
-            max-width: 500px;
-            display: flex;
+            align-items: center;
             gap: 8px;
         }
 
-        .search-bar input {
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: #FFE500;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1f4ca6;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .search-container {
             flex: 1;
-            padding: 10px 16px;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 10px 16px 10px 16px;
             border: none;
             border-radius: 2px;
             font-size: 14px;
+            background: white;
+            display: flex;
+            align-items: center;
         }
 
-        .search-bar button {
-            padding: 10px 16px;
-            background: white;
-            color: #2874f0;
+        .search-box input {
+            width: 100%;
             border: none;
-            border-radius: 2px;
-            font-weight: 600;
+            outline: none;
+            padding: 10px 12px;
+            font-size: 14px;
+        }
+
+        .search-box button {
+            background: none;
+            border: none;
             cursor: pointer;
+            color: #878787;
+            font-size: 16px;
+            padding: 0 8px;
         }
 
-        /* CATEGORIES */
-        .categories {
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            color: white;
+        }
+
+        .header-link {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .header-link:hover {
+            opacity: 0.8;
+        }
+
+        .header-link-text {
+            max-width: 60px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* NAVIGATION */
+        .navigation {
             background: white;
-            border-bottom: 1px solid #ddd;
-            position: sticky;
-            top: 56px;
-            z-index: 999;
-            overflow-x: auto;
-        }
-
-        .categories-inner {
-            max-width: 1280px;
-            margin: 0 auto;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 0;
             display: flex;
             gap: 0;
-            padding: 0;
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
         }
 
-        .category {
-            flex: 0 0 auto;
-            padding: 12px 16px;
-            text-align: center;
+        .nav-item {
+            padding: 16px 20px;
             cursor: pointer;
-            border: none;
-            background: white;
-            color: #212121;
-            font-size: 12px;
-            border-bottom: 3px solid transparent;
-            transition: all 0.2s;
             white-space: nowrap;
-            min-width: 80px;
+            font-size: 14px;
+            color: #212121;
+            border: none;
+            background: none;
+            flex-shrink: 0;
+            transition: all 0.2s;
+            border-bottom: 3px solid transparent;
         }
 
-        .category:hover {
-            background: #f5f5f5;
+        .nav-item:hover {
+            background-color: #f5f5f5;
+        }
+
+        .nav-item.active {
             color: #2874f0;
             border-bottom-color: #2874f0;
         }
 
         /* BANNER/CAROUSEL */
-        .carousel {
-            max-width: 1280px;
-            margin: 16px auto;
-            margin-left: 16px;
-            margin-right: 16px;
-            background: linear-gradient(135deg, #2874f0, #1e40af);
+        .banner {
+            background: white;
+            margin-bottom: 20px;
             border-radius: 2px;
-            height: 280px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 32px;
-            font-weight: bold;
-            position: relative;
+            box-shadow: 0 1px 1px rgba(0,0,0,0.1);
             overflow: hidden;
         }
 
-        .carousel img {
+        .carousel {
+            position: relative;
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            background: #f5f5f5;
+            min-height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
         }
 
-        .carousel-text {
+        .carousel-slide {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .carousel-slide.active {
+            display: flex;
+        }
+
+        .carousel-nav {
             position: absolute;
-            text-align: center;
-            z-index: 2;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .carousel-dot.active {
+            background: white;
+            width: 24px;
+            border-radius: 4px;
         }
 
         /* PRODUCTS SECTION */
         .section {
-            max-width: 1280px;
-            margin: 16px auto;
-            margin-left: 16px;
-            margin-right: 16px;
             background: white;
-            padding: 16px;
+            margin: 0 0 20px 0;
             border-radius: 2px;
+            box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+            padding: 16px;
         }
 
         .section-title {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
             margin-bottom: 16px;
+            color: #212121;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 8px;
         }
 
-        .section-title::before {
-            content: '';
-            width: 4px;
-            height: 20px;
-            background: #2874f0;
+        .view-all {
+            color: #2874f0;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
         }
 
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 12px;
+            gap: 16px;
         }
 
-        .product {
+        .product-card {
             background: white;
-            border: 1px solid #ddd;
+            border: 1px solid #e0e0e0;
             border-radius: 2px;
-            overflow: hidden;
             cursor: pointer;
-            transition: box-shadow 0.2s;
+            transition: all 0.2s;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
-        .product:hover {
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        .product-card:hover {
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
         }
 
-        .product-img {
+        .product-image {
             width: 100%;
-            aspect-ratio: 1;
+            height: 140px;
             background: #f5f5f5;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            position: relative;
         }
 
-        .product-img img {
+        .product-image img {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            padding: 8px;
-        }
-
-        .discount {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            background: #388e3c;
-            color: white;
-            padding: 4px 8px;
-            font-size: 12px;
-            font-weight: 600;
-            border-radius: 2px;
-            z-index: 2;
+            padding: 10px;
         }
 
         .product-info {
             padding: 12px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .product-name {
             font-size: 12px;
-            font-weight: 500;
             color: #212121;
-            line-height: 1.3;
+            margin-bottom: 6px;
+            line-height: 1.4;
+            height: 32px;
+            overflow: hidden;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
-            overflow: hidden;
-            margin-bottom: 6px;
         }
 
         .product-rating {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 11px;
+            font-size: 12px;
+            color: #878787;
             margin-bottom: 6px;
         }
 
-        .stars {
-            color: #388e3c;
-            font-weight: 600;
+        .rating-star {
+            color: #ff9800;
+            margin-right: 4px;
         }
 
-        .rating-count {
-            color: #999;
-        }
-
-        .product-price {
+        .product-prices {
             display: flex;
-            gap: 4px;
             align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
         }
 
         .price {
             font-size: 14px;
             font-weight: 600;
+            color: #212121;
         }
 
         .original-price {
-            font-size: 11px;
-            color: #999;
+            font-size: 12px;
+            color: #878787;
             text-decoration: line-through;
         }
 
-        /* FOOTER */
-        footer {
-            background: #212121;
-            color: white;
-            padding: 32px 16px;
-            margin-top: 32px;
-        }
-
-        .footer-grid {
-            max-width: 1280px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 24px;
-            margin-bottom: 24px;
-        }
-
-        .footer-col h4 {
-            font-size: 13px;
-            margin-bottom: 12px;
+        .discount {
+            font-size: 12px;
+            color: #31a049;
             font-weight: 600;
         }
 
-        .footer-col ul {
-            list-style: none;
+        .product-badge {
+            display: inline-block;
+            background: #31a049;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 2px;
+            font-size: 10px;
+            margin-top: auto;
+            width: fit-content;
         }
 
-        .footer-col li {
+        /* FILTERS */
+        .filters-panel {
+            background: white;
+            padding: 16px;
+            border-radius: 2px;
+            box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .filter-group {
+            margin-bottom: 16px;
+        }
+
+        .filter-title {
+            font-weight: 600;
+            font-size: 13px;
+            margin-bottom: 12px;
+            cursor: pointer;
+        }
+
+        .filter-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .filter-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .filter-option input {
+            cursor: pointer;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: #212121;
+            color: white;
+            padding: 40px 20px;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .footer-section a {
+            display: block;
+            color: #878787;
+            text-decoration: none;
             font-size: 12px;
             margin-bottom: 8px;
-            color: #ccc;
+            transition: color 0.2s;
         }
 
-        .footer-col a {
-            color: #ccc;
-            text-decoration: none;
-        }
-
-        .footer-col a:hover {
-            color: #ffe500;
+        .footer-section a:hover {
+            color: white;
         }
 
         .footer-bottom {
+            border-top: 1px solid #424242;
+            padding-top: 20px;
             text-align: center;
-            border-top: 1px solid #444;
-            padding-top: 16px;
             font-size: 12px;
-            color: #999;
+            color: #878787;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1200px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            }
         }
 
         @media (max-width: 768px) {
-            .logo {
-                font-size: 22px;
+            .header {
+                flex-direction: column;
+                gap: 12px;
             }
 
-            .logo-sub {
+            .header-left {
+                width: 100%;
+            }
+
+            .search-container {
+                max-width: 100%;
+            }
+
+            .header-right {
+                width: 100%;
+                justify-content: space-around;
+                gap: 10px;
+            }
+
+            .header-link-text {
                 display: none;
             }
 
-            .search-bar {
-                max-width: 200px;
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+                gap: 12px;
             }
 
             .carousel {
+                min-height: 200px;
+            }
+
+            .carousel-slide {
                 height: 200px;
-                margin-left: 8px;
-                margin-right: 8px;
             }
 
             .section {
-                margin-left: 8px;
-                margin-right: 8px;
                 padding: 12px;
             }
 
+            .product-image {
+                height: 110px;
+            }
+
+            .product-name {
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 480px) {
             .products-grid {
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                grid-template-columns: repeat(2, 1fr);
                 gap: 8px;
             }
+
+            .section {
+                padding: 8px;
+            }
+
+            .header {
+                padding: 8px 12px;
+            }
+
+            .nav-item {
+                padding: 12px 12px;
+                font-size: 12px;
+            }
+        }
+
+        /* LOADING & EMPTY STATES */
+        .loading {
+            text-align: center;
+            padding: 40px 20px;
+            color: #878787;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 40px 20px;
+            color: #878787;
         }
     </style>
 </head>
 <body>
     <!-- HEADER -->
-    <header>
-        <div class="header-top">
+    <header class="header">
+        <div class="header-left">
             <div class="logo">
-                <span class="logo-text">Flipkart</span>
-                <span class="logo-sub">Explore Now!</span>
+                <div class="logo-icon">⚡</div>
+                <span>Flipkart</span>
             </div>
-            <div class="search-bar">
-                <input type="text" placeholder="Search for products, brands and more" id="searchBox">
-                <button onclick="search()">🔍</button>
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search for products, brands and more" autocomplete="off">
+                    <button id="searchBtn">🔍</button>
+                </div>
             </div>
+        </div>
+        <div class="header-right">
+            <a class="header-link" href="#account">
+                <span>👤</span>
+                <span class="header-link-text">Account</span>
+            </a>
+            <a class="header-link" href="#cart">
+                <span>🛒</span>
+                <span class="header-link-text">Cart</span>
+            </a>
+            <a class="header-link" href="#orders">
+                <span>📦</span>
+                <span class="header-link-text">Orders</span>
+            </a>
         </div>
     </header>
 
-    <!-- CATEGORIES -->
-    <div class="categories">
-        <div class="categories-inner">
-            <button class="category" onclick="filterCategory('all')">🏠 Home</button>
-            <button class="category" onclick="filterCategory('electronics')">📱 Electronics</button>
-            <button class="category" onclick="filterCategory('appliances')">❄️ Appliances</button>
-            <button class="category" onclick="filterCategory('fashion')">👗 Fashion</button>
-            <button class="category" onclick="filterCategory('travel')">🧳 Travel</button>
-            <button class="category" onclick="filterCategory('home')">🏠 Home</button>
-            <button class="category" onclick="filterCategory('sports')">⚽ Sports</button>
-            <button class="category" onclick="filterCategory('books')">📚 Books</button>
-        </div>
-    </div>
+    <!-- NAVIGATION -->
+    <nav class="navigation">
+        <button class="nav-item active" data-category="all">All</button>
+        <button class="nav-item" data-category="Electronics">Electronics</button>
+        <button class="nav-item" data-category="Appliances">Appliances</button>
+        <button class="nav-item" data-category="Travel">Travel</button>
+        <button class="nav-item" data-category="Fashion">Fashion</button>
+        <button class="nav-item" data-category="Home">Home</button>
+        <button class="nav-item" data-category="Sports">Sports</button>
+    </nav>
 
-    <!-- BANNER -->
-    <div class="carousel">
-        <img src="https://diwaliofferslive.xyz/buds/3/public/SwOvZ3r.webp" alt="Banner" onerror="this.style.display='none'">
-        <div class="carousel-text" id="bannerText">🎉 Mega Sale - Up to 99% OFF 🎉</div>
+    <!-- BANNER/CAROUSEL -->
+    <div class="banner">
+        <div class="carousel">
+            <div class="carousel-slide active">📱 Great Electronics Deals</div>
+            <div class="carousel-slide">🏠 Home Appliances</div>
+            <div class="carousel-slide">✈️ Travel & More</div>
+            <div class="carousel-slide">👕 Fashion Week</div>
+            <div class="carousel-slide">🎮 Gaming Paradise</div>
+            <div class="carousel-nav" id="carouselNav"></div>
+        </div>
     </div>
 
     <!-- BEST SELLERS -->
-    <div class="section">
-        <div class="section-title">Best Sellers</div>
-        <div class="products-grid" id="bestsellers"></div>
-    </div>
+    <section class="section">
+        <div class="section-title">
+            <span>Best Sellers</span>
+            <a class="view-all" href="#viewall">View All</a>
+        </div>
+        <div class="products-grid" id="bestSellersGrid">
+            <div class="loading">Loading products...</div>
+        </div>
+    </section>
 
     <!-- TOP RATED -->
-    <div class="section">
-        <div class="section-title">Top Rated Products</div>
-        <div class="products-grid" id="toprated"></div>
-    </div>
+    <section class="section">
+        <div class="section-title">
+            <span>Top Rated Products</span>
+            <a class="view-all" href="#viewall">View All</a>
+        </div>
+        <div class="products-grid" id="topRatedGrid">
+            <div class="loading">Loading products...</div>
+        </div>
+    </section>
 
     <!-- FOOTER -->
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h4>ABOUT</h4>
-                <ul>
-                    <li><a href="#">About Flipkart</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Press</a></li>
-                </ul>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Flipkart</h3>
+                <a href="#">About Us</a>
+                <a href="#">Careers</a>
+                <a href="#">Press</a>
+                <a href="#">Blog</a>
             </div>
-            <div class="footer-col">
-                <h4>HELP</h4>
-                <ul>
-                    <li><a href="#">Payments</a></li>
-                    <li><a href="#">Shipping</a></li>
-                    <li><a href="#">Returns</a></li>
-                </ul>
+            <div class="footer-section">
+                <h3>Help Center</h3>
+                <a href="#">Contact Us</a>
+                <a href="#">FAQ</a>
+                <a href="#">Track Order</a>
+                <a href="#">Returns</a>
             </div>
-            <div class="footer-col">
-                <h4>POLICY</h4>
-                <ul>
-                    <li><a href="#">Privacy</a></li>
-                    <li><a href="#">Security</a></li>
-                    <li><a href="#">Terms</a></li>
-                </ul>
+            <div class="footer-section">
+                <h3>Policy</h3>
+                <a href="#">Return Policy</a>
+                <a href="#">Terms of Use</a>
+                <a href="#">Privacy</a>
+                <a href="#">Cookies</a>
             </div>
-            <div class="footer-col">
-                <h4>SOCIAL</h4>
-                <ul>
-                    <li><a href="#">Facebook</a></li>
-                    <li><a href="#">Twitter</a></li>
-                    <li><a href="#">Instagram</a></li>
-                </ul>
+            <div class="footer-section">
+                <h3>Social</h3>
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">Instagram</a>
+                <a href="#">LinkedIn</a>
             </div>
         </div>
-        <div class="footer-bottom">© 2024 Flipkart. All rights reserved.</div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Flipkart Clone. All rights reserved.</p>
+        </div>
     </footer>
 
     <script>
         let allProducts = [];
 
-        async function loadProducts() {
+        // Fetch products from API
+        async function fetchProducts() {
             try {
-                const res = await fetch('/api/products');
-                const data = await res.json();
-                allProducts = Array.isArray(data) ? data : (data.data || []);
-                
-                if (!allProducts.length) {
-                    document.getElementById('bestsellers').innerHTML = '<p>No products available</p>';
-                    return;
-                }
-
-                render();
-            } catch (e) {
-                console.error('Error loading products:', e);
-                document.getElementById('bestsellers').innerHTML = '<p>Error loading products</p>';
+                const response = await fetch('/api/products');
+                allProducts = await response.json();
+                renderProducts('all');
+            } catch (error) {
+                console.error('Error fetching products:', error);
+                document.getElementById('bestSellersGrid').innerHTML = '<div class="empty">Failed to load products</div>';
             }
         }
 
-        function render() {
-            const bestsellers = allProducts.slice(0, 12);
-            const toprated = allProducts.slice(12, 24);
-
-            document.getElementById('bestsellers').innerHTML = bestsellers.map(createCard).join('');
-            document.getElementById('toprated').innerHTML = toprated.map(createCard).join('');
-        }
-
-        function createCard(p) {
-            return `
-                <div class="product">
-                    <div class="product-img">
-                        <img src="${p.image}" alt="${p.name}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 150 150%22%3E%3Crect fill=%22%23f5f5f5%22 width=%22150%22 height=%22150%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2212%22%3EProduct%3C/text%3E%3C/svg%3E'">
-                        <div class="discount">${p.discount}% OFF</div>
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name">${p.name}</div>
-                        <div class="product-rating">
-                            <span class="stars">★${(p.rating || 4).toFixed(1)}</span>
-                            <span class="rating-count">(${(p.reviews || 0).toLocaleString()})</span>
-                        </div>
-                        <div class="product-price">
-                            <span class="price">₹${(p.price || 0).toLocaleString()}</span>
-                            <span class="original-price">₹${(p.original_price || 0).toLocaleString()}</span>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        function filterCategory(cat) {
-            if (cat === 'all') {
-                render();
-            } else {
-                const filtered = allProducts.filter(p => (p.category || '').toLowerCase() === cat);
-                document.getElementById('bestsellers').innerHTML = filtered.slice(0, 12).map(createCard).join('') || '<p>No products found</p>';
+        // Render product cards
+        function renderProducts(category) {
+            let filtered = allProducts;
+            if (category !== 'all') {
+                filtered = allProducts.filter(p => p.category === category);
             }
+
+            const bestSellers = filtered.slice(0, 12);
+            const topRated = filtered.filter(p => p.rating >= 4.5).slice(0, 12);
+
+            renderGrid('bestSellersGrid', bestSellers);
+            renderGrid('topRatedGrid', topRated);
         }
 
-        function search() {
-            const query = document.getElementById('searchBox').value.toLowerCase();
-            if (!query) {
-                render();
+        function renderGrid(gridId, products) {
+            const grid = document.getElementById(gridId);
+            if (!products || products.length === 0) {
+                grid.innerHTML = '<div class="empty">No products available</div>';
                 return;
             }
-            const results = allProducts.filter(p => p.name.toLowerCase().includes(query));
-            document.getElementById('bestsellers').innerHTML = results.map(createCard).join('') || '<p>No products found</p>';
+
+            grid.innerHTML = products.map(product => `
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22150%22 height=%22150%22%3E%3Crect fill=%22%23f5f5f5%22 width=%22150%22 height=%22150%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2212%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23999%22%3EProduct%3C/text%3E%3C/svg%3E'">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">${product.name}</div>
+                        <div class="product-rating">
+                            <span class="rating-star">★</span>
+                            <span>${product.rating} (${product.reviews})</span>
+                        </div>
+                        <div class="product-prices">
+                            <span class="price">₹${product.price}</span>
+                            <span class="original-price">₹${product.original_price}</span>
+                            <span class="discount">${product.discount}% off</span>
+                        </div>
+                        <div class="product-badge">Shop Now</div>
+                    </div>
+                </div>
+            `).join('');
         }
 
-        loadProducts();
+        // Category filtering
+        document.querySelectorAll('.nav-item').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                renderProducts(this.dataset.category);
+            });
+        });
+
+        // Carousel
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const totalSlides = slides.length;
+
+        function createCarouselNav() {
+            const nav = document.getElementById('carouselNav');
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('div');
+                dot.className = `carousel-dot ${i === 0 ? 'active' : ''}`;
+                dot.addEventListener('click', () => goToSlide(i));
+                nav.appendChild(dot);
+            }
+        }
+
+        function goToSlide(n) {
+            currentSlide = n;
+            slides.forEach((s, i) => s.classList.toggle('active', i === n));
+            document.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === n));
+        }
+
+        function nextSlide() {
+            goToSlide((currentSlide + 1) % totalSlides);
+        }
+
+        createCarouselNav();
+        setInterval(nextSlide, 5000);
+
+        // Search
+        document.getElementById('searchBtn').addEventListener('click', function() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            if (query) {
+                const filtered = allProducts.filter(p => p.name.toLowerCase().includes(query));
+                renderGrid('bestSellersGrid', filtered);
+            }
+        });
+
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('searchBtn').click();
+            }
+        });
+
+        // Initialize
+        fetchProducts();
     </script>
 </body>
 </html>

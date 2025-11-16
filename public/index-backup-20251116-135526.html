@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flipkart - Online Shopping Store | Best Prices | Free Delivery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f5f5;
+            color: #212121;
+        }
+
+        /* ============= HEADER ============= */
+        .header {
+            background: linear-gradient(90deg, #1e40af 0%, #2874f0 100%);
+            color: white;
+            padding: 8px 16px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            cursor: pointer;
+            display: flex;
+            align-items: baseline;
+            gap: 2px;
+        }
+
+        .logo-main {
+            color: #ffe500;
+        }
+
+        .logo-sub {
+            font-size: 10px;
+            font-weight: 400;
+            color: white;
+            margin-left: 4px;
+        }
+
+        .search-box-container {
+            flex: 1;
+            max-width: 500px;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 2px;
+            font-size: 14px;
+            outline: none;
+            background: white;
+            color: #212121;
+        }
+
+        .search-input::placeholder {
+            color: #999;
+        }
+
+        .search-btn {
+            padding: 10px 20px;
+            background: white;
+            color: #2874f0;
+            border: none;
+            border-radius: 2px;
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .search-btn:hover {
+            background: #eff5ff;
+        }
+
+        .header-links {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .header-link {
+            color: white;
+            text-decoration: none;
+            font-size: 13px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            cursor: pointer;
+            padding: 6px 8px;
+            transition: all 0.2s;
+        }
+
+        .header-link:hover {
+            opacity: 0.9;
+        }
+
+        .link-icon {
+            font-size: 18px;
+        }
+
+        /* ============= CATEGORIES ============= */
+        .categories-nav {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 56px;
+            z-index: 999;
+        }
+
+        .categories-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            gap: 0;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+        }
+
+        .category-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 12px 16px;
+            cursor: pointer;
+            border: none;
+            background: white;
+            color: #212121;
+            font-size: 12px;
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+            white-space: nowrap;
+            transition: all 0.2s;
+            min-width: 80px;
+        }
+
+        .category-btn:hover {
+            background: #f5f5f5;
+            border-bottom-color: #2874f0;
+            color: #2874f0;
+        }
+
+        .category-icon {
+            font-size: 24px;
+        }
+
+        /* ============= BANNER ============= */
+        .banner {
+            background: white;
+            padding: 16px;
+            margin: 16px 0;
+            text-align: center;
+        }
+
+        .banner-text {
+            font-size: 24px;
+            font-weight: 500;
+            color: #2874f0;
+        }
+
+        /* ============= MAIN CONTENT ============= */
+        .main-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 24px 0 16px 0;
+            color: #212121;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 20px;
+            background: #2874f0;
+            border-radius: 2px;
+        }
+
+        /* ============= PRODUCT GRID ============= */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 2px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+        }
+
+        .product-image {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 8px;
+        }
+
+        .discount-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #388e3c;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 2px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .product-info {
+            padding: 12px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .product-name {
+            font-size: 12px;
+            color: #212121;
+            font-weight: 500;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+        }
+
+        .stars {
+            color: #388e3c;
+            font-weight: 600;
+        }
+
+        .rating-count {
+            color: #999;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: auto;
+        }
+
+        .price {
+            font-size: 14px;
+            font-weight: 600;
+            color: #212121;
+        }
+
+        .original-price {
+            font-size: 11px;
+            color: #999;
+            text-decoration: line-through;
+        }
+
+        /* ============= FOOTER ============= */
+        .footer {
+            background: #212121;
+            color: white;
+            padding: 32px 16px;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+        }
+
+        .footer-section h3 {
+            font-size: 14px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            font-size: 12px;
+            margin-bottom: 8px;
+            color: #ccc;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-section a:hover {
+            color: #ffe500;
+        }
+
+        /* ============= RESPONSIVE ============= */
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 8px;
+            }
+
+            .header-content {
+                flex-wrap: wrap;
+            }
+
+            .search-box-container {
+                max-width: 100%;
+                order: 3;
+                width: 100%;
+            }
+
+            .logo {
+                font-size: 22px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+                gap: 6px;
+            }
+
+            .product-info {
+                padding: 8px;
+            }
+
+            .header-links {
+                gap: 8px;
+            }
+        }
+
+        /* Loading state */
+        .loading {
+            text-align: center;
+            padding: 32px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #2874f0;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 16px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <span class="logo-main">Flipkart</span>
+                <span class="logo-sub">Explore Now!</span>
+            </div>
+            <div class="search-box-container">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search for products, brands and more">
+                <button class="search-btn">🔍</button>
+            </div>
+            <div class="header-links">
+                <div class="header-link">
+                    <span class="link-icon">🏪</span>
+                    <span>Become a Seller</span>
+                </div>
+                <div class="header-link">
+                    <span class="link-icon">⚙️</span>
+                    <span>Help</span>
+                </div>
+                <div class="header-link">
+                    <span class="link-icon">👤</span>
+                    <span>Account</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- CATEGORIES NAV -->
+    <nav class="categories-nav">
+        <div class="categories-content">
+            <button class="category-btn" data-category="all">
+                <span class="category-icon">🏠</span>
+                <span>Home</span>
+            </button>
+            <button class="category-btn" data-category="electronics">
+                <span class="category-icon">📱</span>
+                <span>Electronics</span>
+            </button>
+            <button class="category-btn" data-category="fashion">
+                <span class="category-icon">👗</span>
+                <span>Fashion</span>
+            </button>
+            <button class="category-btn" data-category="appliances">
+                <span class="category-icon">❄️</span>
+                <span>Appliances</span>
+            </button>
+            <button class="category-btn" data-category="travel">
+                <span class="category-icon">🧳</span>
+                <span>Travel</span>
+            </button>
+            <button class="category-btn" data-category="home">
+                <span class="category-icon">🏠</span>
+                <span>Home & Kitchen</span>
+            </button>
+            <button class="category-btn" data-category="sports">
+                <span class="category-icon">⚽</span>
+                <span>Sports</span>
+            </button>
+            <button class="category-btn" data-category="books">
+                <span class="category-icon">📚</span>
+                <span>Books</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- BANNER -->
+    <div class="banner">
+        <div class="banner-text">🎉 Mega Sale - Up to 99% OFF 🎉</div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-container">
+        <div class="section-title">Best Sellers</div>
+        <div id="productsContainer" class="products-grid">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Loading products...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ABOUT</h3>
+                <ul>
+                    <li><a href="#">About Flipkart</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>HELP</h3>
+                <ul>
+                    <li><a href="#">Payments</a></li>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Cancellation & Returns</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>POLICY</h3>
+                <ul>
+                    <li><a href="#">Return Policy</a></li>
+                    <li><a href="#">Terms of Use</a></li>
+                    <li><a href="#">Security</a></li>
+                    <li><a href="#">Privacy</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>SOCIAL</h3>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">YouTube</a></li>
+                    <li><a href="#">Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="border-top: 1px solid #444; margin-top: 24px; padding-top: 16px; text-align: center; font-size: 12px; color: #999;">
+            © 2024 Flipkart. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        let allProducts = [];
+        let filteredProducts = [];
+
+        async function loadProducts() {
+            try {
+                const response = await fetch('/api/products');
+                allProducts = await response.json();
+                filteredProducts = allProducts;
+                renderProducts();
+            } catch (error) {
+                console.error('Error loading products:', error);
+                document.getElementById('productsContainer').innerHTML = '<p style="grid-column: 1/-1; text-align: center; padding: 32px;">Error loading products</p>';
+            }
+        }
+
+        function renderProducts() {
+            const container = document.getElementById('productsContainer');
+            
+            if (filteredProducts.length === 0) {
+                container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; padding: 32px;">No products found</p>';
+                return;
+            }
+
+            container.innerHTML = filteredProducts.map(product => `
+                <div class="product-card" onclick="viewProduct(${product.id})">
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/150/f5f5f5/212121?text=No+Image'">
+                        <div class="discount-badge">${product.discount}% OFF</div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">${product.name}</div>
+                        <div class="product-rating">
+                            <span class="stars">★${product.rating.toFixed(1)}</span>
+                            <span class="rating-count">(${product.reviews.toLocaleString()})</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="price">₹${product.price.toLocaleString()}</span>
+                            <span class="original-price">₹${product.original_price.toLocaleString()}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function viewProduct(productId) {
+            const product = allProducts.find(p => p.id === productId);
+            if (product) {
+                localStorage.setItem('selectedProduct', JSON.stringify(product));
+                // Redirect to product details page if available
+                console.log('Product selected:', product);
+                alert(`${product.name}\n₹${product.price}\n\n${product.description}`);
+            }
+        }
+
+        // Category filtering
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const category = e.currentTarget.dataset.category;
+                if (category === 'all') {
+                    filteredProducts = allProducts;
+                } else {
+                    filteredProducts = allProducts.filter(p => p.category.toLowerCase() === category);
+                }
+                renderProducts();
+            });
+        });
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('keyup', (e) => {
+            const query = e.target.value.toLowerCase();
+            if (query.trim() === '') {
+                filteredProducts = allProducts;
+            } else {
+                filteredProducts = allProducts.filter(p => 
+                    p.name.toLowerCase().includes(query) || 
+                    p.description.toLowerCase().includes(query)
+                );
+            }
+            renderProducts();
+        });
+
+        // Load products on page load
+        loadProducts();
+    </script>
+</body>
+</html>

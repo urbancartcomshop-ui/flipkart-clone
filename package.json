@@ -8,6 +8,7 @@
   },
   "scripts": {
     "start": "node index.js",
+    "build": "echo 'Building Flipkart clone...'",
     "dev": "nodemon index.js",
     "server": "node index.js",
     "deploy": "node index.js"
