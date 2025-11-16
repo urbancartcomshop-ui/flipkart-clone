@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation - Flipkart</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f1f3f6;
+            color: #212121;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .success-card {
+            background: white;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            background: #388e3c;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 50px;
+            color: white;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #388e3c;
+        }
+
+        .order-id {
+            font-size: 18px;
+            color: #878787;
+            margin-bottom: 30px;
+        }
+
+        .order-details {
+            background: #f8f8f8;
+            border-radius: 4px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0;
+            padding: 10px 0;
+        }
+
+        .detail-label {
+            color: #878787;
+        }
+
+        .detail-value {
+            font-weight: bold;
+        }
+
+        .delivery-info {
+            background: #e8f5e9;
+            padding: 20px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+
+        .delivery-info h3 {
+            color: #388e3c;
+            margin-bottom: 10px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: #2874f0;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1e4db7;
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #212121;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        .payment-info {
+            margin: 20px 0;
+            padding: 15px;
+            background: #fff3e0;
+            border-radius: 4px;
+            border-left: 4px solid #ff9800;
+        }
+
+        .payment-info strong {
+            color: #f57c00;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-card">
+            <div class="success-icon">✓</div>
+            <h1>Order Placed Successfully!</h1>
+            <p class="order-id">Order ID: <strong id="orderId">Loading...</strong></p>
+            <p>Thank you for your purchase! Your order has been confirmed.</p>
+
+            <div class="delivery-info">
+                <h3>📦 Estimated Delivery</h3>
+                <p id="deliveryDate">Loading...</p>
+                <p style="margin-top: 10px; color: #666;">We'll send you tracking details via SMS</p>
+            </div>
+
+            <div class="payment-info">
+                <strong>💳 Payment via UPI</strong>
+                <p id="paymentInfo" style="margin-top: 5px;">Paid to: cc.9199915057220975@axisbank</p>
+            </div>
+
+            <div class="order-details">
+                <h3 style="margin-bottom: 15px;">Order Summary</h3>
+                <div id="orderItems"></div>
+                <div class="detail-row" style="border-top: 2px solid #e0e0e0; padding-top: 15px; margin-top: 15px;">
+                    <div class="detail-label" style="font-size: 18px; font-weight: bold; color: #212121;">Total Amount</div>
+                    <div class="detail-value" style="font-size: 20px; color: #388e3c;" id="totalAmount">₹0</div>
+                </div>
+            </div>
+
+            <div class="order-details">
+                <h3 style="margin-bottom: 15px;">Delivery Address</h3>
+                <p id="deliveryAddress">Loading...</p>
+            </div>
+
+            <div class="action-buttons">
+                <a href="/orders.html" class="btn btn-primary">View All Orders</a>
+                <a href="/" class="btn btn-secondary">Continue Shopping</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function getUrlParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        function loadOrderConfirmation() {
+            const orderId = getUrlParameter('orderId') || `ORD-${Date.now()}`;
+            const transactionId = getUrlParameter('transactionId') || 'Not provided';
+            
+            // Get order details from localStorage or URL
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const address = JSON.parse(localStorage.getItem('deliveryAddress') || 'null');
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+            // Display order ID
+            document.getElementById('orderId').textContent = orderId;
+
+            // Calculate delivery date (5-7 days from now)
+            const deliveryDate = new Date();
+            deliveryDate.setDate(deliveryDate.getDate() + 6);
+            document.getElementById('deliveryDate').textContent = `Expected by ${deliveryDate.toLocaleDateString('en-IN', { 
+                day: 'numeric', 
+                month: 'long', 
+                year: 'numeric' 
+            })}`;
+
+            // Display payment info
+            if (transactionId !== 'Not provided') {
+                document.getElementById('paymentInfo').innerHTML = `
+                    Paid to: cc.9199915057220975@axisbank<br>
+                    Transaction ID: ${transactionId}
+                `;
+            }
+
+            // Display order items
+            const itemsHtml = cart.map(item => `
+                <div class="detail-row">
+                    <div>
+                        <div style="font-weight: 500;">${item.name}</div>
+                        <div class="detail-label">Qty: ${item.quantity}</div>
+                    </div>
+                    <div class="detail-value">₹${(item.price * item.quantity).toLocaleString()}</div>
+                </div>
+            `).join('');
+            document.getElementById('orderItems').innerHTML = itemsHtml;
+
+            // Display total
+            document.getElementById('totalAmount').textContent = `₹${total.toLocaleString()}`;
+
+            // Display delivery address
+            if (address) {
+                document.getElementById('deliveryAddress').innerHTML = `
+                    <strong>${address.fullName}</strong><br>
+                    ${address.address}, ${address.locality}<br>
+                    ${address.city}, ${address.state} - ${address.pincode}<br>
+                    Phone: ${address.mobile}
+                `;
+            }
+
+            // Save order to localStorage
+            saveOrder(orderId, cart, address, total, transactionId);
+
+            // Clear cart after successful order
+            localStorage.removeItem('cart');
+            localStorage.removeItem('deliveryAddress');
+        }
+
+        function saveOrder(orderId, items, address, total, transactionId) {
+            const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+            
+            const newOrder = {
+                orderId: orderId,
+                date: new Date().toISOString(),
+                items: items,
+                total: total,
+                address: address,
+                transactionId: transactionId,
+                status: 'Processing',
+                paymentMethod: 'UPI',
+                estimatedDelivery: new Date(Date.now() + 6*24*60*60*1000).toISOString()
+            };
+
+            orders.push(newOrder);
+            localStorage.setItem('orders', JSON.stringify(orders));
+        }
+
+        window.addEventListener('load', loadOrderConfirmation);
+    </script>
+</body>
+</html>

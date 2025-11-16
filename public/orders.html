@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders - Flipkart</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f1f3f6;
+            color: #212121;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2874f0 0%, #1e4db7 100%);
+            padding: 15px 20px;
+            color: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 10px;
+        }
+
+        .page-header {
+            background: white;
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+        }
+
+        .page-header h1 {
+            font-size: 24px;
+        }
+
+        .order-card {
+            background: white;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            margin-bottom: 15px;
+        }
+
+        .order-id {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .order-date {
+            color: #878787;
+            font-size: 14px;
+        }
+
+        .order-status {
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .status-pending {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        .status-processing {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .status-shipped {
+            background: #e8f5e9;
+            color: #388e3c;
+        }
+
+        .status-delivered {
+            background: #c8e6c9;
+            color: #2e7d32;
+        }
+
+        .order-items {
+            margin: 15px 0;
+        }
+
+        .order-item {
+            display: flex;
+            gap: 15px;
+            padding: 10px 0;
+        }
+
+        .item-image {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            background: #f8f8f8;
+            border-radius: 4px;
+        }
+
+        .item-details {
+            flex: 1;
+        }
+
+        .item-name {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .item-qty {
+            color: #878787;
+            font-size: 13px;
+        }
+
+        .order-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .order-total {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .track-btn {
+            padding: 10px 25px;
+            background: #2874f0;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .track-btn:hover {
+            background: #1e4db7;
+        }
+
+        .empty-orders {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 4px;
+        }
+
+        .empty-orders h2 {
+            margin: 20px 0 10px 0;
+            color: #878787;
+        }
+
+        .shop-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #2874f0;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="/" class="logo">Flipkart</a>
+            <div style="display: flex; gap: 20px;">
+                <a href="/" style="color: white; text-decoration: none;">Home</a>
+                <a href="/cart.html" style="color: white; text-decoration: none;">🛒 Cart</a>
+                <a href="/wishlist.html" style="color: white; text-decoration: none;">❤️ Wishlist</a>
+                <a href="/orders.html" style="color: white; text-decoration: none;">📦 Orders</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>My Orders</h1>
+            <p>Track, return, or buy things again</p>
+        </div>
+
+        <div id="ordersContainer">
+            <!-- Orders will be inserted here -->
+        </div>
+    </div>
+
+    <script>
+        let orders = [];
+
+        function loadOrders() {
+            orders = JSON.parse(localStorage.getItem('orders') || '[]');
+            
+            const container = document.getElementById('ordersContainer');
+            
+            if (orders.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-orders">
+                        <h2>📦</h2>
+                        <h2>No orders yet!</h2>
+                        <p>Looks like you haven't placed any orders yet.</p>
+                        <a href="/" class="shop-btn">Start Shopping</a>
+                    </div>
+                `;
+                return;
+            }
+
+            // Sort orders by date (newest first)
+            orders.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            container.innerHTML = orders.map(order => `
+                <div class="order-card">
+                    <div class="order-header">
+                        <div>
+                            <div class="order-id">Order #${order.orderId}</div>
+                            <div class="order-date">Placed on ${new Date(order.date).toLocaleDateString('en-IN', { 
+                                day: 'numeric', 
+                                month: 'long', 
+                                year: 'numeric' 
+                            })}</div>
+                        </div>
+                        <div class="order-status status-${order.status.toLowerCase()}">
+                            ${order.status}
+                        </div>
+                    </div>
+                    
+                    <div class="order-items">
+                        ${order.items.map(item => `
+                            <div class="order-item">
+                                <img src="${item.image || '/images/placeholder.jpg'}" alt="${item.name}" class="item-image" onerror="this.src='/images/placeholder.jpg'">
+                                <div class="item-details">
+                                    <div class="item-name">${item.name}</div>
+                                    <div class="item-qty">Qty: ${item.quantity} × ₹${item.price.toLocaleString()}</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="order-footer">
+                        <div class="order-total">Total: ₹${order.total.toLocaleString()}</div>
+                        <button class="track-btn" onclick="trackOrder('${order.orderId}')">Track Order</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function trackOrder(orderId) {
+            window.location.href = `/track-order.html?orderId=${orderId}`;
+        }
+
+        window.addEventListener('load', loadOrders);
+    </script>
+</body>
+</html>

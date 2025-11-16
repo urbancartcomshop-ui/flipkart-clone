@@ -253,10 +253,23 @@
         }
 
         async function confirmPayment() {
-            const transactionId = document.getElementById('transactionId').value;
+            const transactionId = document.getElementById('transactionId').value.trim();
             
+            if (!transactionId) {
+                alert('Please enter transaction ID');
+                return;
+            }
+
             if (!currentPaymentData) {
                 alert('Please initiate payment first');
+                return;
+            }
+
+            // Verify cart one more time
+            const currentCart = JSON.parse(localStorage.getItem('cart') || '[]');
+            if (currentCart.length === 0) {
+                alert('❌ Cart is empty!');
+                window.location.replace('/');
                 return;
             }
 
@@ -266,26 +279,23 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         paymentId: currentPaymentData.paymentId,
-                        transactionId: transactionId
+                        transactionId: transactionId,
+                        orderId: currentPaymentData.orderId,
+                        amount: currentPaymentData.amount
                     })
                 });
 
                 const data = await response.json();
                 
                 if (data.success) {
-                    document.getElementById('upiPaymentSection').style.display = 'none';
-                    document.getElementById('successMessage').style.display = 'block';
-                    
-                    // Clear cart
-                    localStorage.removeItem('cart');
-                    
-                    console.log('Payment verified:', data);
+                    // Redirect to order confirmation page
+                    window.location.href = `/order-confirmation.html?orderId=${currentPaymentData.orderId}&transactionId=${transactionId}`;
                 } else {
-                    alert('Verification failed: ' + data.error);
+                    alert('❌ Payment verification failed. Please try again or contact support.');
                 }
             } catch (error) {
-                console.error('Verification error:', error);
-                alert('Error verifying payment. Please try again.');
+                console.error('Payment verification error:', error);
+                alert('❌ Error verifying payment. Please contact support with your transaction ID: ' + transactionId);
             }
         }
     </script>

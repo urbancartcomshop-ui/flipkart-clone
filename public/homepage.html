@@ -489,6 +489,7 @@
                     id: product.id,
                     name: product.name,
                     price: product.price,
+                    original_price: product.original_price,
                     image: product.image,
                     quantity: 1
                 });
@@ -496,6 +497,33 @@
             
             localStorage.setItem('cart', JSON.stringify(cart));
             window.location.href = '/address.html';
+        }
+
+        // Add to Wishlist
+        function addToWishlist(event, productId) {
+            event.stopPropagation();
+            
+            const product = allProducts.find(p => p.id === productId);
+            if (!product) return;
+            
+            let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+            const existingItem = wishlist.find(item => item.id === productId);
+            
+            if (existingItem) {
+                alert('Already in wishlist!');
+                return;
+            }
+            
+            wishlist.push({
+                id: product.id,
+                name: product.name,
+                price: product.price,
+                original_price: product.original_price,
+                image: product.image
+            });
+            
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            alert('❤️ Added to wishlist!');
         }
 
         // Search functionality
